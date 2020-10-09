@@ -1,0 +1,19 @@
+#resume {
+    .employer {
+        margin-bottom: 2rem;
+    }
+
+    .job-title {
+        color: $yellow;
+    }
+
+    .job-description {
+        font-size: 0.9rem;
+        color: $shade1;
+    }
+
+    .job-timespan {
+        color: $shade3;
+        font-size: 0.85rem;
+    }
+}

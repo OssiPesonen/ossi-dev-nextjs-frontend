@@ -1,0 +1,99 @@
+#showcases {
+    .showcase-container {
+        padding: 1rem;
+
+        .showcase {
+            background: #2B323E;
+            transition: transform .12s ease-in-out;
+            cursor: pointer;
+            position: relative;
+
+            &:hover {
+                transform: translateY(-10px);
+
+                &:after {
+                    width: 100%;
+                }
+            }
+
+
+            &:after {
+                content: "";
+                width: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                position: absolute;
+                bottom: -3px;
+                height: 3px;
+                background: $cyan;
+                transition: .2s ease-in-out;
+            }
+
+            .content {
+                padding: 1rem;
+
+                h4 {
+                    margin-bottom: 0.5rem;
+                }
+
+            }
+        }
+    }
+}
+
+.tag {
+    display: inline-block;
+    margin: 0 0.25rem 0.25rem 0;
+    padding: 0.1rem 0.75rem;
+    background: rgba(13, 13, 29, 0.2);
+    border-radius: 24px;
+    color: $shade3;
+    font-size: 0.85rem;
+}
+
+#showcase {
+    padding-top: 2rem;
+    padding-bottom: 5rem;
+
+    section {
+        .tags {
+            box-sizing: border-box;
+            text-align: center;
+            margin-bottom: 2rem;
+
+            > .tag {
+                margin: 0 0.5rem;
+            }
+        }
+
+        .showcase-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr min(65ch, 100%) 1fr 1fr;
+
+            > * {
+                grid-column: 3;
+            }
+
+            .image {
+                grid-column: 3;
+                margin: 1rem 0;
+
+                &.image-style-align-left {
+                    grid-column: 2 / 4;
+                }
+
+                &.image-style-align-right {
+                    grid-column: 3 / 5;
+                }
+            }
+        }
+
+        > * {
+            grid-column: 3;
+        }
+
+        .full-bleed {
+            grid-column: 1 / -1;
+        }
+    }
+}
