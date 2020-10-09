@@ -1,1 +1,6 @@
-This is a starter template for [Learn Next.js](https://nextjs.org/learn).
+# Ossi.dev Next.js front-end app
+
+- [Next.js](https://nextjs.org/)
+- [Font Awesome](https://fontawesome.com)
+
+I'll add some more her later.
