@@ -39,4 +39,3 @@ If you wanna extend the icons, adjust the `icons.scss` file to add more. I didn'
 - [Font Awesome](https://fontawesome.com)
 - [Redux](https://redux.js.org/)
 - [Redux toolkit](https://redux-toolkit.js.org/)
-
