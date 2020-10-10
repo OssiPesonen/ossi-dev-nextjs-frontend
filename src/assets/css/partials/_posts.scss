@@ -1,5 +1,30 @@
 #posts {
     background: #2B323E;
+
+    &.archive {
+        background: none;
+
+        .row a {
+            color: $shade1;
+            display: block;
+            padding: 1rem;
+            height: 100%;
+
+            article {
+                height: 100%;
+                background: #2B323E;
+
+                section,
+                footer {
+                    padding: 1rem;
+                }
+
+                footer {
+                    font-size: 0.85rem;
+                }
+            }
+        }
+    }
 }
 
 #posts-list {
@@ -56,6 +81,11 @@
             }
         }
     }
+
+    &.medium a header h3 {
+        font-size: 1.25rem;
+        font-weight: 500;
+    }
 }
 
 #post {
@@ -87,6 +117,21 @@
 
         .full-bleed {
             grid-column: 1 / -1;
+        }
+    }
+}
+
+.pagination {
+    margin: 0 -1rem;
+
+    li {
+        display: inline-block;
+        margin-right: 1rem;
+
+        span,
+        a {
+            display: block;
+            padding: 1rem;
         }
     }
 }

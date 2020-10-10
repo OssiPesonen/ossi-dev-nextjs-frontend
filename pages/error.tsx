@@ -2,7 +2,7 @@ import React from 'react'
 
 // Components
 import Layout from '@/layouts/layout'
-import Top from '@/components/index/top'
+import Top from '@/components/top'
 
 export default function Error () {
   return (

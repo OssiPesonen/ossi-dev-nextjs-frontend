@@ -1,13 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 // App
-import { useDispatch } from 'react-redux'
+import { useRouter } from 'next/router'
 
 // Redux
-import { setPosts, setBlocks, setShowcases, setEmployments } from '@/store/reducers/appReducer'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '@/store/rootReducer'
+import {
+  setBlocks,
+  setLoaded as setAppLoaded,
+  setEmployments,
+  setTags,
+  setArticles, fetchPosts, fetchShowcases
+} from '@/store/reducers/appReducer'
 
 // Assets
-import { Block, Showcase, Post, Employment } from '@/assets/types'
+import { Block,Employment, Tag, Article } from '@/assets/types'
 
 // Components
 import Introduction from '@/components/index/introduction'
@@ -16,18 +24,18 @@ import Showcases from '@/components/index/showcases'
 import Posts from '@/components/index/posts'
 import Layout from '@/layouts/layout'
 import Contact from '@/components/index/contact'
-import { useRouter } from 'next/router'
 import Loading from '@/components/loading'
+import Resume from '@/components/index/resume'
 
 export default function Home () {
   const router = useRouter()
-  const [loaded, setLoaded] = useState<boolean>(false)
+  const app = useSelector((state: RootState) => state.app)
   const dispatch = useDispatch()
   
-  // Scroll to element if
+  // Scroll to element if router contains a hash
   useEffect(() => {
-    if (router.asPath.substr(0, 2) === '/#' && loaded) {
-      const hash = router.asPath.substr(2);
+    if (router.asPath.substr(0, 2) === '/#' && app.loaded) {
+      const hash = router.asPath.substr(2)
       
       // setTimeout mitigates the effect where elements are not full height yet, and offsetTop gives wrong position
       setTimeout(function () {
@@ -39,32 +47,54 @@ export default function Home () {
         }
       }, 250)
     }
-  }, [router.asPath, loaded])
+  }, [router.asPath, app.loaded])
   
   useEffect(() => {
-    const urls = ['/blocks', '/showcases', '/blog-posts?_limit=15', '/employments']
-    
-    Promise.all(urls.map(url => fetch(process.env.NEXT_API_URL + url)))
-      .then(response => Promise.all(response.map(jsonResponse => jsonResponse.json())))
-      .then((response: [Array<Block>, Array<Showcase>, Array<Post>, Array<Employment>]) => {
-        const [blocks, showcases, posts, employments] = response
-        
-        dispatch(setBlocks(blocks))
-        dispatch(setShowcases(showcases))
-        dispatch(setPosts(posts))
-        dispatch(setEmployments(employments))
-      })
-      .catch(() => router.push('/error'))
-      .finally(() => setLoaded(true))
-  }, [])
+    if (!app.loaded) {
+      // Fetch posts using thunk
+      dispatch(fetchPosts());
+      
+      // Fetch showcases using thunk
+      dispatch(fetchShowcases());
+      
+      // Fetch frontpage data
+      const urls = [
+        '/blocks',
+        '/articles',
+        '/employments',
+        '/tags'
+      ]
+      
+      Promise.all(urls.map(url => fetch(process.env.NEXT_API_URL + url)))
+        .then(response => Promise.all(response.map(jsonResponse => jsonResponse.json())))
+        .then((response: [
+          Array<Block>,
+          Array<Article>,
+          Array<Employment>,
+          Array<Tag>
+        ]) => {
+          const [blocks, articles, employments, tags] = response
+          
+          dispatch(setBlocks(blocks))
+          dispatch(setEmployments(employments))
+          dispatch(setTags(tags))
+          dispatch(setArticles(articles))
+        })
+        .catch(() => router.push('/error'))
+        .finally(() => dispatch(setAppLoaded(true)))
+    }
+  }, [app.loaded])
   
-  return !loaded ? <div className="container text-center justify-content-center align-items-center d-flex" style={{ minHeight: '100vh' }}><Loading /></div> : (
-    <Layout>
-      <Introduction/>
-      <Services/>
-      <Showcases/>
-      <Posts/>
-      <Contact/>
-    </Layout>
-  )
+  return !app.loaded ?
+    <div className="container text-center justify-content-center align-items-center d-flex" style={{ minHeight: '100vh' }}>
+      <Loading/></div> : (
+      <Layout>
+        <Introduction/>
+        <Services/>
+        <Showcases/>
+        <Posts/>
+        <Contact />
+        <Resume/>
+      </Layout>
+    )
 }

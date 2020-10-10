@@ -68,6 +68,12 @@ export interface Post extends ContentType {
   Cover: Image
 }
 
+export interface Article extends ContentType {
+  title: string
+  description: string
+  link: string
+}
+
 export interface Employment extends ContentType {
   Employer: string
   JobTitle: string

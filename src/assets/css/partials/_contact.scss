@@ -1,0 +1,31 @@
+#contact {
+    text-align: center;
+    background: #273db0;
+    padding: 4rem 0;
+
+    h2 {
+        margin-bottom: 2rem;
+    }
+
+    a {
+        font-size: 1rem;
+        color: $shade1;
+        display: inline-block;
+        padding: 0.25rem 1rem;
+
+        @media screen and (min-width: 992px) {
+            font-size: 1.5rem;
+        }
+
+        &:hover {
+            color: $yellow;
+        }
+    }
+
+    i.fa,
+    i.fab {
+        font-size: 1.2rem;
+        margin-right: 1rem !important;
+        color: $yellow !important;
+    }
+}

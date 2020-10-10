@@ -26,10 +26,10 @@ const Introduction = () => {
     <div id="introduction" className="container-md">
       <div className="row align-items-center">
         <div className="col-12 col-md-6 personal text-center">
-          <img className="mb-4" src="/img/avatar.png" alt="" />
+          <img className="mb-4" src="/img/avatar.png" alt=""/>
           <h2>Ossi Pesonen</h2>
           <p className="text-muted">Currently interested in, and learning:</p>
-          <ul className="interest-list mb-4">
+          <ul className="interest-list mt-4 mb-4">
             {currentInterest.Content.split(', ').map((interest: string) => <li key={interest}>{interest}</li>)}
           </ul>
           <div className="row text-center">
