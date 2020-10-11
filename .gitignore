@@ -11,6 +11,7 @@
 # next.js
 /.next/
 /out/
+/.idea
 
 # production
 /build
@@ -30,3 +31,5 @@ yarn-error.log*
 .env.production.local
 
 /src/assets/fontawesome/webfonts/
+
+.vercel

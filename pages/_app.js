@@ -7,10 +7,6 @@ import { Provider } from 'react-redux';
 import store from '@/store/store';
 
 // UI
-import '@/assets/fontawesome/scss/light.css';
-import '@/assets/fontawesome/scss/solid.css';
-import '@/assets/fontawesome/scss/brands.css';
-import '@/assets/fontawesome/scss/fontawesome.css';
 import '@/assets/css/bootstrap/scss/bootstrap-grid.css';
 import '@/assets/css/style.css';
 

@@ -13,9 +13,10 @@
             padding: 1rem;
             background: #313A4A;
 
-            i.fa {
-                font-size: 4rem;
-                font-weight: 300;
+            .icon svg {
+                height: 72px;
+                width: 72px;
+                fill: $yellow;
                 margin: 2rem 0;
             }
         }

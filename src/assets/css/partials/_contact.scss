@@ -11,6 +11,7 @@
         font-size: 1rem;
         color: $shade1;
         display: inline-block;
+        vertical-align: middle;
         padding: 0.25rem 1rem;
 
         @media screen and (min-width: 992px) {
@@ -22,10 +23,17 @@
         }
     }
 
-    i.fa,
-    i.fab {
-        font-size: 1.2rem;
-        margin-right: 1rem !important;
-        color: $yellow !important;
+    .icon {
+        display: inline-block;
+        margin-top: 5px;
+        vertical-align: middle;;
+        line-height: 1;
+
+        svg {
+            height: 24px;
+            width: 24px;
+            margin-right: 0.25rem !important;
+            fill: $yellow !important;
+        }
     }
 }

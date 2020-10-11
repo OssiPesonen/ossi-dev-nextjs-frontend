@@ -6,6 +6,8 @@ import { useSelector } from 'react-redux'
 
 // Types
 import { Article, Post } from '@/assets/types'
+import IconCaretUp from '../../assets/icons/i-caret-up';
+import IconArrowRight from '../../assets/icons/i-arrow-right';
 
 type PostsProps = {
   hideDescription?: boolean
@@ -24,7 +26,7 @@ const Posts = (props: PostsProps) => {
           {hideDescription ? <></> : (
             <div className="col-md-5">
               <h4 className="section-title">
-                <i className="fa fa-caret-up text-secondary mr-2" aria-hidden="true"/> Posts
+                <IconCaretUp /> Posts
               </h4>
               <h2>Blog posts and articles</h2>
               <p className="text-gray">You can find everything I've posted on my blog or Medium accounts right here.</p>
@@ -32,7 +34,7 @@ const Posts = (props: PostsProps) => {
           )}
           <div className={hideDescription ? 'col-md-12' : 'col-md-7'}>
             <h4 className="section-title mt-4 mt-md-0s">
-              <i className="fa fa-caret-up text-secondary mr-2" aria-hidden="true"/> Blog
+                <IconCaretUp /> Blog
             </h4>
             <div id="posts-list" className="pl-md-4 mb-md-4">
               {app.posts.map((post: Post) => {
@@ -55,11 +57,11 @@ const Posts = (props: PostsProps) => {
                 )
               })}
             </div>
-            <div className="text-right">
-              <Link href="/posts"><a>Explore more <i className="ml-2 fa fa-arrow-right" aria-hidden="true"/></a></Link>
+            <div className="text-right explore-more-link">
+              <Link href="/posts"><a>Explore more <IconArrowRight /></a></Link>
             </div>
             <h4 className="section-title mt-4">
-              <i className="fa fa-caret-up text-secondary mr-2" aria-hidden="true"/> Medium.com
+                <IconCaretUp /> Medium.com
             </h4>
             <div id="posts-list" className="medium pl-md-4 mb-md-4">
               {!app.articles ? <>No articles</> : app.articles.map((article: Article) => {

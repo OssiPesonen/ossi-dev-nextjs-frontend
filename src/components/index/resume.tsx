@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Employment, Tag } from '@/assets/types'
 import { RootState } from '@/store/rootReducer'
+import IconCaretUp from '../../assets/icons/i-caret-up';
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
@@ -15,7 +16,7 @@ const Resume = () => {
           <div className="col-12 col-md-8">
             <div id="resume">
               <h4 className="section-title">
-                <i className="fa fa-caret-up text-secondary mr-2" aria-hidden="true"/> Resume
+                  <IconCaretUp /> Resume
               </h4>
               <h2>Where I've worked</h2>
               <p className="text-muted">A list of my most recent employers and job descriptions. </p>
@@ -49,7 +50,7 @@ const Resume = () => {
           </div>
           <div className="col-12 col-md-4 mt-xs-4 mt-md-0">
             <h4 className="section-title">
-              <i className="fa fa-caret-up text-secondary mr-2" aria-hidden="true"/> What I've worked with</h4>
+              <IconCaretUp /> What I've worked with</h4>
             <p className="text-gray mb-4">Below I'll list of some of the frameworks, tools, applications, platforms, concepts, notable designs, libraries and languages I've worked with over the years.</p>
             {!app.tags ? <></> : (
               <ul className="tags">

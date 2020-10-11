@@ -27,6 +27,16 @@
     }
 }
 
+.explore-more-link .icon svg {
+    height: 16px;
+    width: 16px;
+    margin-left: 0.5rem;
+    display: inline-block;
+    line-height: 1;
+    vertical-align: top;
+    margin-top: 5px;
+}
+
 #posts-list {
     a {
         color: $shade1;
@@ -92,6 +102,10 @@
     padding-bottom: 5rem;
     padding-top: 2rem;
 
+    header h1 {
+        margin-top: 2rem;
+    }
+
     section {
         .post-content {
             display: grid;
@@ -119,6 +133,16 @@
             grid-column: 1 / -1;
         }
     }
+
+    header .icon svg,
+    footer .icon svg {
+        height: 20px;
+        width: 20px;
+        margin-right: 0.5rem;
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 1;
+    }
 }
 
 .pagination {
@@ -128,10 +152,27 @@
         display: inline-block;
         margin-right: 1rem;
 
-        span,
+        > span,
         a {
             display: block;
             padding: 1rem;
+        }
+
+        .icon svg {
+            height: 16px;
+            width: 16px;
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 1;
+            margin-bottom: 3px;
+        }
+
+        &.prev .icon {
+            margin-right: 0.5rem;
+        }
+
+        &.next .icon {
+            margin-left: 0.5rem;
         }
     }
 }

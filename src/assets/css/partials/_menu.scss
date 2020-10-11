@@ -84,17 +84,17 @@ body {
             a {
                 padding: 1rem;
 
-                @media screen and (min-width: 992px) {
-                    padding: 0 1rem;
+                .icon svg {
+                    max-width: 18px;
+                    height: 18px;
                 }
 
-                .fa,
-                .fab {
-                    font-size: 1.5rem;
+                &:hover .icon svg {
+                    fill: $shade1;
+                }
 
-                    @media screen and (min-width: 992px) {
-                        font-size: 1.5rem;
-                    }
+                @media screen and (min-width: 992px) {
+                    padding: 0 1rem;
                 }
             }
         }

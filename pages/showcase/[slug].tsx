@@ -16,6 +16,7 @@ import Layout from '@/layouts/layout'
 import Loading from '@/components/loading'
 import Showcases from '@/components/index/showcases'
 import Contact from '@/components/index/contact'
+import IconArrowLeft from '../../src/assets/icons/i-arrow-left';
 
 type ShowcaseProps = {
   showcases: Array<ShowcaseType>
@@ -57,7 +58,7 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
           <Loading/></div> : (
           <>
             <article id="showcase" className="container-md">
-              <Link href="/#showcases"><a><i className="fa fa-arrow-left mr-2" aria-hidden="true"/> Back to frontpage</a></Link>
+              <Link href="/#showcases"><a className="back-to-frontpage"><IconArrowLeft /> Back to frontpage</a></Link>
               <header className="mt-4">
                 <h1>{showcase.Title}</h1>
               </header>
@@ -76,7 +77,7 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
               </section>
               <hr/>
               <footer>
-                <Link href="/#showcases"><a><i className="fa fa-arrow-left mr-2" aria-hidden="true"/> Back to frontpage</a></Link>
+                <Link href="/#showcases"><a><IconArrowLeft />  Back to frontpage</a></Link>
               </footer>
             </article>
             <Showcases hideDescription={true} openPostId={showcase.id}/>

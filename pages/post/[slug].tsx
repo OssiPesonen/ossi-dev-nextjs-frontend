@@ -17,6 +17,8 @@ import { RootState } from '@/store/rootReducer'
 import Layout from '@/layouts/layout'
 import Posts from '@/components/index/posts'
 import Contact from '@/components/index/contact'
+import IconArrowLeft from '../../src/assets/icons/i-arrow-left';
+import IconArchive from '../../src/assets/icons/i-archive';
 
 type PostProps = {
   post: PostType,
@@ -54,8 +56,8 @@ const Post = ({ post, posts, articles }: PostProps) => {
   return (
     <Layout>
       <article id="post" className="container-md">
-        <Link href="/#posts"><a><i className="fa fa-arrow-left mr-2" aria-hidden="true"/> Back to frontpage</a></Link>
-        <header className="mt-4">
+        <header>
+          <Link href="/#posts"><a className="back-to-frontpage"><IconArrowLeft /> Back to frontpage</a></Link>
           <h1>{post.Title}</h1>
         </header>
         <section>
@@ -67,8 +69,8 @@ const Post = ({ post, posts, articles }: PostProps) => {
         </section>
         <hr/>
         <footer>
-          <Link href="/#posts"><a><i className="fa fa-arrow-left mr-2" aria-hidden="true"/> Back to frontpage</a></Link>
-          <Link href="/posts"><a className="ml-4"><i className="fa fa-archive mr-2" aria-hidden="true"/> To post archives</a></Link>
+          <Link href="/#posts"><a className="back-to-frontpage"><IconArrowLeft />  Back to frontpage</a></Link>
+          <Link href="/posts"><a className="ml-4"><IconArchive /> To post archives</a></Link>
         </footer>
       </article>
       <Posts hideDescription={true} openPostId={post.id}/>

@@ -4,24 +4,31 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
+// Components
+import IconBehance from '../assets/icons/i-behance';
+import IconEnvelope from '../assets/icons/i-envelope';
+import IconTwitter from '../assets/icons/i-twitter';
+import IconGithub from '../assets/icons/i-github';
+import IconMedium from '../assets/icons/i-medium';
+
 const Top = () => {
   const router = useRouter()
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
-  
+
   /**
    * Scroll to section
    */
   const scrollTo = (event: React.MouseEvent) => {
     const target = event.currentTarget as HTMLAnchorElement
-    
+
     if (router.pathname === '/') {
       event.preventDefault()
       // Grab the clicked link
-      
+
       if (typeof target.hash !== 'undefined') {
         const hash = target.hash.substr(1)
         const section = document.getElementById(hash)
-        
+
         // Scroll to section
         if (hash && section) {
           window.scrollTo({
@@ -29,10 +36,10 @@ const Top = () => {
             behavior: 'smooth'
           })
         }
-        
+
         // Shut down menu
         setMenuOpen(false)
-        
+
         // Add hash to navigation bar
         window.history.pushState('', target.hash, target.hash)
       }
@@ -42,14 +49,14 @@ const Top = () => {
       router.push(target.attributes.href.value)
     }
   }
-  
+
   /**
    * Toggle menu (mobile)
    */
   const toggleMenu = () => {
     setMenuOpen(state => !state)
   }
-  
+
   return (
     <div id="top-bar">
       <div className="container-lg">
@@ -92,14 +99,11 @@ const Top = () => {
             </nav>
             <nav className="col-xs-12 col-lg-4 text-right" id="social-media-menu">
               <ul>
-                <li><a href="mailto:ossi@ossipesonen.fi"><i className="fa fa-envelope" aria-hidden="true"/></a></li>
-                <li><a href="https://twitter.com/OssiDev"><i className="fab fa-twitter" aria-hidden="true"/></a></li>
-                <li><a href="https://github.com/OssiPesonen/"><i className="fab fa-github" aria-hidden="true"/></a></li>
-                <li><a href="https://medium.com/@rcls" target="_blank"><i className="fab fa-medium" aria-hidden="true"/></a>
-                </li>
-                <li>
-                  <a href="https://www.behance.net/ossipesonen"><i className="fab fa-behance-square" aria-hidden="true"/></a>
-                </li>
+                <li><a href="mailto:ossi@ossipesonen.fi"><IconEnvelope /></a></li>
+                <li><a href="https://twitter.com/OssiDev"><IconTwitter /></a></li>
+                <li><a href="https://github.com/OssiPesonen/"><IconGithub /></a></li>
+                <li><a href="https://medium.com/@rcls" target="_blank"><IconMedium /></a></li>
+                <li><a href="https://www.behance.net/ossipesonen"><IconBehance /></a></li>
               </ul>
             </nav>
           </div>

@@ -12,6 +12,8 @@ import { Article, Post as PostType, Post } from '@/assets/types'
 import Loading from '@/components/loading'
 import Layout from '@/layouts/layout'
 import Link from 'next/link'
+import IconArrowLeft from '../../src/assets/icons/i-arrow-left';
+import IconArrowRight from '../../src/assets/icons/i-arrow-right';
 
 const postLimitPerPage = 2
 
@@ -38,7 +40,7 @@ const PostsArchive = ({ count, pageNumber, posts }: PostsArchiveProps) => {
         <li className="prev">
           <Link href={`/posts/${pageNumber - 1 > 0 ? pageNumber - 1 : ''}`}>
             <a>
-              <i className="fa fa-arrow-left mr-2" aria-hidden="true"/> Previous
+              <IconArrowLeft /> Previous
             </a>
           </Link>
         </li>
@@ -46,7 +48,7 @@ const PostsArchive = ({ count, pageNumber, posts }: PostsArchiveProps) => {
     } else {
       return (
         <li className="prev text-muted">
-          <span><i className="fa fa-arrow-left mr-2" aria-hidden="true"/> Previous</span>
+          <span><IconArrowLeft /> Previous</span>
         </li>)
     }
   }
@@ -57,7 +59,7 @@ const PostsArchive = ({ count, pageNumber, posts }: PostsArchiveProps) => {
         <li className="next">
           <Link href={`/posts/${pageNumber + 1}`}>
             <a>
-              Next <i className="fa fa-arrow-right ml-4" aria-hidden="true"/>
+              Next <IconArrowRight />
             </a>
           </Link>
         </li>
@@ -65,7 +67,7 @@ const PostsArchive = ({ count, pageNumber, posts }: PostsArchiveProps) => {
     } else {
       return (
         <li className="next text-muted">
-          <span>Next <i className="fa fa-arrow-right ml-2" aria-hidden="true"/></span>
+          <span>Next <IconArrowRight /></span>
         </li>)
     }
   }

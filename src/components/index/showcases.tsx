@@ -11,6 +11,7 @@ import { Showcase, Tag } from '@/assets/types'
 
 // Redux
 import { setShowcases } from '@/store/reducers/appReducer'
+import IconCaretUp from '../../assets/icons/i-caret-up';
 
 type ShowcasesProps = {
   hideDescription?: boolean
@@ -40,7 +41,7 @@ const Showcases = (props: ShowcasesProps) => {
         {hideDescription ? <></> : (
           <>
             <h4 className="section-title">
-              <i className="fa fa-caret-up text-secondary mr-2" aria-hidden="true"/> Showcases
+                <IconCaretUp /> Showcases
             </h4>
             <h2>Selected Projects</h2>
             <p className="text-gray">You can click on each project to read about the story behind them.</p>
