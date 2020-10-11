@@ -5,13 +5,15 @@ This repository is nothing special.
 
 I used Next.js due to my earlier experience with it. It took me about a day to code this because the framework takes away the boring stuff.
 
+### SSG
+
+I decided to use SSG for speed. The contents of my portfolio are not that often changed. I'll be setting up a webhook in Vercel and I'm gonna trigger that with Strapi each time content is changed.
+
 ### State container
 
-I used Redux as the state container, and the Toolkit project to cut writing the boilerplate in half. While the application is relatively small, storing some data
-in the container removes the need for repeated API calls when that data is already available.
+I used Redux as the state container, and the Toolkit project to cut writing the boilerplate in half. While the application is relatively small, using a state container removes the need to pass data
+with props.
 
-I also installed Redux Thunk and used it on two calls which populate the state: Showcase and Blog posts. These are both used as a list of entries on single showcase and post pages, 
-so I didn't want to duplicate code with the HTTP call and dispatching to state.
 
 ### Back-end
 
@@ -19,8 +21,9 @@ The back-end is [Strapi](https://strapi.io) which worked great for this project.
 
 ### Data
 
-I did decide to hard code some things as that information is not very frequent to change. Dynamic data is ofcourse retrieved from the API. Some pieces, like the introduction, are too. 
-I wanted to be able to update my intro and my current 'interest' in the landing area.
+I did decide to hard code some things as that information is not very frequent to change. Dynamic data is ofcourse retrieved from the API. Some pieces, like the introduction, are too. I wanted to be able to update my intro and my current 'interest' in the landing area.
+
+I didn't want to hard code the links, but as the top bar is a reusable component it would've meant I would've had to add fetching the links from the API into the getStaticProps function of each possible entry point (frontpage, showcase and post), and I didn't want to do that.
 
 ### Styles
 

@@ -57,8 +57,8 @@ const Showcases = (props: ShowcasesProps) => {
                   <a className="col-12 col-sm-6 col-md-4 showcase-container">
                     <article className="showcase" key={showcase.id}>
                       <header>
-                        {get(showcase, 'Cover.formats.medium', false) ? (
-                          <img className="showcase-thumbnail" src={process.env.NEXT_API_URL + showcase.Thumbnail.formats.small.url} alt={showcase.Thumbnail.formats.small.alternativeText}/>
+                        {get(showcase, 'Thumbnail.url', false) ? (
+                          <img className="showcase-thumbnail" src={process.env.NEXT_API_URL + showcase.Thumbnail.url} alt={showcase.Thumbnail.alternativeText}/>
                         ) : <></>}
                       </header>
                       <section className="content">

@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react'
 // App
 import { useSelector } from 'react-redux'
 
-const ReactMarkdown = require('react-markdown')
-
 // Types
 import { Block } from '@/assets/types'
 
@@ -34,7 +32,7 @@ const Services = () => {
           <i className="fa fa-caret-up text-secondary mr-2" aria-hidden="true"/> Services
         </h4>
         <h2>What I Do</h2>
-        <ReactMarkdown source={blockDescription.Content} className="text-gray"/>
+        <div dangerouslySetInnerHTML={{ __html: blockDescription.Content }} className="text-gray"/>
         <div id="service-boxes">
           <div className="row">
             {Object.keys(serviceList).map((serviceTitle: string) => (

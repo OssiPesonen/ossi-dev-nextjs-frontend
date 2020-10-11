@@ -1,17 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // App
 import Link from 'next/link'
-import { Link as LinkType } from '@/assets/types'
 import { useRouter } from 'next/router'
 
-// Redux
-import { useSelector, useDispatch } from 'react-redux'
-import { setLinks } from '@/store/reducers/appReducer'
-
 const Top = () => {
-  const app = useSelector(state => state.app)
-  const dispatch = useDispatch()
   const router = useRouter()
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
   
@@ -50,15 +43,6 @@ const Top = () => {
     }
   }
   
-  useEffect(() => {
-    // Fetch all links from the API
-    fetch(process.env.NEXT_API_URL + '/links')
-      .then(response => response.json())
-      .then((links: Array<LinkType>,) => {
-        dispatch(setLinks(links))
-      })
-  }, [])
-  
   /**
    * Toggle menu (mobile)
    */
@@ -66,7 +50,7 @@ const Top = () => {
     setMenuOpen(state => !state)
   }
   
-  return !app.links ? <></> : (
+  return (
     <div id="top-bar">
       <div className="container-lg">
         <div className="row">
@@ -108,13 +92,14 @@ const Top = () => {
             </nav>
             <nav className="col-xs-12 col-lg-4 text-right" id="social-media-menu">
               <ul>
-                {app.links ? app.links.map((link: LinkType) => (
-                  <li key={link.id}>
-                    <a href={link.Link} target="_blank">
-                      <i className={link.Icon} aria-hidden="true"/>
-                    </a>
-                  </li>
-                )) : <></>}
+                <li><a href="mailto:ossi@ossipesonen.fi"><i className="fa fa-envelope" aria-hidden="true"/></a></li>
+                <li><a href="https://twitter.com/OssiDev"><i className="fab fa-twitter" aria-hidden="true"/></a></li>
+                <li><a href="https://github.com/OssiPesonen/"><i className="fab fa-github" aria-hidden="true"/></a></li>
+                <li><a href="https://medium.com/@rcls" target="_blank"><i className="fab fa-medium" aria-hidden="true"/></a>
+                </li>
+                <li>
+                  <a href="https://www.behance.net/ossipesonen"><i className="fab fa-behance-square" aria-hidden="true"/></a>
+                </li>
               </ul>
             </nav>
           </div>

@@ -6,53 +6,31 @@ import { get } from 'lodash'
 import { ParsedUrlQuery } from 'querystring'
 
 // Assets
-import { Post } from '@/assets/types'
+import { Article, Post as PostType, Post } from '@/assets/types'
 
 // Components
 import Loading from '@/components/loading'
 import Layout from '@/layouts/layout'
 import Link from 'next/link'
 
-const limit = 10
+const postLimitPerPage = 2
 
-const PostsArchive = () => {
-  const [posts, setPosts] = useState<Array<Post>>(null)
-  const [count, setCount] = useState<number>(0)
+type PostsArchiveProps = {
+  posts: Array<PostType>,
+  count: number,
+  pageNumber: number
+}
+
+const PostsArchive = ({ count, pageNumber, posts }: PostsArchiveProps) => {
   const [hasNextPage, setHasNextPage] = useState<boolean>(false)
   const [hasPrevPage, setHasPrevPage] = useState<boolean>(false)
   
-  const router = useRouter()
-  let { page } = router.query as ParsedUrlQuery
-  const pageNumber = get(page, '[0]', 0)
-  
-  // Scroll to element if
   useEffect(() => {
-    if (!count) {
-      fetch(process.env.NEXT_API_URL + '/blog-posts/count')
-        .then((response) => response.json())
-        .then((response: number) => setCount(response))
-    }
-  }, [count])
-  
-  // Scroll to element if
-  useEffect(() => {
-    let skip: string = ''
-    
-    if (!Number.isNaN(Number(pageNumber))) {
-      skip = '&_start=' + (Number(pageNumber) * limit)
-    }
-    
-    fetch(process.env.NEXT_API_URL + `/blog-posts?_limit=${limit}${skip}`)
-      .then((response) => response.json())
-      .then((response: Array<Post>) => setPosts(response))
-  }, [pageNumber])
-  
-  useEffect(() => {
-    if (count && posts) {
+    if (count) {
       setHasPrevPage(pageNumber > 0)
-      setHasNextPage(posts.length >= limit)
+      setHasNextPage(posts.length >= postLimitPerPage)
     }
-  }, [count, posts])
+  }, [count, pageNumber])
   
   const PrevButton = () => {
     if (hasPrevPage) {
@@ -128,6 +106,51 @@ const PostsArchive = () => {
       </div>
     </Layout>
   )
+}
+
+export async function getStaticPaths () {
+  // Fetch blog post count
+  const res = await fetch(process.env.NEXT_API_URL + '/blog-posts/count')
+  const count = await res.json()
+  
+  // Count max number of pages
+  const pages = Math.ceil(count / postLimitPerPage)
+  
+  // Might arrive with no param which means it's page zero
+  const paths = ['/posts']
+  
+  // Get each possible route
+  for (let i = 0; i < pages; i++) {
+    paths.push(`/posts/${i}`)
+  }
+  
+  return { paths, fallback: false }
+}
+
+export async function getStaticProps ({ params }) {
+  // I might not be defined (page zero)
+  const pageNumber = get(params, 'page[0]', 0)
+  
+  // Build how many we are skipping
+  let skip: string = ''
+  
+  if (!Number.isNaN(Number(pageNumber))) {
+    skip = '&_start=' + (Number(pageNumber) * postLimitPerPage)
+  }
+  
+  const res = await fetch(process.env.NEXT_API_URL + `/blog-posts?_limit=${postLimitPerPage}${skip}`)
+  const posts = await res.json()
+  
+  const countResponse = await fetch(process.env.NEXT_API_URL + '/blog-posts/count')
+  const count = await countResponse.json()
+  
+  return {
+    props: {
+      posts,
+      pageNumber,
+      count
+    },
+  }
 }
 
 export default PostsArchive

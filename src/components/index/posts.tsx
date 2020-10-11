@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useSelector } from 'react-redux'
 
 // Types
-import { Article, Post, Showcase, Tag } from '@/assets/types'
+import { Article, Post } from '@/assets/types'
 
 type PostsProps = {
   hideDescription?: boolean

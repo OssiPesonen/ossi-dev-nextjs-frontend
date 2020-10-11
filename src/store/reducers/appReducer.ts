@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Article, Block, Employment, Link, Post as PostType, Post, Showcase, Tag } from '@/assets/types'
-import { AppThunk } from '@/store/store'
+import { Article, Block, Employment, Link, Post, Showcase, Tag } from '@/assets/types'
 
 type InitialStateProps = {
   showcases: Array<Showcase>
@@ -9,8 +8,6 @@ type InitialStateProps = {
   posts: Array<Post>,
   employments: Array<Employment>,
   articles: Array<Article>,
-  showcase: Showcase,
-  post: Post,
   tags: Array<Tag>,
   loaded: boolean;
   error: string
@@ -23,8 +20,6 @@ const initialState: InitialStateProps = {
   posts: null,
   employments: null,
   articles: null,
-  showcase: null,
-  post: null,
   tags: null,
   loaded: false,
   error: ''
@@ -49,14 +44,8 @@ const appSlice = createSlice({
     setEmployments (state, action: PayloadAction<Array<Employment>>) {
       state.employments = action.payload
     },
-    setPost (state, action: PayloadAction<Post>) {
-      state.post = action.payload
-    },
     setArticles (state, action: PayloadAction<Array<Article>>) {
       state.articles = action.payload
-    },
-    setShowcase (state, action: PayloadAction<Showcase>) {
-      state.showcase = action.payload
     },
     setTags (state, action: PayloadAction<Array<Tag>>) {
       state.tags = action.payload
@@ -76,8 +65,6 @@ export const {
   setBlocks,
   setPosts,
   setEmployments,
-  setPost,
-  setShowcase,
   setTags,
   setLoaded,
   setArticles,
@@ -85,29 +72,3 @@ export const {
 } = appSlice.actions
 
 export default appSlice.reducer
-
-/**
- * Fetch showcases for list
- */
-export const fetchShowcases = (): AppThunk => async dispatch => {
-  try {
-    const response = await fetch(process.env.NEXT_API_URL + '/showcases')
-    const data: Array<Showcase> = await response.json()
-    dispatch(setShowcases(data))
-  } catch (err) {
-    dispatch(setError(err.toString()))
-  }
-}
-
-/**
- * Fetch posts for list
- */
-export const fetchPosts = (): AppThunk => async dispatch => {
-  try {
-    const response = await fetch(process.env.NEXT_API_URL + `/blog-posts?_limit=15&_sort=published_at:DESC`)
-    const data: Array<Post> = await response.json()
-    dispatch(setPosts(data))
-  } catch (err) {
-    dispatch(setError(err.toString()))
-  }
-}

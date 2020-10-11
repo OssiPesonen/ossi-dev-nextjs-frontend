@@ -11,11 +11,13 @@ import {
   setLoaded as setAppLoaded,
   setEmployments,
   setTags,
-  setArticles, fetchPosts, fetchShowcases
+  setArticles,
+  setShowcases,
+  setPosts
 } from '@/store/reducers/appReducer'
 
 // Assets
-import { Block,Employment, Tag, Article } from '@/assets/types'
+import { Block, Employment, Tag, Article, Post, Showcase } from '@/assets/types'
 
 // Components
 import Introduction from '@/components/index/introduction'
@@ -27,7 +29,16 @@ import Contact from '@/components/index/contact'
 import Loading from '@/components/loading'
 import Resume from '@/components/index/resume'
 
-export default function Home () {
+type HomeProps = {
+  posts: Array<Post>,
+  showcases: Array<Showcase>,
+  blocks: Array<Block>,
+  articles: Array<Article>,
+  employments: Array<Employment>,
+  tags: Array<Tag>
+};
+
+function Home ({ posts, articles, blocks, showcases, employments, tags }: HomeProps) {
   const router = useRouter()
   const app = useSelector((state: RootState) => state.app)
   const dispatch = useDispatch()
@@ -51,37 +62,13 @@ export default function Home () {
   
   useEffect(() => {
     if (!app.loaded) {
-      // Fetch posts using thunk
-      dispatch(fetchPosts());
-      
-      // Fetch showcases using thunk
-      dispatch(fetchShowcases());
-      
-      // Fetch frontpage data
-      const urls = [
-        '/blocks',
-        '/articles',
-        '/employments',
-        '/tags'
-      ]
-      
-      Promise.all(urls.map(url => fetch(process.env.NEXT_API_URL + url)))
-        .then(response => Promise.all(response.map(jsonResponse => jsonResponse.json())))
-        .then((response: [
-          Array<Block>,
-          Array<Article>,
-          Array<Employment>,
-          Array<Tag>
-        ]) => {
-          const [blocks, articles, employments, tags] = response
-          
-          dispatch(setBlocks(blocks))
-          dispatch(setEmployments(employments))
-          dispatch(setTags(tags))
-          dispatch(setArticles(articles))
-        })
-        .catch(() => router.push('/error'))
-        .finally(() => dispatch(setAppLoaded(true)))
+      dispatch(setPosts(posts))
+      dispatch(setShowcases(showcases))
+      dispatch(setBlocks(blocks))
+      dispatch(setEmployments(employments))
+      dispatch(setTags(tags))
+      dispatch(setArticles(articles))
+      dispatch(setAppLoaded(true))
     }
   }, [app.loaded])
   
@@ -93,8 +80,37 @@ export default function Home () {
         <Services/>
         <Showcases/>
         <Posts/>
-        <Contact />
+        <Contact/>
         <Resume/>
       </Layout>
     )
 }
+
+export async function getStaticProps () {
+  // Fetch frontpage data
+  const urls = [
+    '/blog-posts?_limit=15&_sort=published_at:DESC',
+    '/showcases',
+    '/blocks',
+    '/articles',
+    '/employments',
+    '/tags'
+  ]
+  
+  const contentCalls: Response[] = await Promise.all(urls.map(url => fetch(process.env.NEXT_API_URL + url)))
+  const contentResponses = await Promise.all(contentCalls.map(jsonResponse => jsonResponse.json()))
+  const [posts, showcases, blocks, articles, employments, tags] = contentResponses
+  
+  return {
+    props: {
+      posts,
+      showcases,
+      blocks,
+      articles,
+      employments,
+      tags
+    },
+  }
+}
+
+export default Home

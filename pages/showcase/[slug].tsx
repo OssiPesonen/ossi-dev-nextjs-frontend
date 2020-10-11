@@ -9,9 +9,7 @@ import { get } from 'lodash'
 
 // Types
 import { Showcase as ShowcaseType, Tag } from '@/assets/types'
-
-// Redux
-import { fetchShowcases } from '@/store/reducers/appReducer'
+import { setShowcases } from '@/store/reducers/appReducer'
 
 // Components
 import Layout from '@/layouts/layout'
@@ -19,7 +17,11 @@ import Loading from '@/components/loading'
 import Showcases from '@/components/index/showcases'
 import Contact from '@/components/index/contact'
 
-const Showcase = () => {
+type ShowcaseProps = {
+  showcases: Array<ShowcaseType>
+}
+
+const Showcase = ({ showcases }: ShowcaseProps) => {
   const router = useRouter()
   const { slug } = router.query as ParsedUrlQuery
   const [showcase, setShowcase] = useState<ShowcaseType>(null)
@@ -28,15 +30,25 @@ const Showcase = () => {
   const dispatch = useDispatch()
   
   useEffect(() => {
-    if (app.showcases) {
-      // Find showcase data from the list. We do this because there are less than 10 showcases so we don't have to fetch
-      // an individual one every time and save the cost of a network call
-      setShowcase(app.showcases.find((showcase: ShowcaseType) => showcase.Slug === slug))
-    } else {
-      // No showcases => fetch
-      dispatch(fetchShowcases())
+    if (!app.showcases) {
+      // Dispatch to state so they're available if not already
+      dispatch(setShowcases(showcases))
     }
-  }, [app.showcases, slug])
+    
+    // Find showcase data from the list. We do this because there are less than 10 showcases so we don't have to fetch
+    // an individual one every time and save the cost of a network call
+    const entry: ShowcaseType = showcases.find((showcase: ShowcaseType) => showcase.Slug === slug)
+    let showcaseObj = entry
+    
+    if (entry) {
+      // Replace all relative image paths with the API URL prefixed.
+      let contentString = entry.Content
+      contentString = contentString.replaceAll('src="/uploads', `src="${process.env.NEXT_API_URL}/uploads`)
+      showcaseObj = { ...entry, Content: contentString }
+    }
+    
+    setShowcase(showcaseObj)
+  }, [slug, showcases])
   
   return (
     <Layout>
@@ -73,6 +85,24 @@ const Showcase = () => {
       <Contact/>
     </Layout>
   )
+}
+
+export async function getStaticPaths () {
+  const res = await fetch(process.env.NEXT_API_URL + '/showcases')
+  const showcases = await res.json()
+  const paths = showcases.map((showcase: ShowcaseType) => `/showcase/${showcase.Slug}`)
+  return { paths, fallback: false }
+}
+
+export async function getStaticProps ({ params }) {
+  const res = await fetch(process.env.NEXT_API_URL + '/showcases')
+  const showcases = await res.json()
+  
+  return {
+    props: {
+      showcases
+    },
+  }
 }
 
 export default Showcase
