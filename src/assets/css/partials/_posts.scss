@@ -27,14 +27,22 @@
     }
 }
 
-.explore-more-link .icon svg {
-    height: 16px;
-    width: 16px;
-    margin-left: 0.5rem;
-    display: inline-block;
-    line-height: 1;
-    vertical-align: top;
-    margin-top: 5px;
+.explore-more-link {
+    .icon svg {
+        height: 16px;
+        width: 16px;
+        margin-left: 0.5rem;
+        display: inline-block;
+        line-height: 1;
+        vertical-align: top;
+        margin-top: 5px;
+        fill: $cyan;
+    }
+
+    &:hover .icon svg {
+        fill: $shade3;
+        transform: translateX(0.5rem);
+    }
 }
 
 #posts-list {
@@ -45,20 +53,23 @@
         display: block;
         border-bottom: 1px solid #515D68;
 
-        &:after {
+
+        section.read-more-icon {
             position: absolute;
-            font-family: "Font Awesome 5 Pro", sans-serif;
-            content: "\f061";
-            color: $cyan;
-            top: 1rem;
-            right: 0;
+            top: 0.5rem;
+            right: 0rem;
             font-size: 1.25rem;
-            font-weight: 900;
             transition: .12s ease-in-out;
+
+            .icon svg {
+                fill: $cyan;
+                height: 16px;
+                width: 16px;
+            }
         }
 
         &:hover {
-            &:after {
+            .read-more-icon {
                 right: -0.5rem;
             }
 

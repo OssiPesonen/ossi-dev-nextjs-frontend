@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
 import { ParsedUrlQuery } from 'querystring'
 import { get } from 'lodash'
+import ReactMarkdown from 'react-markdown'
 
 // Types
 import { Showcase as ShowcaseType, Tag } from '@/assets/types'
@@ -72,7 +73,10 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
                     {showcase.tags ? showcase.tags.map((tag: Tag) =>
                       <div className="tag" key={tag.id}>{tag.Tag}</div>) : <></>}
                   </div>
-                  <div className="showcase-content" dangerouslySetInnerHTML={{ __html: showcase.Content }}/>
+                  <div className="showcase-content">
+                    <ReactMarkdown className="content-area" source={showcase.Content}/>
+                  </div>
+                  
                 </div>
               </section>
               <hr/>

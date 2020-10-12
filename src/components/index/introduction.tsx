@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 // App
 import { useSelector } from 'react-redux'
+import ReactMarkdown from 'react-markdown'
 
 // Types
 import { Block } from '@/assets/types'
@@ -46,7 +47,7 @@ const Introduction = () => {
           </div>
         </div>
         <div className="col-12 col-md-6 introduction-content">
-          <div dangerouslySetInnerHTML={{ __html: intro.Content }} />
+          <ReactMarkdown source={intro.Content}/>
         </div>
       </div>
     </div>

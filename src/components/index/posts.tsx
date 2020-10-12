@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux'
 
 // Types
 import { Article, Post } from '@/assets/types'
-import IconCaretUp from '../../assets/icons/i-caret-up';
-import IconArrowRight from '../../assets/icons/i-arrow-right';
+import IconCaretUp from '../../assets/icons/i-caret-up'
+import IconArrowRight from '../../assets/icons/i-arrow-right'
 
 type PostsProps = {
   hideDescription?: boolean
@@ -26,7 +26,7 @@ const Posts = (props: PostsProps) => {
           {hideDescription ? <></> : (
             <div className="col-md-5">
               <h4 className="section-title">
-                <IconCaretUp /> Posts
+                <IconCaretUp/> Posts
               </h4>
               <h2>Blog posts and articles</h2>
               <p className="text-gray">You can find everything I've posted on my blog or Medium accounts right here.</p>
@@ -34,7 +34,7 @@ const Posts = (props: PostsProps) => {
           )}
           <div className={hideDescription ? 'col-md-12' : 'col-md-7'}>
             <h4 className="section-title mt-4 mt-md-0s">
-                <IconCaretUp /> Blog
+              <IconCaretUp/> Blog
             </h4>
             <div id="posts-list" className="pl-md-4 mb-md-4">
               {app.posts.map((post: Post) => {
@@ -48,6 +48,9 @@ const Posts = (props: PostsProps) => {
                         <header className="content">
                           <h3>{post.Title}</h3>
                         </header>
+                        <section className="read-more-icon">
+                          <IconArrowRight/>
+                        </section>
                         <footer>
                           <time>{readableDate}</time>
                         </footer>
@@ -58,10 +61,10 @@ const Posts = (props: PostsProps) => {
               })}
             </div>
             <div className="text-right explore-more-link">
-              <Link href="/posts"><a>Explore more <IconArrowRight /></a></Link>
+              <Link href="/posts"><a>Explore more <IconArrowRight/></a></Link>
             </div>
             <h4 className="section-title mt-4">
-                <IconCaretUp /> Medium.com
+              <IconCaretUp/> Medium.com
             </h4>
             <div id="posts-list" className="medium pl-md-4 mb-md-4">
               {!app.articles ? <>No articles</> : app.articles.map((article: Article) => {
@@ -74,6 +77,9 @@ const Posts = (props: PostsProps) => {
                       <header className="content">
                         <h3>{article.title}</h3>
                       </header>
+                      <section className="read-more-icon">
+                        <IconArrowRight/>
+                      </section>
                       <footer>
                         <time>{readableDate}</time>
                         <span className="ml-4 text-secondary">Medium.com</span>

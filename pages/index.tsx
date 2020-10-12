@@ -38,7 +38,7 @@ type HomeProps = {
   tags: Array<Tag>
 };
 
-function Home ({ posts, articles, blocks, showcases, employments, tags }: HomeProps) {
+function Home ({ posts, showcases, articles, blocks, employments, tags }: HomeProps) {
   const router = useRouter()
   const app = useSelector((state: RootState) => state.app)
   const dispatch = useDispatch()

@@ -114,7 +114,7 @@
 
             ul {
                 margin-bottom: 2rem;
-                padding-left: 1rem;
+                padding-left: 1.5rem;
 
                 li {
                     list-style: square;
@@ -123,13 +123,12 @@
                     position: relative;
 
                     &:before {
-                        font-family: "Font Awesome 5 Pro", sans-serif;
-                        content: "\f0da";
-                        color: $yellow;
+                        content: url('/img/caret.png');
+                        height: 16px;
+                        width: 16px;
                         position: absolute;
-                        left: -1rem;
-                        top: -2px;
-                        font-weight: 900;
+                        left: -1.6rem;
+                        top: 2px;
                     }
                 }
             }

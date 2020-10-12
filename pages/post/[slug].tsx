@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Prism from 'prismjs'
 import { useSelector, useDispatch } from 'react-redux'
 import { get } from 'lodash'
+import ReactMarkdown from 'react-markdown';
 
 // Types
 import { Article, Post as PostType } from '@/assets/types'
@@ -65,7 +66,7 @@ const Post = ({ post, posts, articles }: PostProps) => {
             {get(post, 'Cover.url', null) ?
               <img src={process.env.NEXT_API_URL + post.Cover.url} alt={post.Cover.alternativeText}/> : <></>}
           </div>
-          <div className="post-content" dangerouslySetInnerHTML={{ __html: post.Content }}/>
+          <ReactMarkdown source={post.Content} className="post-content" />
         </section>
         <hr/>
         <footer>

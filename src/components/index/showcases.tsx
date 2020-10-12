@@ -1,16 +1,14 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 // App
 import Link from 'next/link'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { get } from 'lodash'
-import { useRouter } from 'next/router'
 
 // Types
 import { Showcase, Tag } from '@/assets/types'
 
 // Redux
-import { setShowcases } from '@/store/reducers/appReducer'
 import IconCaretUp from '../../assets/icons/i-caret-up';
 
 type ShowcasesProps = {
@@ -21,19 +19,6 @@ type ShowcasesProps = {
 const Showcases = (props: ShowcasesProps) => {
   const { hideDescription, openPostId } = props
   const app = useSelector(state => state.app)
-  const dispatch = useDispatch()
-  const router = useRouter()
-  
-  // Fetch posts if user visits this site first
-  useEffect(() => {
-    if (!app.showcases) {
-      // Todo: This is a duplicate, might want to create a thunk
-      fetch(process.env.NEXT_API_URL + `/showcases`)
-        .then((response) => response.json())
-        .then((response: Array<Showcase>) => dispatch(setShowcases(response)))
-        .catch(() => router.push('/error'))
-    }
-  }, [app.posts])
   
   return !app.showcases ? <></> : (
     <div id="showcases" className={`section-container${hideDescription ? ' on-single-page' : ''}`}>
