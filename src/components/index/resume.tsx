@@ -20,7 +20,7 @@ const Resume = () => {
                 <IconCaretUp/> Resume
               </h4>
               <h2>Where I've worked</h2>
-              <p className="text-muted">A list of my most recent employers and job descriptions. </p>
+              <p className="text-muted mb-4">A list of my most recent employers and job descriptions. </p>
               <div id="employers" className="mt-4 mt-md-0">
                 {!app.employments ? <></> : app.employments.map((employment: Employment) => {
                   const startDate = new Date(employment.StartDate)

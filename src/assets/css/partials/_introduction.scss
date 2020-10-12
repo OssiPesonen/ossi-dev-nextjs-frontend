@@ -2,6 +2,7 @@
     display: flex;
     min-height: calc(100vh - #{$top-bar-height});
     align-items: center;
+    padding: 2rem 1rem;
 
     .personal h3 {
         font-size: 2rem;
@@ -14,7 +15,7 @@
         li {
             display: inline-block;
             padding: 0.5rem 1rem;
-            margin: 0 1rem;
+            margin: 0.5rem 1rem;
             border-radius: 32px;
             border: 1px solid $border-color;
             font-size: 0.9rem;

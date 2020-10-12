@@ -24,7 +24,7 @@ const Introduction = () => {
   return !intro || !currentInterest ? <></> : (
     <div id="introduction" className="container-md">
       <div className="row align-items-center">
-        <div className="col-12 col-md-6 personal text-center">
+        <div className="col-12 col-md-6 personal text-center mb-4">
           <img className="mb-4" src="/img/avatar.png" alt=""/>
           <h2>Ossi Pesonen</h2>
           <p className="text-muted">Currently interested in, and learning:</p>
@@ -47,7 +47,7 @@ const Introduction = () => {
           </div>
         </div>
         <div className="col-12 col-md-6 introduction-content">
-          <ReactMarkdown source={intro.Content}/>
+          <ReactMarkdown className="text-center text-md-left" source={intro.Content}/>
         </div>
       </div>
     </div>

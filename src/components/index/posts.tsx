@@ -21,7 +21,7 @@ const Posts = (props: PostsProps) => {
   
   return !app.posts ? <></> : (
     <div id="posts" className="section-container">
-      <div className="container" style={{ maxWidth: hideDescription ? '768px' : '1140px' }}>
+      <div className="container-md" style={{ maxWidth: hideDescription ? '768px' : '1140px' }}>
         <div className="row">
           {hideDescription ? <></> : (
             <div className="col-md-5">
@@ -32,10 +32,7 @@ const Posts = (props: PostsProps) => {
               <p className="text-gray">You can find everything I've posted on my blog or Medium accounts right here.</p>
             </div>
           )}
-          <div className={hideDescription ? 'col-md-12' : 'col-md-7'}>
-            <h4 className="section-title mt-4 mt-md-0s">
-              <IconCaretUp/> Blog
-            </h4>
+          <div className={`${hideDescription ? 'col-md-12' : 'col-md-7'} mt-4 mt-md-0`}>
             <div id="posts-list" className="pl-md-4 mb-md-4">
               {app.posts.map((post: Post) => {
                 const published = new Date(post.published_at)

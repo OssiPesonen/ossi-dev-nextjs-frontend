@@ -70,7 +70,7 @@ const Post = ({ post, posts, articles }: PostProps) => {
           <ReactMarkdown source={ post.Content }
                          transformImageUri={ (uri) => process.env.NEXT_PUBLIC_API_URL + uri }
                          renderers={ { image: ImageComponent, paragraph: ParagraphComponent } }
-                         className="showcase-content"/>
+                         className="post-content"/>
         </section>
         <hr/>
         <footer>

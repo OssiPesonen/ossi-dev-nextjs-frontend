@@ -75,7 +75,7 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
               </section>
               <hr/>
               <footer>
-                <Link href="/#showcases"><a><IconArrowLeft/> Back to frontpage</a></Link>
+                <Link href="/#showcases"><a className="back-to-frontpage"><IconArrowLeft/> Back to frontpage</a></Link>
               </footer>
             </article>
             <Showcases hideDescription={ true } openPostId={ showcase.id }/>
