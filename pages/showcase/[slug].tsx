@@ -45,7 +45,7 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
     if (entry) {
       // Replace all relative image paths with the API URL prefixed.
       let contentString = entry.Content
-      contentString = contentString.replaceAll('src="/uploads', `src="${process.env.NEXT_PUBLIC_API_URL}/uploads`)
+      contentString = contentString.replaceAll('](/uploads', `](${process.env.NEXT_PUBLIC_API_URL}/uploads`)
       showcaseObj = { ...entry, Content: contentString }
     }
     
