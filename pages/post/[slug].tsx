@@ -20,6 +20,7 @@ import Posts from '@/components/index/posts'
 import Contact from '@/components/index/contact'
 import IconArrowLeft from '../../src/assets/icons/i-arrow-left'
 import IconArchive from '../../src/assets/icons/i-archive'
+import { ParagraphComponent, ImageComponent } from '../../src/assets/react-markdown-renderers'
 
 type PostProps = {
   post: PostType,
@@ -38,11 +39,6 @@ const Post = ({ post, posts, articles }: PostProps) => {
   useEffect(() => {
     if (post) {
       Prism.highlightAll()
-
-      // Replace all relative image paths with the API URL prefixed.
-      let contentString = post.Content
-      contentString = contentString.replaceAll('](/uploads', `](${ process.env.NEXT_PUBLIC_API_URL }/uploads`)
-      post = { ...post, Content: contentString }
     }
   }, [post])
 
@@ -71,7 +67,10 @@ const Post = ({ post, posts, articles }: PostProps) => {
             { get(post, 'Cover.url', null) ?
               <img src={ process.env.NEXT_PUBLIC_API_URL + post.Cover.url } alt={ post.Cover.alternativeText }/> : <></> }
           </div>
-          <ReactMarkdown source={ post.Content } className="post-content"/>
+          <ReactMarkdown source={ post.Content }
+                         transformImageUri={ (uri) => process.env.NEXT_PUBLIC_API_URL + uri }
+                         renderers={ { image: ImageComponent, paragraph: ParagraphComponent } }
+                         className="showcase-content"/>
         </section>
         <hr/>
         <footer>

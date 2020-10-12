@@ -113,10 +113,6 @@
     padding-bottom: 5rem;
     padding-top: 2rem;
 
-    header h1 {
-        margin-top: 2rem;
-    }
-
     section {
         .post-content {
             display: grid;
@@ -145,7 +141,6 @@
         }
     }
 
-    header .icon svg,
     footer .icon svg {
         height: 20px;
         width: 20px;
