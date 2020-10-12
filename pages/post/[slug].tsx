@@ -64,7 +64,7 @@ const Post = ({ post, posts, articles }: PostProps) => {
         <section>
           <div className="cover-photo mb-4 full-bleed">
             {get(post, 'Cover.url', null) ?
-              <img src={process.env.NEXT__PUBLIC_API_URL + post.Cover.url} alt={post.Cover.alternativeText}/> : <></>}
+              <img src={process.env.NEXT_PUBLIC_API_URL + post.Cover.url} alt={post.Cover.alternativeText}/> : <></>}
           </div>
           <ReactMarkdown source={post.Content} className="post-content" />
         </section>
@@ -81,20 +81,20 @@ const Post = ({ post, posts, articles }: PostProps) => {
 }
 
 export async function getStaticPaths () {
-  const res = await fetch(process.env.NEXT__PUBLIC_API_URL + '/blog-posts')
+  const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/blog-posts')
   const posts = await res.json()
   const paths = posts.map((post: PostType) => `/post/${post.Slug}`)
   return { paths, fallback: false }
 }
 
 export async function getStaticProps ({ params }) {
-  const postsResponse = await fetch(process.env.NEXT__PUBLIC_API_URL + '/blog-posts?_limit=15&_sort=published_at:DESC')
+  const postsResponse = await fetch(process.env.NEXT_PUBLIC_API_URL + '/blog-posts?_limit=15&_sort=published_at:DESC')
   const posts: Array<PostType> = await postsResponse.json()
   
-  const articlesResponse = await fetch(process.env.NEXT__PUBLIC_API_URL + '/articles')
+  const articlesResponse = await fetch(process.env.NEXT_PUBLIC_API_URL + '/articles')
   const articles: Array<Article> = await articlesResponse.json()
   
-  const postResponse = await fetch(process.env.NEXT__PUBLIC_API_URL + `/blog-posts?Slug=${params.slug}`)
+  const postResponse = await fetch(process.env.NEXT_PUBLIC_API_URL + `/blog-posts?Slug=${params.slug}`)
   const singlePost: PostType = await postResponse.json()
   
   return {

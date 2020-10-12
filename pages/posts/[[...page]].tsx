@@ -112,7 +112,7 @@ const PostsArchive = ({ count, pageNumber, posts }: PostsArchiveProps) => {
 
 export async function getStaticPaths () {
   // Fetch blog post count
-  const res = await fetch(process.env.NEXT__PUBLIC_API_URL + '/blog-posts/count')
+  const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/blog-posts/count')
   const count = await res.json()
   
   // Count max number of pages
@@ -140,10 +140,10 @@ export async function getStaticProps ({ params }) {
     skip = '&_start=' + (Number(pageNumber) * postLimitPerPage)
   }
   
-  const res = await fetch(process.env.NEXT__PUBLIC_API_URL + `/blog-posts?_limit=${postLimitPerPage}${skip}`)
+  const res = await fetch(process.env.NEXT_PUBLIC_API_URL + `/blog-posts?_limit=${postLimitPerPage}${skip}`)
   const posts = await res.json()
   
-  const countResponse = await fetch(process.env.NEXT__PUBLIC_API_URL + '/blog-posts/count')
+  const countResponse = await fetch(process.env.NEXT_PUBLIC_API_URL + '/blog-posts/count')
   const count = await countResponse.json()
   
   return {

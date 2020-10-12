@@ -97,7 +97,7 @@ export async function getStaticProps () {
     '/tags'
   ]
   
-  const contentCalls: Response[] = await Promise.all(urls.map(url => fetch(process.env.NEXT__PUBLIC_API_URL + url)))
+  const contentCalls: Response[] = await Promise.all(urls.map(url => fetch(process.env.NEXT_PUBLIC_API_URL + url)))
   const contentResponses = await Promise.all(contentCalls.map(jsonResponse => jsonResponse.json()))
   const [posts, showcases, blocks, articles, employments, tags] = contentResponses
   

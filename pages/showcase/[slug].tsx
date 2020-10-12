@@ -45,7 +45,7 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
     if (entry) {
       // Replace all relative image paths with the API URL prefixed.
       let contentString = entry.Content
-      contentString = contentString.replaceAll('src="/uploads', `src="${process.env.NEXT__PUBLIC_API_URL}/uploads`)
+      contentString = contentString.replaceAll('src="/uploads', `src="${process.env.NEXT_PUBLIC_API_URL}/uploads`)
       showcaseObj = { ...entry, Content: contentString }
     }
     
@@ -66,7 +66,7 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
               <section>
                 <div className="cover-photo mb-4 full-bleed">
                   {get(showcase, 'Cover.url', null) ?
-                    <img src={process.env.NEXT__PUBLIC_API_URL + showcase.Cover.url} alt={showcase.Cover.alternativeText}/> : <></>}
+                    <img src={process.env.NEXT_PUBLIC_API_URL + showcase.Cover.url} alt={showcase.Cover.alternativeText}/> : <></>}
                 </div>
                 <div className="showcase-grid">
                   <div className="tags">
@@ -93,14 +93,14 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
 }
 
 export async function getStaticPaths () {
-  const res = await fetch(process.env.NEXT__PUBLIC_API_URL + '/showcases')
+  const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/showcases')
   const showcases = await res.json()
   const paths = showcases.map((showcase: ShowcaseType) => `/showcase/${showcase.Slug}`)
   return { paths, fallback: false }
 }
 
 export async function getStaticProps ({ params }) {
-  const res = await fetch(process.env.NEXT__PUBLIC_API_URL + '/showcases')
+  const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/showcases')
   const showcases = await res.json()
   
   return {
