@@ -20,7 +20,7 @@ import Posts from '@/components/index/posts'
 import Contact from '@/components/index/contact'
 import IconArrowLeft from '../../src/assets/icons/i-arrow-left'
 import IconArchive from '../../src/assets/icons/i-archive'
-import { ParagraphComponent, ImageComponent } from '../../src/assets/react-markdown-renderers'
+import { ParagraphComponent, ImageComponent, LinkComponent } from '../../src/assets/react-markdown-renderers'
 
 type PostProps = {
   post: PostType,
@@ -69,8 +69,11 @@ const Post = ({ post, posts, articles }: PostProps) => {
           </div>
           <ReactMarkdown source={ post.Content }
                          transformImageUri={ (uri) => process.env.NEXT_PUBLIC_API_URL + uri }
-                         renderers={ { image: ImageComponent, paragraph: ParagraphComponent } }
-                         escapeHtml={false}
+                         renderers={ {
+                           image: ImageComponent,
+                           paragraph: ParagraphComponent,
+                           link: LinkComponent
+                         } }
                          className="post-content"/>
         </section>
         <hr/>

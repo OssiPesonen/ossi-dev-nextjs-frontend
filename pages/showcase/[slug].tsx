@@ -18,7 +18,7 @@ import Loading from '@/components/loading'
 import Showcases from '@/components/index/showcases'
 import Contact from '@/components/index/contact'
 import IconArrowLeft from '../../src/assets/icons/i-arrow-left'
-import { ParagraphComponent, ImageComponent } from '../../src/assets/react-markdown-renderers'
+import { ParagraphComponent, ImageComponent, LinkComponent } from '../../src/assets/react-markdown-renderers'
 
 type ShowcaseProps = {
   showcases: Array<ShowcaseType>
@@ -69,8 +69,11 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
                   </div>
                   <ReactMarkdown source={ showcase.Content }
                                  transformImageUri={ (uri) => process.env.NEXT_PUBLIC_API_URL + uri }
-                                 renderers={ { image: ImageComponent, paragraph: ParagraphComponent } }
-                                 escapeHtml={false}
+                                 renderers={ {
+                                   image: ImageComponent,
+                                   paragraph: ParagraphComponent,
+                                   link: LinkComponent
+                                 } }
                                  className="showcase-content"/>
                 </div>
               </section>

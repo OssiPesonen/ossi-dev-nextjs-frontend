@@ -1,4 +1,4 @@
-export const ImageComponent = (props: { src: string, alt: string}) => {
+export const ImageComponent = (props: { src: string, alt: string }) => {
   return (
     <figure className="image">
       <img src={ props.src } alt={ props.alt }/>
@@ -6,7 +6,10 @@ export const ImageComponent = (props: { src: string, alt: string}) => {
   )
 }
 
-export const ParagraphComponent = (props: { children: Array<any>}): React.ReactElement => {
+export const LinkComponent = (props: { href: string, children?: any }) =>
+  <a href={ props.href } target="_blank">{ props.children }</a>
+
+export const ParagraphComponent = (props: { children: Array<any> }): React.ReactElement => {
   const { children } = props
 
   if (children && children[ 0 ]
