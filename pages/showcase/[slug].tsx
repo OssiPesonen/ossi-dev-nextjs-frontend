@@ -70,6 +70,7 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
                   <ReactMarkdown source={ showcase.Content }
                                  transformImageUri={ (uri) => process.env.NEXT_PUBLIC_API_URL + uri }
                                  renderers={ { image: ImageComponent, paragraph: ParagraphComponent } }
+                                 escapeHtml={true}
                                  className="showcase-content"/>
                 </div>
               </section>
