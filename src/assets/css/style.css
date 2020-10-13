@@ -614,6 +614,7 @@ body {
   top: 2px;
 }
 #showcase section .showcase-content .image {
+  text-align: center;
   grid-column: 2/5;
   margin: 1.5rem 0 2.5rem;
   position: relative;
@@ -747,7 +748,8 @@ body {
   grid-column: 3;
 }
 #post section .post-content .image {
-  grid-column: 2/4;
+  grid-column: 2/5;
+  text-align: center;
   margin: 1rem 0 1.5rem;
 }
 #post section .post-content a {
