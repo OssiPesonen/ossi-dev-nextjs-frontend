@@ -107,7 +107,9 @@
         .showcase-content {
             display: grid;
             grid-template-columns: 1fr 1fr min(65ch, 100%) 1fr 1fr;
-
+            font-size: 1.1rem;
+            color: $shade1;
+            
             > * {
                 grid-column: 3;
             }

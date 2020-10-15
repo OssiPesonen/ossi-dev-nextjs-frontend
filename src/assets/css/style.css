@@ -55,17 +55,17 @@ body {
 
 body {
   color: #ADBBCC;
+  font-size: 14px;
   font-family: "Fira Sans", sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Droid Sans", "Helvetica Neue";
+}
+@media screen and (min-width: 992px) {
+  body {
+    font-size: 16px;
+  }
 }
 
 body, p {
-  font-size: 14px;
   line-height: 1.8;
-}
-@media screen and (min-width: 992px) {
-  body, p {
-    font-size: 16px;
-  }
 }
 
 p {
@@ -153,6 +153,14 @@ i, em {
 img {
   max-width: 100%;
   height: auto;
+}
+
+blockquote {
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #FFC661;
+  color: #DCE0E6;
+  font-style: italic;
 }
 
 .section-title {
@@ -592,6 +600,8 @@ body {
 #showcase section .showcase-content {
   display: grid;
   grid-template-columns: 1fr 1fr min(65ch, 100%) 1fr 1fr;
+  font-size: 1.1rem;
+  color: #DCE0E6;
 }
 #showcase section .showcase-content > * {
   grid-column: 3;
@@ -744,6 +754,8 @@ body {
 #post section .post-content {
   display: grid;
   grid-template-columns: 1fr 1fr min(65ch, 100%) 1fr 1fr;
+  font-size: 1.1rem;
+  color: #DCE0E6;
 }
 #post section .post-content > * {
   grid-column: 3;
