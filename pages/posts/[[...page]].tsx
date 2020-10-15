@@ -14,6 +14,7 @@ import Layout from '@/layouts/layout'
 import Link from 'next/link'
 import IconArrowLeft from '../../src/assets/icons/i-arrow-left';
 import IconArrowRight from '../../src/assets/icons/i-arrow-right';
+import Head from 'next/head'
 
 const postLimitPerPage = 2
 
@@ -75,7 +76,10 @@ const PostsArchive = ({ count, pageNumber, posts }: PostsArchiveProps) => {
   return (
     <Layout>
       <div className="container mt-4 mb-4">
-        <h1>Blog posts</h1>
+        <Head>
+          <title>Blog Posts - ossi.dev</title>
+        </Head>
+        <h1>Blog Posts</h1>
         {!posts ? <Loading/> : (
           <div id="posts" className="archive">
             <div id="posts-list">

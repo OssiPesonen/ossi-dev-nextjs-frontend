@@ -21,6 +21,7 @@ import Contact from '@/components/index/contact'
 import IconArrowLeft from '../../src/assets/icons/i-arrow-left'
 import IconArchive from '../../src/assets/icons/i-archive'
 import { ParagraphComponent, ImageComponent, LinkComponent } from '../../src/assets/react-markdown-renderers'
+import Head from 'next/head'
 
 type PostProps = {
   post: PostType,
@@ -57,6 +58,9 @@ const Post = ({ post, posts, articles }: PostProps) => {
 
   return (
     <Layout>
+      <Head>
+        <title>{ post.Title } - Blog - ossi.dev</title>
+      </Head>
       <article id="post" className="container-md">
         <header>
           <Link href="/#posts"><a className="back-to-frontpage"><IconArrowLeft/> Back to frontpage</a></Link>
@@ -74,6 +78,7 @@ const Post = ({ post, posts, articles }: PostProps) => {
                            paragraph: ParagraphComponent,
                            link: LinkComponent
                          } }
+                         escapeHtml={false}
                          className="post-content"/>
         </section>
         <hr/>

@@ -19,6 +19,7 @@ import Showcases from '@/components/index/showcases'
 import Contact from '@/components/index/contact'
 import IconArrowLeft from '../../src/assets/icons/i-arrow-left'
 import { ParagraphComponent, ImageComponent, LinkComponent } from '../../src/assets/react-markdown-renderers'
+import Head from 'next/head'
 
 type ShowcaseProps = {
   showcases: Array<ShowcaseType>
@@ -52,6 +53,9 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
           <Loading/>
         </div> : (
           <>
+            <Head>
+              <title>{ showcase.Title } - Showcases - ossi.dev</title>
+            </Head>
             <article id="showcase" className="container-md">
               <header className="mt-4">
                 <Link href="/#showcases"><a className="back-to-frontpage"><IconArrowLeft/> Back to frontpage</a></Link>

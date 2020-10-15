@@ -28,7 +28,7 @@ const Posts = (props: PostsProps) => {
               <h4 className="section-title">
                 <IconCaretUp/> Posts
               </h4>
-              <h2>Blog posts and articles</h2>
+              <h2>Blog Posts and Articles</h2>
               <p className="text-gray">You can find everything I've posted on my blog and links to some of my Medium articles right here.</p>
             </div>
           )}

@@ -19,7 +19,7 @@ const Resume = () => {
               <h4 className="section-title">
                 <IconCaretUp/> Resume
               </h4>
-              <h2>Where I've worked</h2>
+              <h2>Where I've Worked</h2>
               <p className="text-muted mb-4">A list of my most recent employers and job descriptions. </p>
               <div id="employers" className="mt-4 mt-md-0">
                 {!app.employments ? <></> : app.employments.map((employment: Employment) => {
@@ -51,7 +51,7 @@ const Resume = () => {
           </div>
           <div className="col-12 col-md-4 mt-xs-4 mt-md-0">
             <h4 className="section-title">
-              <IconCaretUp/> What I've worked with</h4>
+              <IconCaretUp/> What I've Worked With</h4>
             <p className="text-gray mb-4">Below I'll list of some of the frameworks, tools, applications, platforms, concepts, notable designs, libraries and languages I've worked with over the years.</p>
             {!app.tags ? <></> : (
               <ul className="tags">
