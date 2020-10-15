@@ -29,7 +29,7 @@ const Posts = (props: PostsProps) => {
                 <IconCaretUp/> Posts
               </h4>
               <h2>Blog posts and articles</h2>
-              <p className="text-gray">You can find everything I've posted on my blog or Medium accounts right here.</p>
+              <p className="text-gray">You can find everything I've posted on my blog and links to some of my Medium articles right here.</p>
             </div>
           )}
           <div className={`${hideDescription ? 'col-md-12' : 'col-md-7'} mt-4 mt-md-0`}>
