@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // App
 import Link from 'next/link'
@@ -18,7 +18,7 @@ import Loading from '@/components/loading'
 import Showcases from '@/components/index/showcases'
 import Contact from '@/components/index/contact'
 import IconArrowLeft from '../../src/assets/icons/i-arrow-left'
-import { ParagraphComponent, ImageComponent, LinkComponent } from '../../src/assets/react-markdown-renderers'
+import { ParagraphComponent, ImageComponent, LinkComponent, CodeComponent } from '../../src/assets/react-markdown-renderers'
 import Head from 'next/head'
 
 type ShowcaseProps = {
@@ -76,8 +76,10 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
                                  renderers={ {
                                    image: ImageComponent,
                                    paragraph: ParagraphComponent,
-                                   link: LinkComponent
+                                   link: LinkComponent,
+                                   code: CodeComponent
                                  } }
+                                 escapeHtml={false}
                                  className="showcase-content"/>
                 </div>
               </section>

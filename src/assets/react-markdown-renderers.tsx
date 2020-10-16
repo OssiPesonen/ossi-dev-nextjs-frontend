@@ -1,3 +1,6 @@
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { materialOceanic } from "react-syntax-highlighter/dist/cjs/styles/prism";
+
 export const ImageComponent = (props: { src: string, alt: string }) => {
   return (
     <figure className="image">
@@ -21,4 +24,13 @@ export const ParagraphComponent = (props: { children: Array<any> }): React.React
   }
 
   return <p>{ children }</p>
+}
+
+export const CodeComponent = (props) => {
+  const { language, value } = props;
+  return (
+    <SyntaxHighlighter language={ language } style={ materialOceanic }>
+      { value }
+    </SyntaxHighlighter>
+  );
 }

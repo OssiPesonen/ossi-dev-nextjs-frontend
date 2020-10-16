@@ -2,13 +2,17 @@ import React, { useEffect } from 'react'
 
 // App
 import Link from 'next/link'
-import Prism from 'prismjs'
+import Head from 'next/head'
+import ReactMarkdown from 'react-markdown'
 import { useSelector, useDispatch } from 'react-redux'
 import { get } from 'lodash'
-import ReactMarkdown from 'react-markdown'
 
-// Types
-import { Article, Post as PostType, Showcase as ShowcaseType } from '@/assets/types'
+
+// Assets
+import { Article, Post as PostType } from '@/assets/types'
+import IconArrowLeft from '@/assets/icons/i-arrow-left'
+import IconArchive from '@/assets/icons/i-archive'
+import { ParagraphComponent, ImageComponent, LinkComponent, CodeComponent } from '@/assets/react-markdown-renderers'
 
 // Redux
 import { setPosts, setArticles } from '@/store/reducers/appReducer'
@@ -18,10 +22,6 @@ import { RootState } from '@/store/rootReducer'
 import Layout from '@/layouts/layout'
 import Posts from '@/components/index/posts'
 import Contact from '@/components/index/contact'
-import IconArrowLeft from '../../src/assets/icons/i-arrow-left'
-import IconArchive from '../../src/assets/icons/i-archive'
-import { ParagraphComponent, ImageComponent, LinkComponent } from '../../src/assets/react-markdown-renderers'
-import Head from 'next/head'
 
 type PostProps = {
   post: PostType,
@@ -33,15 +33,6 @@ const Post = ({ post, posts, articles }: PostProps) => {
   // Redux
   const app = useSelector((state: RootState) => state.app)
   const dispatch = useDispatch()
-
-  /**
-   * Highlight using prism
-   */
-  useEffect(() => {
-    if (post) {
-      Prism.highlightAll()
-    }
-  }, [post])
 
   /**
    * Fetch posts list if user visits this page first
@@ -76,7 +67,8 @@ const Post = ({ post, posts, articles }: PostProps) => {
                          renderers={ {
                            image: ImageComponent,
                            paragraph: ParagraphComponent,
-                           link: LinkComponent
+                           link: LinkComponent,
+                           code: CodeComponent
                          } }
                          escapeHtml={false}
                          className="post-content"/>

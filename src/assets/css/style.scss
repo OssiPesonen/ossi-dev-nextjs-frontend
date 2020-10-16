@@ -171,6 +171,11 @@ hr {
     }
 }
 
+pre {
+    margin-bottom: 1.2rem !important;
+    background: #2B323E !important;
+}
+
 @import 'partials/hamburger';
 @import 'partials/bootstrap_overrides';
 @import 'partials/menu';
