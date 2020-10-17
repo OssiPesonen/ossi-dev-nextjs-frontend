@@ -135,6 +135,38 @@
             a {
                 text-decoration: underline;
             }
+
+            ul {
+                margin-bottom: 2rem;
+                padding-left: 1.5rem;
+
+                li {
+                    list-style: square;
+                    display: block;
+                    margin: 0.5rem 0;
+                    position: relative;
+
+                    &:before {
+                        content: url('/img/caret.png');
+                        height: 16px;
+                        width: 16px;
+                        position: absolute;
+                        left: -1.6rem;
+                        top: 2px;
+                    }
+                }
+            }
+
+            ol {
+                margin-bottom: 2rem;
+                padding-left: 1.5rem;
+
+                li {
+                    list-style: decimal;
+                    margin: 0.5rem 0;
+                    position: relative;
+                }
+            }
         }
 
         > * {

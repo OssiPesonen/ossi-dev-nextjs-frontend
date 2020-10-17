@@ -633,6 +633,15 @@ body {
   left: -1.6rem;
   top: 2px;
 }
+#showcase section .showcase-content ol {
+  margin-bottom: 2rem;
+  padding-left: 1.5rem;
+}
+#showcase section .showcase-content ol li {
+  list-style: decimal;
+  margin: 0.5rem 0;
+  position: relative;
+}
 #showcase section .showcase-content .image {
   text-align: center;
   grid-column: 2/5;
@@ -776,6 +785,33 @@ body {
 }
 #post section .post-content a {
   text-decoration: underline;
+}
+#post section .post-content ul {
+  margin-bottom: 2rem;
+  padding-left: 1.5rem;
+}
+#post section .post-content ul li {
+  list-style: square;
+  display: block;
+  margin: 0.5rem 0;
+  position: relative;
+}
+#post section .post-content ul li:before {
+  content: url("/img/caret.png");
+  height: 16px;
+  width: 16px;
+  position: absolute;
+  left: -1.6rem;
+  top: 2px;
+}
+#post section .post-content ol {
+  margin-bottom: 2rem;
+  padding-left: 1.5rem;
+}
+#post section .post-content ol li {
+  list-style: decimal;
+  margin: 0.5rem 0;
+  position: relative;
 }
 #post section > * {
   grid-column: 3;
