@@ -656,6 +656,7 @@ body {
 }
 #showcase section .showcase-content .image img {
   display: block;
+  margin: auto;
 }
 #showcase section .showcase-content .image figcaption {
   position: absolute;
