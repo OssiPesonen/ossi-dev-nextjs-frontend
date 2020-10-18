@@ -1,4 +1,6 @@
 import React from 'react';
+import { DefaultSeo } from 'next-seo';
+import SEO from '../next-seo.config';
 
 // Packages
 import { Provider } from 'react-redux';
@@ -14,6 +16,7 @@ const App = ({ Component, pageProps }) => {
   
   return (
     <Provider store={ store }>
+      <DefaultSeo {...SEO} />
       <Component { ...pageProps } />
     </Provider>
   );

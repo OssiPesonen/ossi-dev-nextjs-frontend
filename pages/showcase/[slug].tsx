@@ -20,6 +20,7 @@ import Contact from '@/components/index/contact'
 import IconArrowLeft from '../../src/assets/icons/i-arrow-left'
 import { ParagraphComponent, ImageComponent, LinkComponent, CodeComponent } from '../../src/assets/react-markdown-renderers'
 import Head from 'next/head'
+import { NextSeo } from 'next-seo'
 
 type ShowcaseProps = {
   showcases: Array<ShowcaseType>
@@ -29,6 +30,7 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
   const router = useRouter()
   const { slug } = router.query as ParsedUrlQuery
   const [showcase, setShowcase] = useState<ShowcaseType>(null)
+  const [title, setTitle] = useState<string>('');
 
   const app = useSelector(state => state.app)
   const dispatch = useDispatch()
@@ -43,7 +45,10 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
     // an individual one every time and save the cost of a network call
     const entry: ShowcaseType = showcases.find((showcase: ShowcaseType) => showcase.Slug === slug)
 
-    setShowcase(entry)
+    if(entry) {
+      setShowcase(entry)
+      setTitle(`${ entry.Title } - Showcases - ossi.dev`);
+    }
   }, [slug, showcases])
 
   return (
@@ -56,6 +61,19 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
             <Head>
               <title>{ showcase.Title } - Showcases - ossi.dev</title>
             </Head>
+            <NextSeo
+              title={ title }
+              description={ get(showcase, 'SEO.Description', '') }
+              canonical={ process.env.NEXT_PUBLIC_APP_URL + router.asPath }
+              openGraph={{
+                url: process.env.NEXT_PUBLIC_APP_URL + router.asPath,
+                title: title,
+                description: get(showcase, 'SEO.Description', ''),
+                images: [
+                  { url: get(showcase, 'Cover.url', null) ? process.env.NEXT_PUBLIC_API_URL + showcase.Cover.url : '' },
+                ]
+              } }
+            />
             <article id="showcase" className="container-md">
               <header className="mt-4">
                 <Link href="/#showcases"><a className="back-to-frontpage"><IconArrowLeft/> Back to frontpage</a></Link>
@@ -79,7 +97,7 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
                                    link: LinkComponent,
                                    code: CodeComponent
                                  } }
-                                 escapeHtml={false}
+                                 escapeHtml={ false }
                                  className="showcase-content"/>
                 </div>
               </section>

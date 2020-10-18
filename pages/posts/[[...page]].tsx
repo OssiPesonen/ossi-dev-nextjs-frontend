@@ -13,6 +13,8 @@ import Link from 'next/link'
 import IconArrowLeft from '../../src/assets/icons/i-arrow-left';
 import IconArrowRight from '../../src/assets/icons/i-arrow-right';
 import Head from 'next/head'
+import { NextSeo } from 'next-seo'
+import { useRouter } from 'next/router'
 
 const postLimitPerPage = 2
 
@@ -25,6 +27,7 @@ type PostsArchiveProps = {
 const PostsArchive = ({ count, pageNumber, posts }: PostsArchiveProps) => {
   const [hasNextPage, setHasNextPage] = useState<boolean>(false)
   const [hasPrevPage, setHasPrevPage] = useState<boolean>(false)
+  const router = useRouter();
   
   useEffect(() => {
     if (count) {
@@ -76,7 +79,16 @@ const PostsArchive = ({ count, pageNumber, posts }: PostsArchiveProps) => {
       <div className="container mt-4 mb-4">
         <Head>
           <title>Blog Posts - ossi.dev</title>
-        </Head>
+        </Head><NextSeo
+        title={ 'Blog Posts - ossi.dev' }
+        description={ 'My blog post archives' }
+        canonical={ process.env.NEXT_PUBLIC_APP_URL + router.asPath }
+        openGraph={{
+          url: process.env.NEXT_PUBLIC_APP_URL + router.asPath,
+          title: 'Blog Posts - ossi.dev',
+          description: 'My blog post archives',
+        } }
+      />
         <h1>Blog Posts</h1>
         {!posts ? <Loading/> : (
           <div id="posts" className="archive">

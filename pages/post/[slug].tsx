@@ -22,6 +22,8 @@ import { RootState } from '@/store/rootReducer'
 import Layout from '@/layouts/layout'
 import Posts from '@/components/index/posts'
 import Contact from '@/components/index/contact'
+import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router'
 
 type PostProps = {
   post: PostType,
@@ -33,6 +35,7 @@ const Post = ({ post, posts, articles }: PostProps) => {
   // Redux
   const app = useSelector((state: RootState) => state.app)
   const dispatch = useDispatch()
+  const router = useRouter()
 
   /**
    * Fetch posts list if user visits this page first
@@ -47,11 +50,26 @@ const Post = ({ post, posts, articles }: PostProps) => {
     }
   }, [app.posts, app.articles])
 
+  const title: string = `${ post.Title } - Blog - ossi.dev`;
+
   return (
     <Layout>
       <Head>
-        <title>{ post.Title } - Blog - ossi.dev</title>
+        <title>{ title }</title>
       </Head>
+      <NextSeo
+        title={title}
+        description={get(post, 'SEO.Description', '')}
+        canonical={ process.env.NEXT_PUBLIC_APP_URL + router.asPath }
+        openGraph={{
+          url: process.env.NEXT_PUBLIC_APP_URL + router.asPath,
+          title: title,
+          description: get(post, 'SEO.Description', ''),
+          images: [
+            { url: get(post, 'Cover.url', null) ? process.env.NEXT_PUBLIC_API_URL + post.Cover.url : ''  },
+          ]
+        }}
+      />
       <article id="post" className="container-md">
         <header>
           <Link href="/#posts"><a className="back-to-frontpage"><IconArrowLeft/> Back to frontpage</a></Link>
