@@ -10,7 +10,7 @@ export const ImageComponent = (props: { src: string, alt: string }) => {
 }
 
 export const LinkComponent = (props: { href: string, children?: any }) =>
-  <a href={ props.href } target="_blank">{ props.children }</a>
+  <a href={ props.href } target="_blank" rel="noopener">{ props.children }</a>
 
 export const ParagraphComponent = (props: { children: Array<any> }): React.ReactElement => {
   const { children } = props
