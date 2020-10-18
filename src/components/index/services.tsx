@@ -34,10 +34,10 @@ const Services = () => {
   return !blockDescription ? <></> : (
     <div id="services" className="section-container">
       <div className="container-md">
-        <h4 className="section-title">
+        <h2 className="section-title">
           <IconCaretUp/> Services
-        </h4>
-        <h2>What I Do</h2>
+        </h2>
+        <h3>What I Do</h3>
         <ReactMarkdown source={blockDescription.Content} className="text-gray"/>
         <div id="service-boxes">
           <div className="row">

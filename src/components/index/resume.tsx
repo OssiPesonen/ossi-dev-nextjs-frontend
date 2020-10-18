@@ -16,10 +16,10 @@ const Resume = () => {
         <div className="row">
           <div className="col-12 col-md-8">
             <div id="resume">
-              <h4 className="section-title">
+              <h2 className="section-title">
                 <IconCaretUp/> Resume
-              </h4>
-              <h2>Where I've Worked</h2>
+              </h2>
+              <h3>Where I've Worked</h3>
               <p className="text-muted mb-4">A list of my most recent employers and job descriptions. </p>
               <div id="employers" className="mt-4 mt-md-0">
                 {!app.employments ? <></> : app.employments.map((employment: Employment) => {

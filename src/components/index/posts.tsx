@@ -25,10 +25,10 @@ const Posts = (props: PostsProps) => {
         <div className="row">
           {hideDescription ? <></> : (
             <div className="col-md-5">
-              <h4 className="section-title">
+              <h2 className="section-title">
                 <IconCaretUp/> Posts
-              </h4>
-              <h2>Blog Posts and Articles</h2>
+              </h2>
+              <h3>Blog Posts and Articles</h3>
               <p className="text-gray">You can find everything I've posted on my blog and links to some of my Medium articles right here.</p>
             </div>
           )}
@@ -69,7 +69,7 @@ const Posts = (props: PostsProps) => {
                 const readableDate = published.toDateString()
                 
                 return (
-                  <a href={article.link} target="_blank" key={article.id}>
+                  <a href={article.link} target="_blank" key={article.id} rel="noreferrer">
                     <article className="post">
                       <header className="content">
                         <h3>{article.title}</h3>

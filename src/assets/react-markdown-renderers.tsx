@@ -4,7 +4,7 @@ import { materialOceanic } from "react-syntax-highlighter/dist/cjs/styles/prism"
 export const ImageComponent = (props: { src: string, alt: string }) => {
   return (
     <figure className="image">
-      <img src={ props.src } alt={ props.alt }/>
+      <img src={ props.src } alt={ props.alt } loading="lazy" />
     </figure>
   )
 }
