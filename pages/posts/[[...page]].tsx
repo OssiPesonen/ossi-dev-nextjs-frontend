@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
 // App
+import Head from 'next/head'
 import { get } from 'lodash'
+import { NextSeo } from 'next-seo'
+import { useRouter } from 'next/router'
 
 // Assets
 import { Post as PostType, Post } from '@/assets/types'
@@ -12,9 +15,6 @@ import Layout from '@/layouts/layout'
 import Link from 'next/link'
 import IconArrowLeft from '../../src/assets/icons/i-arrow-left';
 import IconArrowRight from '../../src/assets/icons/i-arrow-right';
-import Head from 'next/head'
-import { NextSeo } from 'next-seo'
-import { useRouter } from 'next/router'
 
 const postLimitPerPage = 2
 

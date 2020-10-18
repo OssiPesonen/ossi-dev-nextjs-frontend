@@ -63,7 +63,7 @@ const Top = () => {
         <div className="row">
           <div className="col-xs-12 col-md" id="logo">
             <Link href="/#introduction">
-              <a>
+              <a aria-label="To introduction">
                 <svg version="1.1" x="0px" y="0px" width="48px" height="48px" viewBox="0 0 94.6 94.6" style={{ overflow: 'visible' }}>
                   <g>
                     <g>
@@ -82,7 +82,7 @@ const Top = () => {
               </a>
             </Link>
           </div>
-          <button id="toggle-menu" className={`hamburger hamburger--elastic js-hamburger${menuOpen ? ' is-active' : ''}`} aria-label="Menu" aria-controls="navigation" onClick={toggleMenu}>
+          <button id="toggle-menu" className={`hamburger hamburger--elastic js-hamburger${menuOpen ? ' is-active' : ''}`} onClick={toggleMenu}>
             <div className="hamburger-box">
               <div className="hamburger-inner"/>
             </div>
@@ -99,11 +99,11 @@ const Top = () => {
             </nav>
             <nav className="col-xs-12 col-lg-4 text-right" id="social-media-menu">
               <ul>
-                <li><a href="mailto:ossi@ossipesonen.fi"><IconEnvelope /></a></li>
-                <li><a href="https://twitter.com/OssiDev"><IconTwitter /></a></li>
-                <li><a href="https://github.com/OssiPesonen/"><IconGithub /></a></li>
-                <li><a href="https://medium.com/@rcls" target="_blank"><IconMedium /></a></li>
-                <li><a href="https://www.behance.net/ossipesonen"><IconBehance /></a></li>
+                <li><a href="mailto:ossi@ossipesonen.fi" aria-label="Email"><IconEnvelope /></a></li>
+                <li><a href="https://twitter.com/OssiDev" aria-label="Twitter"><IconTwitter /></a></li>
+                <li><a href="https://github.com/OssiPesonen/" aria-label="Github"><IconGithub /></a></li>
+                <li><a href="https://medium.com/@rcls" target="_blank" aria-label="Medium"><IconMedium /></a></li>
+                <li><a href="https://www.behance.net/ossipesonen" aria-label="Behance"><IconBehance /></a></li>
               </ul>
             </nav>
           </div>

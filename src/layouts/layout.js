@@ -5,6 +5,7 @@ import Top from '@/components/top'
 const Layout = (props) => (
     <>
       <Head>
+        <html lang="en" />
         <title>Ossi Pesonen - ossi.dev</title>
         <link rel="preconnect" href={ process.env.NEXT_PUBLIC_API_URL } />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>

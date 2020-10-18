@@ -6,7 +6,8 @@ import Head from 'next/head'
 import ReactMarkdown from 'react-markdown'
 import { useSelector, useDispatch } from 'react-redux'
 import { get } from 'lodash'
-
+import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router'
 
 // Assets
 import { Article, Post as PostType } from '@/assets/types'
@@ -22,8 +23,6 @@ import { RootState } from '@/store/rootReducer'
 import Layout from '@/layouts/layout'
 import Posts from '@/components/index/posts'
 import Contact from '@/components/index/contact'
-import { NextSeo } from 'next-seo';
-import { useRouter } from 'next/router'
 
 type PostProps = {
   post: PostType,
