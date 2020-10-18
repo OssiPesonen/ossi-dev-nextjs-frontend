@@ -8,6 +8,7 @@ const Layout = (props) => (
         <html lang="en" />
         <title>Ossi Pesonen - ossi.dev</title>
         <link rel="preconnect" href={ process.env.NEXT_PUBLIC_API_URL } />
+        <link rel="preconnect" href="https://fonts.googleapis.com"  />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>

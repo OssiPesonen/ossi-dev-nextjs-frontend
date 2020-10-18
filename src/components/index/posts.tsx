@@ -40,7 +40,7 @@ const Posts = (props: PostsProps) => {
                 
                 return (
                   <Link href='/post/[slug]' as={`/post/${post.Slug}`} key={post.id}>
-                    <a className={openPostId && openPostId === post.id ? 'active' : ''}>
+                    <a className={openPostId && openPostId === post.id ? 'active' : ''} aria-label={post.Title}>
                       <article className="post" key={post.id}>
                         <header className="content">
                           <h3>{post.Title}</h3>
@@ -69,7 +69,7 @@ const Posts = (props: PostsProps) => {
                 const readableDate = published.toDateString()
                 
                 return (
-                  <a href={article.link} target="_blank" key={article.id} rel="noreferrer">
+                  <a href={article.link} target="_blank" key={article.id} rel="noopener" aria-label={article.title}>
                     <article className="post">
                       <header className="content">
                         <h3>{article.title}</h3>

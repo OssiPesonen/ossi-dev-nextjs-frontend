@@ -82,7 +82,7 @@ const Top = () => {
               </a>
             </Link>
           </div>
-          <button id="toggle-menu" className={`hamburger hamburger--elastic js-hamburger${menuOpen ? ' is-active' : ''}`} onClick={toggleMenu}>
+          <button id="toggle-menu" className={`hamburger hamburger--elastic js-hamburger${menuOpen ? ' is-active' : ''}`} onClick={toggleMenu} aria-label="Toggle menu" type="button">
             <div className="hamburger-box">
               <div className="hamburger-inner"/>
             </div>
