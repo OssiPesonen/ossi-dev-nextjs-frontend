@@ -11,7 +11,7 @@ const Contact = () => (
     </p>
     <p>
       <IconTwitter />
-      <a href="https://twitter.com/OssiDev" target="_blank">@OssiDev</a>
+      <a href="https://twitter.com/OssiDev" target="_blank" rel="noopener">@OssiDev</a>
     </p>
   </div>
 )
