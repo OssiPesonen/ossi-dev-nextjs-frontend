@@ -76,7 +76,7 @@ const Post = ({ post, posts, articles }: PostProps) => {
         <hr/>
         <footer>
           <Link href="/#posts"><a className="back-to-frontpage"><IconArrowLeft/> Back to frontpage</a></Link>
-          <Link href="/posts"><a className="ml-4"><IconArchive/> To post archives</a></Link>
+          <Link href="/posts"><a className="ml-4"><IconArchive/> To archives</a></Link>
         </footer>
       </article>
       <Posts hideDescription={ true } openPostId={ post.id }/>

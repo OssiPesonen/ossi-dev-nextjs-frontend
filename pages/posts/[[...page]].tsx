@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
 // App
-import { useRouter } from 'next/router'
 import { get } from 'lodash'
-import { ParsedUrlQuery } from 'querystring'
 
 // Assets
-import { Article, Post as PostType, Post } from '@/assets/types'
+import { Post as PostType, Post } from '@/assets/types'
 
 // Components
 import Loading from '@/components/loading'
