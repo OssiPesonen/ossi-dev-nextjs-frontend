@@ -170,6 +170,7 @@ blockquote {
 .section-title {
   color: #91A2B1;
   margin-bottom: 1rem;
+  font-size: 1.25rem;
 }
 .section-title .icon svg {
   width: 18px;
@@ -181,8 +182,9 @@ blockquote {
 .section-container {
   padding: 2rem 0;
 }
-.section-container h2 {
+.section-container h3 {
   color: #fff;
+  font-size: 1.5rem;
 }
 @media screen and (min-width: 992px) {
   .section-container {
@@ -531,6 +533,8 @@ body {
   position: relative;
 }
 #showcases .showcase-container .showcase img {
+  width: 100% !important;
+  height: auto;
   display: block;
   transition: 0.12s ease-in-out;
 }
@@ -655,6 +659,8 @@ body {
   grid-column: 3/5;
 }
 #showcase section .showcase-content .image img {
+  width: 100% !important;
+  height: auto;
   display: block;
   margin: auto;
 }

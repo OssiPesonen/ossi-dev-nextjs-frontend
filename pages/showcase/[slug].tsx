@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react'
 
 // App
 import Link from 'next/link'
+import Head from 'next/head'
+import ReactMarkdown from 'react-markdown'
 import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
 import { ParsedUrlQuery } from 'querystring'
 import { get } from 'lodash'
-import ReactMarkdown from 'react-markdown'
+import { NextSeo } from 'next-seo'
+
 
 // Types
 import { Showcase as ShowcaseType, Tag } from '@/assets/types'
@@ -17,10 +20,8 @@ import Layout from '@/layouts/layout'
 import Loading from '@/components/loading'
 import Showcases from '@/components/index/showcases'
 import Contact from '@/components/index/contact'
-import IconArrowLeft from '../../src/assets/icons/i-arrow-left'
-import { ParagraphComponent, ImageComponent, LinkComponent, CodeComponent } from '../../src/assets/react-markdown-renderers'
-import Head from 'next/head'
-import { NextSeo } from 'next-seo'
+import IconArrowLeft from '@/assets/icons/i-arrow-left'
+import { ParagraphComponent, ImageComponent, LinkComponent, CodeComponent } from '@/assets/react-markdown-renderers'
 
 type ShowcaseProps = {
   showcases: Array<ShowcaseType>
@@ -82,7 +83,7 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
               <section>
                 <div className="cover-photo mb-4 full-bleed">
                   { get(showcase, 'Cover.url', null) ?
-                    <img src={ process.env.NEXT_PUBLIC_API_URL + showcase.Cover.url } alt={ showcase.Cover.alternativeText }/> : <></> }
+                    <img src={ process.env.NEXT_PUBLIC_API_URL + showcase.Cover.url } alt={ showcase.Cover.alternativeText } width="1100" height="600" /> : <></> }
                 </div>
                 <div className="showcase-grid">
                   <div className="tags">

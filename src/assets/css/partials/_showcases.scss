@@ -14,6 +14,8 @@
             position: relative;
 
             img {
+                width: 100% !important;
+                height: auto;
                 display: block;
                 transition: .12s ease-in-out;
             }
@@ -161,6 +163,8 @@
                 }
 
                 img {
+                    width: 100% !important;
+                    height: auto;
                     display: block;
                     margin: auto;
                 }

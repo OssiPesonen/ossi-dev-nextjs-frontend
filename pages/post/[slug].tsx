@@ -6,7 +6,8 @@ import Head from 'next/head'
 import ReactMarkdown from 'react-markdown'
 import { useSelector, useDispatch } from 'react-redux'
 import { get } from 'lodash'
-
+import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router'
 
 // Assets
 import { Article, Post as PostType } from '@/assets/types'
@@ -22,8 +23,6 @@ import { RootState } from '@/store/rootReducer'
 import Layout from '@/layouts/layout'
 import Posts from '@/components/index/posts'
 import Contact from '@/components/index/contact'
-import { NextSeo } from 'next-seo';
-import { useRouter } from 'next/router'
 
 type PostProps = {
   post: PostType,
@@ -78,7 +77,7 @@ const Post = ({ post, posts, articles }: PostProps) => {
         <section>
           <div className="cover-photo mb-4 full-bleed">
             { get(post, 'Cover.url', null) ?
-              <img src={ process.env.NEXT_PUBLIC_API_URL + post.Cover.url } alt={ post.Cover.alternativeText }/> : <></> }
+              <img src={ process.env.NEXT_PUBLIC_API_URL + post.Cover.url } alt={ post.Cover.alternativeText } width="1100" height="600" /> : <></> }
           </div>
           <ReactMarkdown source={ post.Content }
                          transformImageUri={ (uri) => process.env.NEXT_PUBLIC_API_URL + uri }

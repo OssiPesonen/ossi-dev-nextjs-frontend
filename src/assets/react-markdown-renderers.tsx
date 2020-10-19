@@ -4,13 +4,13 @@ import { materialOceanic } from "react-syntax-highlighter/dist/cjs/styles/prism"
 export const ImageComponent = (props: { src: string, alt: string }) => {
   return (
     <figure className="image">
-      <img src={ props.src } alt={ props.alt }/>
+      <img src={ props.src } alt={ props.alt } loading="lazy" width="1100" height="600" />
     </figure>
   )
 }
 
 export const LinkComponent = (props: { href: string, children?: any }) =>
-  <a href={ props.href } target="_blank">{ props.children }</a>
+  <a href={ props.href } target="_blank" rel="noopener">{ props.children }</a>
 
 export const ParagraphComponent = (props: { children: Array<any> }): React.ReactElement => {
   const { children } = props

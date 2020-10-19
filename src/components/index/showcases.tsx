@@ -25,10 +25,10 @@ const Showcases = (props: ShowcasesProps) => {
       <div className="container-md">
         {hideDescription ? <></> : (
           <>
-            <h4 className="section-title">
+            <h2 className="section-title">
                 <IconCaretUp /> Showcases
-            </h4>
-            <h2>Selected Projects</h2>
+            </h2>
+            <h3>Selected Projects</h3>
             <p className="text-gray">You can click on each project to read about the story behind them.</p>
           </>
         )}
@@ -40,11 +40,11 @@ const Showcases = (props: ShowcasesProps) => {
               
               return (
                 <Link href='/showcase/[slug]' as={`/showcase/${showcase.Slug}`} key={showcase.id}>
-                  <a className="col-12 col-sm-6 col-md-4 showcase-container">
+                  <a className="col-12 col-sm-6 col-md-4 showcase-container" aria-label={`Showcase ${showcase.Title}`}>
                     <article className="showcase" key={showcase.id}>
                       <header>
                         {get(showcase, 'Thumbnail.url', false) ? (
-                          <img className="showcase-thumbnail" src={process.env.NEXT_PUBLIC_API_URL + showcase.Thumbnail.url} alt={showcase.Thumbnail.alternativeText}/>
+                          <img className="showcase-thumbnail" src={process.env.NEXT_PUBLIC_API_URL + showcase.Thumbnail.url} alt={showcase.Thumbnail.alternativeText} loading="lazy" width="350" height="350" />
                         ) : <></>}
                       </header>
                       <section className="content">
