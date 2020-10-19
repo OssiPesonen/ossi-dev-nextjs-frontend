@@ -659,6 +659,8 @@ body {
   grid-column: 3/5;
 }
 #showcase section .showcase-content .image img {
+  width: 100% !important;
+  height: auto;
   display: block;
   margin: auto;
 }
