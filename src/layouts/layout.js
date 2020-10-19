@@ -5,7 +5,6 @@ import Top from '@/components/top'
 const Layout = (props) => (
     <>
       <Head>
-        <html lang="en" />
         <title>Ossi Pesonen - ossi.dev</title>
         <link rel="preconnect" href={ process.env.NEXT_PUBLIC_API_URL } />
         <link rel="preconnect" href="https://fonts.googleapis.com"  />
