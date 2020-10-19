@@ -100,10 +100,10 @@ const Top = () => {
             <nav className="col-xs-12 col-lg-4 text-right" id="social-media-menu">
               <ul>
                 <li><a href="mailto:ossi@ossipesonen.fi" aria-label="Email"><IconEnvelope /></a></li>
-                <li><a href="https://twitter.com/OssiDev" aria-label="Twitter" rel="noreferrer"><IconTwitter /></a></li>
-                <li><a href="https://github.com/OssiPesonen/" aria-label="Github" rel="noreferrer"><IconGithub /></a></li>
+                <li><a href="https://twitter.com/OssiDev" aria-label="Twitter" rel="noreferrer" target="_blank"><IconTwitter /></a></li>
+                <li><a href="https://github.com/OssiPesonen/" aria-label="Github" rel="noreferrer" target="_blank"><IconGithub /></a></li>
                 <li><a href="https://medium.com/@rcls" target="_blank" aria-label="Medium" rel="noreferrer"><IconMedium /></a></li>
-                <li><a href="https://www.behance.net/ossipesonen" aria-label="Behance" rel="noreferrer"><IconBehance /></a></li>
+                <li><a href="https://www.behance.net/ossipesonen" aria-label="Behance" rel="noreferrer" target="_blank"><IconBehance /></a></li>
               </ul>
             </nav>
           </div>
