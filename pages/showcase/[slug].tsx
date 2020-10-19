@@ -83,7 +83,7 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
               <section>
                 <div className="cover-photo mb-4 full-bleed">
                   { get(showcase, 'Cover.url', null) ?
-                    <img src={ process.env.NEXT_PUBLIC_API_URL + showcase.Cover.url } alt={ showcase.Cover.alternativeText }/> : <></> }
+                    <img src={ process.env.NEXT_PUBLIC_API_URL + showcase.Cover.url } alt={ showcase.Cover.alternativeText } width="1100" height="600" /> : <></> }
                 </div>
                 <div className="showcase-grid">
                   <div className="tags">

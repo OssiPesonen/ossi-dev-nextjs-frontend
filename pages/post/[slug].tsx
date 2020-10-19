@@ -77,7 +77,7 @@ const Post = ({ post, posts, articles }: PostProps) => {
         <section>
           <div className="cover-photo mb-4 full-bleed">
             { get(post, 'Cover.url', null) ?
-              <img src={ process.env.NEXT_PUBLIC_API_URL + post.Cover.url } alt={ post.Cover.alternativeText }/> : <></> }
+              <img src={ process.env.NEXT_PUBLIC_API_URL + post.Cover.url } alt={ post.Cover.alternativeText } width="1100" height="600" /> : <></> }
           </div>
           <ReactMarkdown source={ post.Content }
                          transformImageUri={ (uri) => process.env.NEXT_PUBLIC_API_URL + uri }
