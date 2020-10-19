@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown'
 
 // Types
 import { Block } from '@/assets/types'
+import { CodeComponent, ImageComponent, LinkComponent, ParagraphComponent } from '../../assets/react-markdown-renderers'
 
 const Introduction = () => {
   const [intro, setIntro] = useState<Block>(null)
@@ -47,7 +48,16 @@ const Introduction = () => {
           </div>
         </div>
         <div className="col-12 col-md-6 introduction-content">
-          <ReactMarkdown className="text-center text-md-left" source={intro.Content}/>
+          <ReactMarkdown source={ intro.Content }
+                         transformImageUri={ (uri) => process.env.NEXT_PUBLIC_API_URL + uri }
+                         renderers={ {
+                           image: ImageComponent,
+                           paragraph: ParagraphComponent,
+                           link: LinkComponent,
+                           code: CodeComponent
+                         } }
+                         escapeHtml={false}
+                         className="text-center text-md-left"/>
         </div>
       </div>
     </div>
