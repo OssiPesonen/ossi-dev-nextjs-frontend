@@ -793,6 +793,27 @@ body {
 #post section .post-content a {
   text-decoration: underline;
 }
+#post section .post-content code {
+  background: #1d1f21;
+  color: #c5c8c6;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+  font-family: Inconsolata, Monaco, Consolas, "Courier New", Courier, monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  border-radius: 0.3em;
+  margin: 0 0.25rem;
+  line-height: 1;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
 #post section .post-content ul {
   margin-bottom: 2rem;
   padding-left: 1.5rem;
