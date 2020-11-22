@@ -156,6 +156,8 @@
                 -moz-hyphens: none;
                 -ms-hyphens: none;
                 hyphens: none;
+                word-break: break-all;
+                word-wrap: break-word;
             }
 
             ul {
