@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux'
 import { Article, Post } from '@/assets/types'
 import IconCaretUp from '../../assets/icons/i-caret-up'
 import IconArrowRight from '../../assets/icons/i-arrow-right'
+import IconMedium from "@/assets/icons/i-medium";
 
 type PostsProps = {
   hideDescription?: boolean
@@ -63,28 +64,9 @@ const Posts = (props: PostsProps) => {
             <h4 className="section-title mt-4">
               <IconCaretUp/> Medium.com
             </h4>
-            <div id="posts-list" className="medium pl-md-4 mb-md-4">
-              {!app.articles ? <>No articles</> : app.articles.map((article: Article) => {
-                const published = new Date(article.published_at)
-                const readableDate = published.toDateString()
-                
-                return (
-                  <a href={article.link} target="_blank" key={article.id} rel="noopener" aria-label={article.title}>
-                    <article className="post">
-                      <header className="content">
-                        <h3>{article.title}</h3>
-                      </header>
-                      <section className="read-more-icon">
-                        <IconArrowRight/>
-                      </section>
-                      <footer>
-                        <time>{readableDate}</time>
-                        <span className="ml-4 text-secondary">Medium.com</span>
-                      </footer>
-                    </article>
-                  </a>
-                )
-              })}
+            <div className="medium pl-md-4 mb-md-4">
+              <p>I write more non-personal and in-depth articles at Medium.com The platform has put their API behind CloudFlare DDoS protection, and I'm too lazy to create some technical workaround to fetch the RSS feed,
+                so instead use <a href="https://medium.com/@rcls" target="_blank" aria-label="Medium" rel="noreferrer">this link</a> to go to my Medium profile and browse my articles there :)</p>
             </div>
           </div>
         </div>

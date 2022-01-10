@@ -11,13 +11,12 @@ import {
   setLoaded as setAppLoaded,
   setEmployments,
   setTags,
-  setArticles,
   setShowcases,
   setPosts
 } from '@/store/reducers/appReducer'
 
 // Assets
-import { Block, Employment, Tag, Article, Post, Showcase } from '@/assets/types'
+import { Block, Employment, Tag, Post, Showcase } from '@/assets/types'
 
 // Components
 import Introduction from '@/components/index/introduction'
@@ -33,12 +32,11 @@ type HomeProps = {
   posts: Array<Post>,
   showcases: Array<Showcase>,
   blocks: Array<Block>,
-  articles: Array<Article>,
   employments: Array<Employment>,
   tags: Array<Tag>
 };
 
-function Home ({ posts, showcases, articles, blocks, employments, tags }: HomeProps) {
+function Home ({ posts, showcases, blocks, employments, tags }: HomeProps) {
   const router = useRouter()
   const app = useSelector((state: RootState) => state.app)
   const dispatch = useDispatch()
@@ -67,7 +65,6 @@ function Home ({ posts, showcases, articles, blocks, employments, tags }: HomePr
       dispatch(setBlocks(blocks))
       dispatch(setEmployments(employments))
       dispatch(setTags(tags))
-      dispatch(setArticles(articles))
       dispatch(setAppLoaded(true))
     }
   }, [app.loaded])
@@ -92,21 +89,19 @@ export async function getStaticProps () {
     '/blog-posts?_limit=15&_sort=published_at:DESC',
     '/showcases',
     '/blocks',
-    '/articles',
     '/employments',
     '/tags'
   ]
   
   const contentCalls: Response[] = await Promise.all(urls.map(url => fetch(process.env.NEXT_PUBLIC_API_URL + url)))
   const contentResponses = await Promise.all(contentCalls.map(jsonResponse => jsonResponse.json()))
-  const [posts, showcases, blocks, articles, employments, tags] = contentResponses
+  const [posts, showcases, blocks, employments, tags] = contentResponses
   
   return {
     props: {
       posts,
       showcases,
       blocks,
-      articles,
       employments,
       tags
     },

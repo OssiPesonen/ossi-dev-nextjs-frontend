@@ -16,7 +16,7 @@ import IconArchive from '@/assets/icons/i-archive'
 import { ParagraphComponent, ImageComponent, LinkComponent, CodeComponent } from '@/assets/react-markdown-renderers'
 
 // Redux
-import { setPosts, setArticles } from '@/store/reducers/appReducer'
+import { setPosts } from '@/store/reducers/appReducer'
 import { RootState } from '@/store/rootReducer'
 
 // components
@@ -27,11 +27,11 @@ import Contact from '@/components/index/contact'
 type PostProps = {
   post: PostType,
   posts: Array<PostType>,
-  articles: Array<Article>
 }
 
-const Post = ({ post, posts, articles }: PostProps) => {
+const Post = ({ post, posts }: PostProps) => {
   // Redux
+
   const app = useSelector((state: RootState) => state.app)
   const dispatch = useDispatch()
   const router = useRouter()
@@ -43,11 +43,7 @@ const Post = ({ post, posts, articles }: PostProps) => {
     if (!app.posts) {
       dispatch(setPosts(posts))
     }
-
-    if (!app.articles) {
-      dispatch(setArticles(articles))
-    }
-  }, [app.posts, app.articles])
+  }, [app.posts])
 
   const title: string = `${ post.Title } - Blog - ossi.dev`;
 
@@ -113,9 +109,6 @@ export async function getStaticProps ({ params }) {
   const postsResponse = await fetch(process.env.NEXT_PUBLIC_API_URL + '/blog-posts?_limit=15&_sort=published_at:DESC')
   const posts: Array<PostType> = await postsResponse.json()
 
-  const articlesResponse = await fetch(process.env.NEXT_PUBLIC_API_URL + '/articles')
-  const articles: Array<Article> = await articlesResponse.json()
-
   const postResponse = await fetch(process.env.NEXT_PUBLIC_API_URL + `/blog-posts?Slug=${ params.slug }`)
   const singlePost: PostType = await postResponse.json()
 
@@ -123,7 +116,6 @@ export async function getStaticProps ({ params }) {
     props: {
       post: get(singlePost, [0], null),
       posts,
-      articles
     },
   }
 }
