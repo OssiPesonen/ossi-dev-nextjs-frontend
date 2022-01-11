@@ -27,7 +27,6 @@ const Services = () => {
   const serviceList: Record<string, React.ReactElement> = {
     'Web Development': <IconLaptopCode/>,
     'UI/UX Design': <IconBrowser/>,
-    'Identity Design': <IconPalette/>
   }
   
   return !blockDescription ? <></> : (
@@ -41,7 +40,7 @@ const Services = () => {
         <div id="service-boxes">
           <div className="row">
             {Object.keys(serviceList).map((serviceTitle: string) => (
-              <div className="col-sm-12 col-md-4" key={serviceTitle}>
+              <div className="col-sm-6" key={serviceTitle}>
                 <div className="inner">
                   {serviceList[serviceTitle]}
                   <h4>{serviceTitle}</h4>
