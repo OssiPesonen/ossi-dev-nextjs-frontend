@@ -29,8 +29,11 @@ const Posts = (props: PostsProps) => {
               <h2 className="section-title">
                 <IconCaretUp/> Posts
               </h2>
-              <h3>Blog Posts and Articles</h3>
-              <p className="text-gray">You can find everything I've posted on my blog and links to some of my Medium articles right here.</p>
+              <h3>Blog Posts, Articles andTweets</h3>
+              <p className="text-gray">You can find everything I've posted on my blog and links to some of my Medium articles right here. Below I've embedded my Twitter feed, which is where I'll sometimes post random stuff that I'm too lazy to write a blog post about.</p>
+              <h3 style={{ marginTop: "2rem" }}>Twitter</h3>
+              <a className="twitter-timeline" data-width="500" data-height="540" data-theme="dark"
+                 href="https://twitter.com/OssiDev?ref_src=twsrc%5Etfw">Tweets by OssiDev</a>
             </div>
           )}
           <div className={`${hideDescription ? 'col-md-12' : 'col-md-7'} mt-4 mt-md-0`}>

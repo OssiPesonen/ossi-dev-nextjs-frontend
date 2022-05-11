@@ -40,12 +40,12 @@ function Home ({ posts, showcases, blocks, employments, tags }: HomeProps) {
   const router = useRouter()
   const app = useSelector((state: RootState) => state.app)
   const dispatch = useDispatch()
-  
+
   // Scroll to element if router contains a hash
   useEffect(() => {
     if (router.asPath.substr(0, 2) === '/#' && app.loaded) {
       const hash = router.asPath.substr(2)
-      
+
       // setTimeout mitigates the effect where elements are not full height yet, and offsetTop gives wrong position
       setTimeout(function () {
         if (hash && document.getElementById(hash)) {
@@ -57,7 +57,7 @@ function Home ({ posts, showcases, blocks, employments, tags }: HomeProps) {
       }, 250)
     }
   }, [router.asPath, app.loaded])
-  
+
   useEffect(() => {
     if (!app.loaded) {
       dispatch(setPosts(posts))
@@ -68,7 +68,7 @@ function Home ({ posts, showcases, blocks, employments, tags }: HomeProps) {
       dispatch(setAppLoaded(true))
     }
   }, [app.loaded])
-  
+
   return !app.loaded ?
     <div className="container text-center justify-content-center align-items-center d-flex" style={{ minHeight: '100vh' }}>
       <Loading/></div> : (
@@ -92,11 +92,11 @@ export async function getStaticProps () {
     '/employments',
     '/tags'
   ]
-  
+
   const contentCalls: Response[] = await Promise.all(urls.map(url => fetch(process.env.NEXT_PUBLIC_API_URL + url)))
   const contentResponses = await Promise.all(contentCalls.map(jsonResponse => jsonResponse.json()))
   const [posts, showcases, blocks, employments, tags] = contentResponses
-  
+
   return {
     props: {
       posts,
