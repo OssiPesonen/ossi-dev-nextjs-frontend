@@ -35,15 +35,15 @@ const Introduction = () => {
           <div className="row text-center">
             <div className="col-6">
               <h3 className="text-secondary">
-                10+
+                15+
               </h3>
               <p>Years of experience</p>
             </div>
             <div className="col-6">
               <h3 className="text-secondary">
-                100+
+                500+
               </h3>
-              <p>Completed projects</p>
+              <p>Worked projects</p>
             </div>
           </div>
         </div>
