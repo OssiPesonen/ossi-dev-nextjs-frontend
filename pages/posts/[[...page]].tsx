@@ -94,15 +94,15 @@ const PostsArchive = ({ count, pageNumber, posts }: PostsArchiveProps) => {
           <div id="posts" className="archive">
             <div id="posts-list">
               {posts.map((post: Post) => {
-                const published = new Date(post.published_at)
+                const published = new Date(post.attributes.publishedAt)
                 const readableDate = published.toDateString()
                 
                 return (
-                  <Link href='/post/[slug]' as={`/post/${post.Slug}`} key={post.id}>
+                  <Link href='/post/[slug]' as={`/post/${post.attributes.Slug}`} key={post.id}>
                     <a>
                       <article className="post" key={post.id}>
                         <header>
-                          <h3>{post.Title}</h3>
+                          <h3>{post.attributes.Title}</h3>
                         </header>
                         <footer>
                           <time>{readableDate}</time>

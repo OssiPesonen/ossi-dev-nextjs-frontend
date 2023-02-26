@@ -43,8 +43,8 @@ function Home ({ posts, showcases, blocks, employments, tags }: HomeProps) {
 
   // Scroll to element if router contains a hash
   useEffect(() => {
-    if (router.asPath.substr(0, 2) === '/#' && app.loaded) {
-      const hash = router.asPath.substr(2)
+    if (router.asPath.substring(0, 2) === '/#' && app.loaded) {
+      const hash = router.asPath.substring(2)
 
       // setTimeout mitigates the effect where elements are not full height yet, and offsetTop gives wrong position
       setTimeout(function () {
@@ -99,11 +99,11 @@ export async function getStaticProps () {
 
   return {
     props: {
-      posts,
-      showcases,
-      blocks,
-      employments,
-      tags
+      posts: posts.data,
+      showcases: showcases.data,
+      blocks: blocks.data,
+      employments: employments.data,
+      tags: tags.data
     },
   }
 }

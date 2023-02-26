@@ -22,6 +22,7 @@ import Showcases from '@/components/index/showcases'
 import Contact from '@/components/index/contact'
 import IconArrowLeft from '@/assets/icons/i-arrow-left'
 import { ParagraphComponent, ImageComponent, LinkComponent, CodeComponent } from '@/assets/react-markdown-renderers'
+import { RootState } from '@/store/rootReducer'
 
 type ShowcaseProps = {
   showcases: Array<ShowcaseType>
@@ -33,7 +34,7 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
   const [showcase, setShowcase] = useState<ShowcaseType>(null)
   const [title, setTitle] = useState<string>('');
 
-  const app = useSelector(state => state.app)
+  const app = useSelector((state: RootState) => state.app)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -44,11 +45,11 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
 
     // Find showcase data from the list. We do this because there are less than 10 showcases so we don't have to fetch
     // an individual one every time and save the cost of a network call
-    const entry: ShowcaseType = showcases.find((showcase: ShowcaseType) => showcase.Slug === slug)
+    const entry: ShowcaseType = showcases.find((showcase: ShowcaseType) => showcase.attributes.Slug === slug)
 
     if(entry) {
       setShowcase(entry)
-      setTitle(`${ entry.Title } - Showcases - ossi.dev`);
+      setTitle(`${ entry.attributes.Title } - Showcases - ossi.dev`);
     }
   }, [slug, showcases])
 
@@ -60,7 +61,7 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
         </div> : (
           <>
             <Head>
-              <title>{ showcase.Title } - Showcases - ossi.dev</title>
+              <title>{ showcase.attributes.Title } - Showcases - ossi.dev</title>
             </Head>
             <NextSeo
               title={ title }
@@ -71,26 +72,26 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
                 title: title,
                 description: get(showcase, 'SEO.Description', ''),
                 images: [
-                  { url: get(showcase, 'Cover.url', null) ? process.env.NEXT_PUBLIC_API_URL + showcase.Cover.url : '' },
+                  { url: get(showcase, 'Cover.url', null) ? process.env.NEXT_PUBLIC_API_URL + showcase.attributes.Cover.url : '' },
                 ]
               } }
             />
             <article id="showcase" className="container-md">
               <header className="mt-4">
                 <Link href="/#showcases"><a className="back-to-frontpage"><IconArrowLeft/> Back to frontpage</a></Link>
-                <h1>{ showcase.Title }</h1>
+                <h1>{ showcase.attributes.Title }</h1>
               </header>
               <section>
                 <div className="cover-photo mb-4 full-bleed">
                   { get(showcase, 'Cover.url', null) ?
-                    <img src={ process.env.NEXT_PUBLIC_API_URL + showcase.Cover.url } alt={ showcase.Cover.alternativeText } width="1100" height="600" /> : <></> }
+                    <img src={ process.env.NEXT_PUBLIC_API_URL + showcase.attributes.Cover.url } alt={ showcase.attributes.Cover.alternativeText } width="1100" height="600" /> : <></> }
                 </div>
                 <div className="showcase-grid">
                   <div className="tags">
-                    { showcase.tags ? showcase.tags.map((tag: Tag) =>
-                      <div className="tag" key={ tag.id }>{ tag.Tag }</div>) : <></> }
+                    { showcase.attributes.tags ? showcase.attributes.tags.map((tag: Tag) =>
+                      <div className="tag" key={ tag.id }>{ tag.attributes.Tag }</div>) : <></> }
                   </div>
-                  <ReactMarkdown source={ showcase.Content }
+                  <ReactMarkdown source={ showcase.attributes.Content }
                                  transformImageUri={ (uri) => process.env.NEXT_PUBLIC_API_URL + uri }
                                  renderers={ {
                                    image: ImageComponent,
@@ -118,7 +119,7 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
 export async function getStaticPaths () {
   const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/showcases')
   const showcases = await res.json()
-  const paths = showcases.map((showcase: ShowcaseType) => `/showcase/${ showcase.Slug }`)
+  const paths = showcases.map((showcase: ShowcaseType) => `/showcase/${ showcase.attributes.Slug }`)
   return { paths, fallback: false }
 }
 

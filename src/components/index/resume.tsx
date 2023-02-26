@@ -23,12 +23,12 @@ const Resume = () => {
               <p className="text-muted mb-4">A list of my most recent employers and job descriptions. </p>
               <div id="employers" className="mt-4 mt-md-0">
                 {!app.employments ? <></> : app.employments.map((employment: Employment) => {
-                  const startDate = new Date(employment.StartDate)
+                  const startDate = new Date(employment.attributes.StartDate)
                   const startDateString = months[startDate.getMonth()] + ' ' + startDate.getFullYear()
                   let endDateString
                   
-                  if (employment.EndDate !== null) {
-                    const endDate = new Date(employment.EndDate)
+                  if (employment.attributes.EndDate !== null) {
+                    const endDate = new Date(employment.attributes.EndDate)
                     endDateString = months[endDate.getMonth()] + ' ' + endDate.getFullYear()
                   } else {
                     endDateString = 'Present'
@@ -37,12 +37,14 @@ const Resume = () => {
                   return (
                     <article className="employer" key={employment.id}>
                       <h4>
-                        <span className="job-title">{employment.JobTitle}</span> - <span className="employer">{employment.Employer}</span>
+                        <span className="job-title">{employment.attributes.JobTitle}</span> - <span className="employer">
+                          {employment.attributes.Employer}
+                          </span>
                       </h4>
                       <p className="job-timespan">
                         <time>{startDateString} - {endDateString}</time>
                       </p>
-                      <ReactMarkdown className="job-description" source={employment.JobDescription}/>
+                      <ReactMarkdown className="job-description" source={employment.attributes.JobDescription}/>
                     </article>
                   )
                 })}

@@ -45,7 +45,7 @@ const Post = ({ post, posts }: PostProps) => {
     }
   }, [app.posts])
 
-  const title: string = `${ post.Title } - Blog - ossi.dev`;
+  const title: string = `${ post.attributes.Title } - Blog - ossi.dev`;
 
   return (
     <Layout>
@@ -61,21 +61,21 @@ const Post = ({ post, posts }: PostProps) => {
           title: title,
           description: get(post, 'SEO.Description', ''),
           images: [
-            { url: get(post, 'Cover.url', null) ? process.env.NEXT_PUBLIC_API_URL + post.Cover.url : ''  },
+            { url: get(post, 'Cover.url', null) ? process.env.NEXT_PUBLIC_API_URL + post.attributes.Cover.url : ''  },
           ]
         }}
       />
       <article id="post" className="container-md">
         <header>
           <Link href="/#posts"><a className="back-to-frontpage"><IconArrowLeft/> Back to frontpage</a></Link>
-          <h1>{ post.Title }</h1>
+          <h1>{ post.attributes.Title }</h1>
         </header>
         <section>
           <div className="cover-photo mb-4 full-bleed">
             { get(post, 'Cover.url', null) ?
-              <img src={ process.env.NEXT_PUBLIC_API_URL + post.Cover.url } alt={ post.Cover.alternativeText } width="1100" height="600" /> : <></> }
+              <img src={ process.env.NEXT_PUBLIC_API_URL + post.attributes.Cover.url } alt={ post.attributes.Cover.alternativeText } width="1100" height="600" /> : <></> }
           </div>
-          <ReactMarkdown source={ post.Content }
+          <ReactMarkdown source={ post.attributes.Content }
                          transformImageUri={ (uri) => process.env.NEXT_PUBLIC_API_URL + uri }
                          renderers={ {
                            image: ImageComponent,
@@ -101,7 +101,7 @@ const Post = ({ post, posts }: PostProps) => {
 export async function getStaticPaths () {
   const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/blog-posts')
   const posts = await res.json()
-  const paths = posts.map((post: PostType) => `/post/${ post.Slug }`)
+  const paths = posts.map((post: PostType) => `/post/${ post.attributes.Slug }`)
   return { paths, fallback: false }
 }
 

@@ -1,26 +1,25 @@
 import React, { useEffect, useState } from 'react'
 
 // App
+import ReactMarkdown from 'react-markdown'
 import { useSelector } from 'react-redux'
 
 // Types
-import { Block } from '@/assets/types'
 import IconCaretUp from '../../assets/icons/i-caret-up'
 import IconBrowser from '../../assets/icons/i-browser'
 import IconLaptopCode from '../../assets/icons/i-laptop-code'
-import IconPrint from '../../assets/icons/i-print'
-import IconPalette from '../../assets/icons/i-palette'
-import ReactMarkdown from 'react-markdown'
+import { Block } from '@/assets/types'
+import { RootState } from '@/store/rootReducer'
 
 const Services = () => {
   const [blockDescription, setBlockDescription] = useState<Block>(null)
   
-  const app = useSelector(state => state.app)
+  const app = useSelector((state: RootState) => state.app)
   
   // Grab blocks
   useEffect(() => {
     if (app.blocks) {
-      setBlockDescription(app.blocks.find((block: Block) => block.Area === 'services'))
+      setBlockDescription(app.blocks.find((block: Block) => block.attributes.Area === 'services'))
     }
   }, [app.blocks])
   
@@ -36,7 +35,7 @@ const Services = () => {
           <IconCaretUp/> Services
         </h2>
         <h3>What I Do</h3>
-        <ReactMarkdown source={blockDescription.Content} className="text-gray"/>
+        <ReactMarkdown source={blockDescription.attributes.Content} className="text-gray"/>
         <div id="service-boxes">
           <div className="row">
             {Object.keys(serviceList).map((serviceTitle: string) => (
