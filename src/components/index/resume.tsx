@@ -44,7 +44,7 @@ const Resume = () => {
                       <p className="job-timespan">
                         <time>{startDateString} - {endDateString}</time>
                       </p>
-                      <ReactMarkdown className="job-description" source={employment.attributes.JobDescription}/>
+                      <ReactMarkdown className="job-description">{employment.attributes.JobDescription}</ReactMarkdown>
                     </article>
                   )
                 })}
@@ -58,7 +58,7 @@ const Resume = () => {
             {!app.tags ? <></> : (
               <ul className="tags">
                 {app.tags.map((tag: Tag) => (
-                  <li className="tag" key={tag.id}>{tag.Tag}</li>
+                  <li className="tag" key={tag.id}>{tag.attributes.Tag}</li>
                 ))}
               </ul>
             )}
