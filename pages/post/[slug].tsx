@@ -1,123 +1,158 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 
 // App
-import Link from 'next/link'
-import Head from 'next/head'
-import ReactMarkdown from 'react-markdown'
-import { useSelector, useDispatch } from 'react-redux'
-import { get } from 'lodash'
-import { NextSeo } from 'next-seo';
-import { useRouter } from 'next/router'
+import Link from "next/link";
+import Head from "next/head";
+import Image from "next/image";
+import ReactMarkdown from "react-markdown";
+import { useSelector, useDispatch } from "react-redux";
+import { get } from "lodash";
+import { NextSeo } from "next-seo";
+import { useRouter } from "next/router";
 
 // Assets
-import { Article, Post as PostType } from '@/assets/types'
-import IconArrowLeft from '@/assets/icons/i-arrow-left'
-import IconArchive from '@/assets/icons/i-archive'
-import { ParagraphComponent, ImageComponent, LinkComponent, CodeComponent } from '@/assets/react-markdown-renderers'
+import { Post as PostType } from "@/assets/types";
+import IconArrowLeft from "@/assets/icons/i-arrow-left";
+import IconArchive from "@/assets/icons/i-archive";
 
 // Redux
-import { setPosts } from '@/store/reducers/appReducer'
-import { RootState } from '@/store/rootReducer'
+import { setPosts } from "@/store/reducers/appReducer";
+import { RootState } from "@/store/rootReducer";
 
 // components
-import Layout from '@/layouts/layout'
-import Posts from '@/components/index/posts'
-import Contact from '@/components/index/contact'
+import Layout from "@/layouts/layout";
+import Posts from "@/components/index/posts";
+import Contact from "@/components/index/contact";
+import { ImageComponent, ParagraphComponent } from "@/assets/react-markdown-renderers";
 
 type PostProps = {
-  post: PostType,
-  posts: Array<PostType>,
-}
+  post: PostType;
+  posts: Array<PostType>;
+};
 
 const Post = ({ post, posts }: PostProps) => {
   // Redux
 
-  const app = useSelector((state: RootState) => state.app)
-  const dispatch = useDispatch()
-  const router = useRouter()
+  const app = useSelector((state: RootState) => state.app);
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   /**
    * Fetch posts list if user visits this page first
    */
   useEffect(() => {
     if (!app.posts) {
-      dispatch(setPosts(posts))
+      dispatch(setPosts(posts));
     }
-  }, [app.posts])
+  }, [app.posts]);
 
-  const title: string = `${ post.Title } - Blog - ossi.dev`;
+  const title: string = `${post.attributes.Title} - Blog - ossi.dev`;
 
   return (
     <Layout>
       <Head>
-        <title>{ title }</title>
+        <title>{title}</title>
       </Head>
       <NextSeo
         title={title}
-        description={get(post, 'SEO.Description', '')}
-        canonical={ process.env.NEXT_PUBLIC_APP_URL + router.asPath }
+        description={get(post, "SEO.Description", "")}
+        canonical={process.env.NEXT_PUBLIC_APP_URL + router.asPath}
         openGraph={{
           url: process.env.NEXT_PUBLIC_APP_URL + router.asPath,
           title: title,
-          description: get(post, 'SEO.Description', ''),
+          description: get(post, "SEO.Description", ""),
           images: [
-            { url: get(post, 'Cover.url', null) ? process.env.NEXT_PUBLIC_API_URL + post.Cover.url : ''  },
-          ]
+            {
+              url: get(post, "Cover.data.attributes.url", null)
+                ? process.env.NEXT_PUBLIC_API_URL +
+                  post.attributes.Cover.data.attributes.url
+                : "",
+            },
+          ],
         }}
       />
       <article id="post" className="container-md">
         <header>
-          <Link href="/#posts"><a className="back-to-frontpage"><IconArrowLeft/> Back to frontpage</a></Link>
-          <h1>{ post.Title }</h1>
+          <Link href="/#posts" className="back-to-frontpage">
+            <IconArrowLeft /> Back to frontpage
+          </Link>
+          <h1>{post.attributes.Title}</h1>
         </header>
         <section>
           <div className="cover-photo mb-4 full-bleed">
-            { get(post, 'Cover.url', null) ?
-              <img src={ process.env.NEXT_PUBLIC_API_URL + post.Cover.url } alt={ post.Cover.alternativeText } width="1100" height="600" /> : <></> }
+            {get(post, "attributes.Cover.data.attributes.url", null) ? (
+              <Image
+                src={
+                  process.env.NEXT_PUBLIC_API_URL +
+                  post.attributes.Cover.data.attributes.url
+                }
+                alt={post.attributes.Cover.data.attributes.alternativeText}
+                width="1100"
+                height="600"
+              />
+            ) : (
+              <></>
+            )}
           </div>
-          <ReactMarkdown source={ post.Content }
-                         transformImageUri={ (uri) => process.env.NEXT_PUBLIC_API_URL + uri }
-                         renderers={ {
-                           image: ImageComponent,
-                           paragraph: ParagraphComponent,
-                           link: LinkComponent,
-                           code: CodeComponent
-                         } }
-                         escapeHtml={false}
-                         className="post-content"/>
+          <ReactMarkdown className="post-content" components={{
+            img: ImageComponent,
+            p: ParagraphComponent
+          }}
+          >
+            {post.attributes.Content}
+          </ReactMarkdown>
         </section>
-        <hr/>
+        <hr />
         <footer>
-          <Link href="/#posts"><a className="back-to-frontpage"><IconArrowLeft/> Back to frontpage</a></Link>
-          <Link href="/posts"><a className="ml-4"><IconArchive/> To archives</a></Link>
+          <Link href="/#posts" className="back-to-frontpage">
+            <IconArrowLeft /> Back to frontpage
+          </Link>
+          <Link href="/posts" className="ml-4">
+            <IconArchive /> To archives
+          </Link>
         </footer>
       </article>
-      <Posts hideDescription={ true } openPostId={ post.id }/>
-      <Contact/>
+      <Posts hideDescription={true} openPostId={post.id} />
+      <Contact />
     </Layout>
-  )
+  );
+};
+
+export async function getStaticPaths() {
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_API_URL + "/api/blog-posts?populate=*"
+  );
+  const posts = await res.json();
+  let paths = [];
+
+  if (posts) {
+    paths = posts.data.map((post: PostType) => `/post/${post.attributes.Slug}`);
+  }
+
+  return { paths, fallback: false };
 }
 
-export async function getStaticPaths () {
-  const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/blog-posts')
-  const posts = await res.json()
-  const paths = posts.map((post: PostType) => `/post/${ post.Slug }`)
-  return { paths, fallback: false }
-}
+export async function getStaticProps({ params }) {
+  const postsResponse = await fetch(
+    process.env.NEXT_PUBLIC_API_URL +
+      "/api/blog-posts?pagination[pageSize]=15&sort=PublishedAt:DESC&populate=*"
+  );
 
-export async function getStaticProps ({ params }) {
-  const postsResponse = await fetch(process.env.NEXT_PUBLIC_API_URL + '/blog-posts?_limit=15&_sort=published_at:DESC')
-  const posts: Array<PostType> = await postsResponse.json()
+  const posts: { data: Array<PostType> } = await postsResponse.json();
 
-  const postResponse = await fetch(process.env.NEXT_PUBLIC_API_URL + `/blog-posts?Slug=${ params.slug }`)
-  const singlePost: PostType = await postResponse.json()
+  const postResponse = await fetch(
+    process.env.NEXT_PUBLIC_API_URL +
+      `/api/blog-posts?populate=*&filters[Slug][$eq]=${params.slug}`
+  );
+
+  const singlePost: { data: PostType } = await postResponse.json();
 
   return {
     props: {
-      post: get(singlePost, [0], null),
-      posts,
+      post: get(singlePost.data, [0], null),
+      posts: posts.data,
     },
-  }
+  };
 }
 
-export default Post
+export default Post;

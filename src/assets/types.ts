@@ -1,89 +1,114 @@
-type ContentType = {
-  id: number,
-  created_at: string,
-  updated_at: string,
-  published_at?: string
+interface Attributes {
+  createdAt: string;
+  updatedAt: string;
+  publishedAt?: string;
 }
 
-export type Tag = {
-  id: number
-  Tag: string
-  created: string
-  updated_at: string
-  showcase: number
-  BackgroundColor: string
-  TextColor: string
+interface ContentType<T> {
+  id: number;
+  attributes: Attributes & T;
 }
+
+interface TagAttributes {
+  Tag: string;
+  created: string;
+  updated_at: string;
+  showcase: number;
+  BackgroundColor: string;
+  TextColor: string;
+}
+
+export type Tag = ContentType<TagAttributes>;
 
 type ImageBase = {
-  id: number
-  name: string
-  alternativeText: string
-  caption: string
-  width: number
-  height: number
-  hash: string
-  ext: '.jpg' | '.png' | '.gif' | '.svg'
-  mime: 'image/jpeg' | 'image/png' | 'image/gif' | 'image/svg+xml'
-  size: number
-  path: null
-  url: string
-}
+  id: number;
+  name: string;
+  alternativeText: string;
+  caption: string;
+  width: number;
+  height: number;
+  hash: string;
+  ext: ".jpg" | ".png" | ".gif" | ".svg";
+  mime: "image/jpeg" | "image/png" | "image/gif" | "image/svg+xml";
+  size: number;
+  path: null;
+  url: string;
+};
 
 type ImageFormats = {
-  thumbnail: ImageBase
-  large: ImageBase
-  medium: ImageBase
-  small: ImageBase
-}
+  thumbnail: ImageBase;
+  large: ImageBase;
+  medium: ImageBase;
+  small: ImageBase;
+};
 
 interface Image extends ImageBase {
-  formats: ImageFormats
-  previewUrl: null | string
-  provider: string
-  provider_metadata: null | string
+  formats: ImageFormats;
+  previewUrl: null | string;
+  provider: string;
+  provider_metadata: null | string;
 }
 
-export interface Link extends ContentType {
-  Title: string
-  Link: string
-  Icon: string
+interface LinkAttributes {
+  Title: string;
+  Link: string;
+  Icon: string;
 }
 
-export interface Showcase extends ContentType {
-  Title: string
-  Slug: string
-  Content: string
-  Labels: String
-  Cover: Image
-  Thumbnail: Image
-  tags: Tag[]
+export type Link = ContentType<LinkAttributes>;
+
+interface ShowcaseAttributes {
+  Title: string;
+  Slug: string;
+  Content: string;
+  Labels: String;
+  Cover: {
+    data: ContentType<Image>;
+  };
+  Thumbnail: {
+    data: ContentType<Image>;
+  };
+  Tags: { 
+    data: Tag[]
+  };
 }
 
-export interface Post extends ContentType {
-  Title: string
-  Slug: string
-  Content: string
-  Excerpt: string
-  Cover: Image
+export type Showcase = ContentType<ShowcaseAttributes>;
+
+interface PostAttributes {
+  Title: string;
+  Slug: string;
+  Content: string;
+  Excerpt: string;
+  Cover: {
+    data: ContentType<Image>;
+  };
 }
 
-export interface Article extends ContentType {
-  title: string
-  description: string
-  link: string
+export type Post = ContentType<PostAttributes>;
+
+export interface ArticleAttributes {
+  title: string;
+  description: string;
+  link: string;
 }
 
-export interface Employment extends ContentType {
-  Employer: string
-  JobTitle: string
-  JobDescription: string
-  StartDate: string
-  EndDate: string
+export type Article = ContentType<ArticleAttributes>;
+
+interface EmploymentAttributes {
+  Employer: string;
+  JobTitle: string;
+  JobDescription: string;
+  StartDate: string;
+  EndDate: string;
 }
 
-export interface Block extends ContentType {
-  Area: string
-  Description: string
-  Content: string
+export type Employment = ContentType<EmploymentAttributes>;
+
+interface BlockAttributes {
+  Area: string;
+  Description: string;
+  Content: string;
 }
+
+export type Block = ContentType<BlockAttributes>;
