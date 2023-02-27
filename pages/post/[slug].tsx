@@ -23,6 +23,7 @@ import { RootState } from "@/store/rootReducer";
 import Layout from "@/layouts/layout";
 import Posts from "@/components/index/posts";
 import Contact from "@/components/index/contact";
+import { ImageComponent, ParagraphComponent } from "@/assets/react-markdown-renderers";
 
 type PostProps = {
   post: PostType;
@@ -93,7 +94,11 @@ const Post = ({ post, posts }: PostProps) => {
               <></>
             )}
           </div>
-          <ReactMarkdown className="post-content">
+          <ReactMarkdown className="post-content" components={{
+            img: ImageComponent,
+            p: ParagraphComponent
+          }}
+          >
             {post.attributes.Content}
           </ReactMarkdown>
         </section>
@@ -130,14 +135,14 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const postsResponse = await fetch(
     process.env.NEXT_PUBLIC_API_URL +
-      "/api/blog-posts?_limit=15&_sort=published_at:DESC&populate=*"
+      "/api/blog-posts?pagination[pageSize]=15&sort=PublishedAt:DESC&populate=*"
   );
 
   const posts: { data: Array<PostType> } = await postsResponse.json();
 
   const postResponse = await fetch(
     process.env.NEXT_PUBLIC_API_URL +
-      `/api/blog-posts?populate=*&Slug=${params.slug}`
+      `/api/blog-posts?populate=*&filters[Slug][$eq]=${params.slug}`
   );
 
   const singlePost: { data: PostType } = await postResponse.json();

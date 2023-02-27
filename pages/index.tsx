@@ -91,11 +91,11 @@ function Home({ posts, showcases, blocks, employments, tags }: HomeProps) {
 export async function getStaticProps() {
   // Fetch frontpage data
   const urls = [
-    "/blog-posts?_limit=15&populate=*&_sort=published_at:DESC",
+    "/blog-posts?pagination[pageSize]=15&populate=*&sort=PublishedAt:DESC",
     "/showcases?populate=*",
     "/blocks",
-    "/employments",
-    "/tags",
+    "/employments?sort=Order:DESC",
+    "/tags?pagination[pageSize]=100",
   ];
 
   const contentCalls: Response[] = await Promise.all(

@@ -16,7 +16,7 @@ import Link from "next/link";
 import IconArrowLeft from "../../src/assets/icons/i-arrow-left";
 import IconArrowRight from "../../src/assets/icons/i-arrow-right";
 
-const postLimitPerPage = 2;
+const postLimitPerPage = 25;
 
 type PostsArchiveProps = {
   posts: Array<PostType>;
@@ -41,9 +41,7 @@ const PostsArchive = ({ count, pageNumber, posts }: PostsArchiveProps) => {
       return (
         <li className="prev">
           <Link href={`/posts/${pageNumber - 1 > 0 ? pageNumber - 1 : ""}`}>
-            <a>
-              <IconArrowLeft /> Previous
-            </a>
+            <IconArrowLeft /> Previous
           </Link>
         </li>
       );
@@ -63,9 +61,7 @@ const PostsArchive = ({ count, pageNumber, posts }: PostsArchiveProps) => {
       return (
         <li className="next">
           <Link href={`/posts/${pageNumber + 1}`}>
-            <a>
               Next <IconArrowRight />
-            </a>
           </Link>
         </li>
       );
@@ -125,8 +121,8 @@ const PostsArchive = ({ count, pageNumber, posts }: PostsArchiveProps) => {
               })}
             </div>
             <ul className="pagination">
-              { hasPrevPage && <PrevButton /> }
-              { hasNextPage && <NextButton /> }
+              {hasPrevPage && <PrevButton />}
+              {hasNextPage && <NextButton />}
             </ul>
           </div>
         )}
@@ -162,8 +158,7 @@ export async function getStaticProps({ params }) {
   );
 
   const posts = await res.json();
-
-  const count = posts.data.meta.pagination.pageCount;
+  const count = posts.meta.pagination.pageCount;
 
   return {
     props: {

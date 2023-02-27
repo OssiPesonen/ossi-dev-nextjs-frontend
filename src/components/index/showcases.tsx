@@ -66,7 +66,7 @@ const Showcases = (props: ShowcasesProps) => {
                             process.env.NEXT_PUBLIC_API_URL +
                             showcase.attributes.Thumbnail.data.attributes.url
                           }
-                          alt={showcase.attributes.Thumbnail.data.attributes.alternativeText}
+                          alt={showcase.attributes.Thumbnail.data.attributes.alternativeText ? showcase.attributes.Thumbnail.data.attributes.alternativeText : showcase.attributes.Thumbnail.data.attributes.name}
                           loading="lazy"
                           width="350"
                           height="350"
@@ -77,8 +77,8 @@ const Showcases = (props: ShowcasesProps) => {
                     </header>
                     <section className="content">
                       <h4>{showcase.attributes.Title}</h4>
-                      {showcase.attributes.tags ? (
-                        showcase.attributes.tags.map((tag: Tag) => (
+                      {showcase.attributes.Tags ? (
+                        showcase.attributes.Tags.data.map((tag) => (
                           <div className="tag" key={tag.id}>
                             {tag.attributes.Tag}
                           </div>

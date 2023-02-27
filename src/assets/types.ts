@@ -10,7 +10,6 @@ interface ContentType<T> {
 }
 
 interface TagAttributes {
-  id: number;
   Tag: string;
   created: string;
   updated_at: string;
@@ -64,12 +63,14 @@ interface ShowcaseAttributes {
   Content: string;
   Labels: String;
   Cover: {
-    data: ContentType<Image>
+    data: ContentType<Image>;
   };
   Thumbnail: {
-    data: ContentType<Image>
+    data: ContentType<Image>;
   };
-  tags: Tag[];
+  Tags: { 
+    data: Tag[]
+  };
 }
 
 export type Showcase = ContentType<ShowcaseAttributes>;
@@ -80,7 +81,7 @@ interface PostAttributes {
   Content: string;
   Excerpt: string;
   Cover: {
-    data: ContentType<Image>
+    data: ContentType<Image>;
   };
 }
 

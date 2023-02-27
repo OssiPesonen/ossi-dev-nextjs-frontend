@@ -21,13 +21,8 @@ import Loading from "@/components/loading";
 import Showcases from "@/components/index/showcases";
 import Contact from "@/components/index/contact";
 import IconArrowLeft from "@/assets/icons/i-arrow-left";
-import {
-  ParagraphComponent,
-  ImageComponent,
-  LinkComponent,
-  CodeComponent,
-} from "@/assets/react-markdown-renderers";
 import { RootState } from "@/store/rootReducer";
+import { ImageComponent, ParagraphComponent } from "@/assets/react-markdown-renderers";
 
 type ShowcaseProps = {
   showcases: Array<ShowcaseType>;
@@ -119,8 +114,8 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
               </div>
               <div className="showcase-grid">
                 <div className="tags">
-                  {showcase.attributes.tags ? (
-                    showcase.attributes.tags.map((tag: Tag) => (
+                  {showcase.attributes.Tags.data ? (
+                    showcase.attributes.Tags.data.map((tag) => (
                       <div className="tag" key={tag.id}>
                         {tag.attributes.Tag}
                       </div>
@@ -131,6 +126,10 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
                 </div>
                 <ReactMarkdown
                   className="showcase-content"
+                  components={{
+                    img: ImageComponent,
+                    p: ParagraphComponent
+                  }}
                 >
                   {showcase.attributes.Content}
                 </ReactMarkdown>
@@ -162,7 +161,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "/api/showcases?populate=*");
+  const res = await fetch(process.env.NEXT_PUBLIC_API_URL + `/api/showcases?populate=*&Slug=${params.slug}`);
   const showcases = await res.json();
 
   return {
