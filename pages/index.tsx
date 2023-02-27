@@ -91,15 +91,15 @@ function Home({ posts, showcases, blocks, employments, tags }: HomeProps) {
 export async function getStaticProps() {
   // Fetch frontpage data
   const urls = [
-    "/blog-posts?_limit=15&_sort=published_at:DESC",
-    "/showcases",
+    "/blog-posts?_limit=15&populate=*&_sort=published_at:DESC",
+    "/showcases?populate=*",
     "/blocks",
     "/employments",
     "/tags",
   ];
 
   const contentCalls: Response[] = await Promise.all(
-    urls.map((url) => fetch(process.env.NEXT_PUBLIC_API_URL + url))
+    urls.map((url) => fetch(process.env.NEXT_PUBLIC_API_URL + '/api' + url))
   );
 
   const contentResponses = await Promise.all(

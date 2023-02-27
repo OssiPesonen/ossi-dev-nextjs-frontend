@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from "react";
 
 // App
-import { useSelector } from "react-redux";
+import Image from "next/image";
 import ReactMarkdown from "react-markdown";
+import { useSelector } from "react-redux";
 
 // Types
 import { Block } from "@/assets/types";
 import { RootState } from "@/store/rootReducer";
-import {
-  CodeComponent,
-  ImageComponent,
-  LinkComponent,
-  ParagraphComponent,
-} from "../../assets/react-markdown-renderers";
 
 const Introduction = () => {
   const [intro, setIntro] = useState<Block>(null);
@@ -42,7 +37,7 @@ const Introduction = () => {
     <div id="introduction" className="container-md">
       <div className="row align-items-center">
         <div className="col-12 col-md-6 personal text-center mb-4">
-          <img
+          <Image
             className="mb-4"
             src="/img/avatar.png"
             alt=""
@@ -70,10 +65,7 @@ const Introduction = () => {
           </div>
         </div>
         <div className="col-12 col-md-6 introduction-content">
-          <ReactMarkdown
-            transformImageUri={(uri) => process.env.NEXT_PUBLIC_API_URL + uri}
-            className="text-center text-md-left"
-          >
+          <ReactMarkdown className="text-center text-md-left">
             {intro.attributes.Content}
           </ReactMarkdown>
         </div>

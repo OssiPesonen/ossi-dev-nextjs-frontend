@@ -1,10 +1,11 @@
+import Image from "next/image";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialOceanic } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 export const ImageComponent = (props: { src: string, alt: string }) => {
   return (
     <figure className="image">
-      <img src={ props.src } alt={ props.alt } loading="lazy" width="1100" height="600" />
+      <Image src={ props.src } alt={ props.alt } loading="lazy" width="1100" height="600" />
     </figure>
   )
 }

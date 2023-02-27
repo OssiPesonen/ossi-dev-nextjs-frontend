@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 // App
 import Link from "next/link";
 import Head from "next/head";
+import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import { useSelector, useDispatch } from "react-redux";
 import { get } from "lodash";
@@ -10,15 +11,9 @@ import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 
 // Assets
-import { Article, Post as PostType } from "@/assets/types";
+import { Post as PostType } from "@/assets/types";
 import IconArrowLeft from "@/assets/icons/i-arrow-left";
 import IconArchive from "@/assets/icons/i-archive";
-import {
-  ParagraphComponent,
-  ImageComponent,
-  LinkComponent,
-  CodeComponent,
-} from "@/assets/react-markdown-renderers";
 
 // Redux
 import { setPosts } from "@/store/reducers/appReducer";
@@ -67,8 +62,9 @@ const Post = ({ post, posts }: PostProps) => {
           description: get(post, "SEO.Description", ""),
           images: [
             {
-              url: get(post, "Cover.url", null)
-                ? process.env.NEXT_PUBLIC_API_URL + post.attributes.Cover.url
+              url: get(post, "Cover.data.attributes.url", null)
+                ? process.env.NEXT_PUBLIC_API_URL +
+                  post.attributes.Cover.data.attributes.url
                 : "",
             },
           ],
@@ -76,21 +72,20 @@ const Post = ({ post, posts }: PostProps) => {
       />
       <article id="post" className="container-md">
         <header>
-          <Link href="/#posts">
-            <a className="back-to-frontpage">
-              <IconArrowLeft /> Back to frontpage
-            </a>
+          <Link href="/#posts" className="back-to-frontpage">
+            <IconArrowLeft /> Back to frontpage
           </Link>
           <h1>{post.attributes.Title}</h1>
         </header>
         <section>
           <div className="cover-photo mb-4 full-bleed">
-            {get(post, "Cover.url", null) ? (
-              <img
+            {get(post, "attributes.Cover.data.attributes.url", null) ? (
+              <Image
                 src={
-                  process.env.NEXT_PUBLIC_API_URL + post.attributes.Cover.url
+                  process.env.NEXT_PUBLIC_API_URL +
+                  post.attributes.Cover.data.attributes.url
                 }
-                alt={post.attributes.Cover.alternativeText}
+                alt={post.attributes.Cover.data.attributes.alternativeText}
                 width="1100"
                 height="600"
               />
@@ -98,24 +93,17 @@ const Post = ({ post, posts }: PostProps) => {
               <></>
             )}
           </div>
-          <ReactMarkdown
-            transformImageUri={(uri) => process.env.NEXT_PUBLIC_API_URL + uri}
-            className="post-content"
-          >
+          <ReactMarkdown className="post-content">
             {post.attributes.Content}
           </ReactMarkdown>
         </section>
         <hr />
         <footer>
-          <Link href="/#posts">
-            <a className="back-to-frontpage">
-              <IconArrowLeft /> Back to frontpage
-            </a>
+          <Link href="/#posts" className="back-to-frontpage">
+            <IconArrowLeft /> Back to frontpage
           </Link>
-          <Link href="/posts">
-            <a className="ml-4">
-              <IconArchive /> To archives
-            </a>
+          <Link href="/posts" className="ml-4">
+            <IconArchive /> To archives
           </Link>
         </footer>
       </article>
@@ -126,28 +114,38 @@ const Post = ({ post, posts }: PostProps) => {
 };
 
 export async function getStaticPaths() {
-  const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "/blog-posts");
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_API_URL + "/api/blog-posts?populate=*"
+  );
   const posts = await res.json();
-  const paths = posts.map((post: PostType) => `/post/${post.attributes.Slug}`);
+  let paths = [];
+
+  if (posts) {
+    paths = posts.data.map((post: PostType) => `/post/${post.attributes.Slug}`);
+  }
+
   return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
   const postsResponse = await fetch(
     process.env.NEXT_PUBLIC_API_URL +
-      "/blog-posts?_limit=15&_sort=published_at:DESC"
+      "/api/blog-posts?_limit=15&_sort=published_at:DESC&populate=*"
   );
-  const posts: Array<PostType> = await postsResponse.json();
+
+  const posts: { data: Array<PostType> } = await postsResponse.json();
 
   const postResponse = await fetch(
-    process.env.NEXT_PUBLIC_API_URL + `/blog-posts?Slug=${params.slug}`
+    process.env.NEXT_PUBLIC_API_URL +
+      `/api/blog-posts?populate=*&Slug=${params.slug}`
   );
-  const singlePost: PostType = await postResponse.json();
+
+  const singlePost: { data: PostType } = await postResponse.json();
 
   return {
     props: {
-      post: get(singlePost, [0], null),
-      posts,
+      post: get(singlePost.data, [0], null),
+      posts: posts.data,
     },
   };
 }

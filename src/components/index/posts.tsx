@@ -39,9 +39,9 @@ const Posts = (props: PostsProps) => {
               </h2>
               <h3>Blog Posts, Articles andTweets</h3>
               <p className="text-gray">
-                You can find everything I've posted on my blog and links to some
-                of my Medium articles right here. Below I've embedded my Twitter
-                feed, which is where I'll sometimes post random stuff that I'm
+                You can find everything I&apos;ve posted on my blog and links to some
+                of my Medium articles right here. Below I&apos;ve embedded my Twitter
+                feed, which is where I&apos;ll sometimes post random stuff that I&apos;m
                 too lazy to write a blog post about.
               </p>
               <h3 style={{ marginTop: "2rem" }}>Twitter</h3>
@@ -103,7 +103,7 @@ const Posts = (props: PostsProps) => {
               <p>
                 I write more non-personal and in-depth articles at Medium.com
                 The platform has put their API behind CloudFlare DDoS
-                protection, and I'm too lazy to create some technical workaround
+                protection, and I&apos;m too lazy to create some technical workaround
                 to fetch the RSS feed, so instead use{" "}
                 <a
                   href="https://medium.com/@rcls"

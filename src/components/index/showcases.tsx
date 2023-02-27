@@ -2,6 +2,7 @@ import React from "react";
 
 // App
 import Link from "next/link";
+import Image from "next/image";
 import { useSelector } from "react-redux";
 import { get } from "lodash";
 
@@ -58,14 +59,14 @@ const Showcases = (props: ShowcasesProps) => {
                 >
                   <article className="showcase" key={showcase.id}>
                     <header>
-                      {get(showcase, "Thumbnail.url", false) ? (
-                        <img
+                      {get(showcase, "attributes.Thumbnail.data.attributes.url", false) ? (
+                        <Image
                           className="showcase-thumbnail"
                           src={
                             process.env.NEXT_PUBLIC_API_URL +
-                            showcase.attributes.Thumbnail.url
+                            showcase.attributes.Thumbnail.data.attributes.url
                           }
-                          alt={showcase.attributes.Thumbnail.alternativeText}
+                          alt={showcase.attributes.Thumbnail.data.attributes.alternativeText}
                           loading="lazy"
                           width="350"
                           height="350"

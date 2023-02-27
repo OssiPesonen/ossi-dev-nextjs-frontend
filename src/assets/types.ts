@@ -63,8 +63,12 @@ interface ShowcaseAttributes {
   Slug: string;
   Content: string;
   Labels: String;
-  Cover: Image;
-  Thumbnail: Image;
+  Cover: {
+    data: ContentType<Image>
+  };
+  Thumbnail: {
+    data: ContentType<Image>
+  };
   tags: Tag[];
 }
 
@@ -75,7 +79,9 @@ interface PostAttributes {
   Slug: string;
   Content: string;
   Excerpt: string;
-  Cover: Image;
+  Cover: {
+    data: ContentType<Image>
+  };
 }
 
 export type Post = ContentType<PostAttributes>;
