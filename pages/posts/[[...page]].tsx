@@ -154,7 +154,7 @@ export async function getStaticProps({ params }) {
 
   const res = await fetch(
     process.env.NEXT_PUBLIC_API_URL +
-      `/api/blog-posts?pagination[page]=${pageNumber}`
+      `/api/blog-posts?pagination[page]=${pageNumber}&sort=PublishedAt:DESC`
   );
 
   const posts = await res.json();
