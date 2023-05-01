@@ -37,12 +37,12 @@ const Posts = (props: PostsProps) => {
               <h2 className="section-title">
                 <IconCaretUp /> Posts
               </h2>
-              <h3>Blog Posts, Articles andTweets</h3>
+              <h3>Blog Posts, Articles and Tweets</h3>
               <p className="text-gray">
-                You can find everything I&apos;ve posted on my blog and links to some
-                of my Medium articles right here. Below I&apos;ve embedded my Twitter
-                feed, which is where I&apos;ll sometimes post random stuff that I&apos;m
-                too lazy to write a blog post about.
+                You can find everything I&apos;ve posted on my blog and links to
+                some of my Medium articles right here. Below I&apos;ve embedded
+                my Twitter feed, which is where I&apos;ll sometimes post random
+                stuff that I&apos;m too lazy to write a blog post about.
               </p>
               <h3 style={{ marginTop: "2rem" }}>Twitter</h3>
               <a
@@ -61,6 +61,29 @@ const Posts = (props: PostsProps) => {
               hideDescription ? "col-md-12" : "col-md-7"
             } mt-4 mt-md-0`}
           >
+            
+            <h4 className="section-title mt-4">
+              <IconCaretUp /> Medium.com & Dev.to
+            </h4>
+            <div className="medium pl-md-4 mb-md-4">
+              <p>
+                I write more non-personal and in-depth articles at{" "}
+                <a
+                  href="https://medium.com/@rcls"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Medium.com
+                </a>{" "}
+                and{" "}
+                <a href="https://dev.to/rcls" target="_blank" rel="noreferrer">
+                  Dev.to
+                </a>
+              </p>
+            </div>
+            <h4 className="section-title mt-4">
+              <IconCaretUp /> Blog posts
+            </h4>
             <div id="posts-list" className="pl-md-4 mb-md-4">
               {app.posts.map((post: Post) => {
                 const published = new Date(post.attributes.publishedAt);
@@ -95,26 +118,6 @@ const Posts = (props: PostsProps) => {
               <Link href="/posts">
                 Explore more <IconArrowRight />
               </Link>
-            </div>
-            <h4 className="section-title mt-4">
-              <IconCaretUp /> Medium.com
-            </h4>
-            <div className="medium pl-md-4 mb-md-4">
-              <p>
-                I write more non-personal and in-depth articles at Medium.com
-                The platform has put their API behind CloudFlare DDoS
-                protection, and I&apos;m too lazy to create some technical workaround
-                to fetch the RSS feed, so instead use{" "}
-                <a
-                  href="https://medium.com/@rcls"
-                  target="_blank"
-                  aria-label="Medium"
-                  rel="noreferrer"
-                >
-                  this link
-                </a>{" "}
-                to go to my Medium profile and browse my articles there :)
-              </p>
             </div>
           </div>
         </div>

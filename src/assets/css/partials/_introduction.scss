@@ -3,10 +3,20 @@
     min-height: calc(100vh - #{$top-bar-height});
     align-items: center;
     padding: 2rem 1rem;
+    background: url(/img/background.svg) bottom center no-repeat;
+    background-size: cover;
+    
+    .container-sm {
+        max-width: 768px;
+    }
 
     .personal h3 {
         font-size: 2rem;
         margin-bottom: 0.5rem;
+    }
+
+    .introduction-content {
+        margin-bottom: 2rem;
     }
 
     .interest-list {

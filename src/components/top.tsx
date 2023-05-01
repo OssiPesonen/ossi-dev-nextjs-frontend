@@ -10,6 +10,7 @@ import IconEnvelope from "../assets/icons/i-envelope";
 import IconTwitter from "../assets/icons/i-twitter";
 import IconGithub from "../assets/icons/i-github";
 import IconMedium from "../assets/icons/i-medium";
+import IconDev from "@/assets/icons/i-dev";
 
 const Top = () => {
   const router = useRouter();
@@ -188,12 +189,12 @@ const Top = () => {
                 </li>
                 <li>
                   <a
-                    href="https://www.behance.net/ossipesonen"
-                    aria-label="Behance"
+                    href="https://dev.to/rcls"
+                    aria-label="Dev.to"
                     rel="noreferrer"
                     target="_blank"
                   >
-                    <IconBehance />
+                    <IconDev />
                   </a>
                 </li>
               </ul>

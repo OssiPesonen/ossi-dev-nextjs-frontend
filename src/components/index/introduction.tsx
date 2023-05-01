@@ -34,33 +34,26 @@ const Introduction = () => {
   return !intro || !currentInterest ? (
     <></>
   ) : (
-    <div id="introduction" className="container-md">
-      <div className="row align-items-center">
-        <div className="col-12 col-md-6 personal text-center mb-4">
-          <h1>Ossi Pesonen</h1>
-          <p className="text-muted">Currently interested in, and learning:</p>
-          <ul className="interest-list mt-4 mb-4">
-            {currentInterest.attributes.Content.split(", ").map(
-              (interest: string) => (
-                <li key={interest}>{interest}</li>
-              )
-            )}
-          </ul>
-          <div className="row text-center">
-            <div className="col-6">
-              <h3 className="text-secondary">15+</h3>
-              <p>Years of experience</p>
-            </div>
-            <div className="col-6">
-              <h3 className="text-secondary">500+</h3>
-              <p>Worked projects</p>
+    <div id="introduction">
+      <div className="container-sm">
+        <div className="row align-items-center">
+          <div className="col-12 introduction-content text-center mb-8">
+            <ReactMarkdown className="text-center text-md-left">
+              {intro.attributes.Content}
+            </ReactMarkdown>
+          </div>
+          <div className="col-12 personal text-center mb-4">
+            <div className="row text-center">
+              <div className="col-6">
+                <h3 className="text-secondary">15+</h3>
+                <p>Years of experience</p>
+              </div>
+              <div className="col-6">
+                <h3 className="text-secondary">500+</h3>
+                <p>Worked projects</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="col-12 col-md-6 introduction-content">
-          <ReactMarkdown className="text-center text-md-left">
-            {intro.attributes.Content}
-          </ReactMarkdown>
         </div>
       </div>
     </div>

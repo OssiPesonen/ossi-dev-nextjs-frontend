@@ -10,6 +10,8 @@ import IconBrowser from "../../assets/icons/i-browser";
 import IconLaptopCode from "../../assets/icons/i-laptop-code";
 import { Block } from "@/assets/types";
 import { RootState } from "@/store/rootReducer";
+import IconMobile from "@/assets/icons/i-moblie";
+import IconConsulting from "@/assets/icons/i-consulting";
 
 const Services = () => {
   const [blockDescription, setBlockDescription] = useState<Block>(null);
@@ -26,8 +28,10 @@ const Services = () => {
   }, [app.blocks]);
 
   const serviceList: Record<string, React.ReactElement> = {
-    "Web Development": <IconLaptopCode />,
+    "Software Development": <IconLaptopCode />,
     "UI/UX Design": <IconBrowser />,
+    "Mobile development": <IconMobile />,
+    "Agile coaching": <IconConsulting />
   };
 
   return !blockDescription ? (
