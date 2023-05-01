@@ -37,14 +37,7 @@ const Introduction = () => {
     <div id="introduction" className="container-md">
       <div className="row align-items-center">
         <div className="col-12 col-md-6 personal text-center mb-4">
-          <Image
-            className="mb-4"
-            src="/img/avatar.png"
-            alt=""
-            width="210"
-            height="210"
-          />
-          <h2>Ossi Pesonen</h2>
+          <h1>Ossi Pesonen</h1>
           <p className="text-muted">Currently interested in, and learning:</p>
           <ul className="interest-list mt-4 mb-4">
             {currentInterest.attributes.Content.split(", ").map(
