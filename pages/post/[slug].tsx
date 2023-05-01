@@ -23,7 +23,7 @@ import { RootState } from "@/store/rootReducer";
 import Layout from "@/layouts/layout";
 import Posts from "@/components/index/posts";
 import Contact from "@/components/index/contact";
-import { ImageComponent, ParagraphComponent } from "@/assets/react-markdown-renderers";
+import { HeadingComponent, ImageComponent, ParagraphComponent } from "@/assets/react-markdown-renderers";
 
 type PostProps = {
   post: PostType;
@@ -47,7 +47,7 @@ const Post = ({ post, posts }: PostProps) => {
   }, [app.posts]);
 
   const title: string = `${post.attributes.Title} - Blog - ossi.dev`;
-
+  
   return (
     <Layout>
       <Head>
@@ -96,7 +96,9 @@ const Post = ({ post, posts }: PostProps) => {
           </div>
           <ReactMarkdown className="post-content" components={{
             img: ImageComponent,
-            p: ParagraphComponent
+            p: ParagraphComponent,
+            h2: HeadingComponent,
+            h3: HeadingComponent,
           }}
           >
             {post.attributes.Content}

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialOceanic } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
@@ -24,6 +25,19 @@ export const ParagraphComponent = (props: { children: Array<any> }): React.React
   }
 
   return <p>{ children }</p>
+}
+
+function flatten(text, child) {
+  return typeof child === 'string'
+    ? text + child
+    : React.Children.toArray(child.props.children).reduce(flatten, text)
+}
+
+export const HeadingComponent = (props: { children: Array<any>, level: number }): React.ReactElement => {
+  const { children } = props
+  var text = children.reduce(flatten, '')
+  var slug = text.toLowerCase().replace(/\W/g, '-')
+  return React.createElement('h' + props.level, {id: slug}, props.children)
 }
 
 export const CodeComponent = (props) => {
