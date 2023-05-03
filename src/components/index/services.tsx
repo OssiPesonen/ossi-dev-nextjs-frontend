@@ -31,7 +31,6 @@ const Services = () => {
     "Software Development": <IconLaptopCode />,
     "UI/UX Design": <IconBrowser />,
     "Mobile development": <IconMobile />,
-    "Agile coaching": <IconConsulting />
   };
 
   return !blockDescription ? (
