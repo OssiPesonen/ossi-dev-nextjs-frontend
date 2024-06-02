@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 
 // App
 import Link from "next/link";
 import Head from "next/head";
 import Image from "next/image";
-import ReactMarkdown from "react-markdown";
 import { useSelector, useDispatch } from "react-redux";
 import { get } from "lodash";
 import { NextSeo } from "next-seo";
@@ -23,30 +22,31 @@ import { RootState } from "@/store/rootReducer";
 import Layout from "@/layouts/layout";
 import Posts from "@/components/index/posts";
 import Contact from "@/components/index/contact";
-import { HeadingComponent, ImageComponent, ParagraphComponent } from "@/assets/react-markdown-renderers";
+import { client, postsQuery } from "@/sanity/index";
+import { myPortableTextComponents } from "@/sanity/portableComponents";
+import { PortableText } from "@portabletext/react";
 
 type PostProps = {
-  post: PostType;
   posts: Array<PostType>;
 };
 
-const Post = ({ post, posts }: PostProps) => {
+const Post = ({ posts }: PostProps) => {
   // Redux
 
   const app = useSelector((state: RootState) => state.app);
   const dispatch = useDispatch();
   const router = useRouter();
+  const slug = router.query.slug;
 
-  /**
-   * Fetch posts list if user visits this page first
-   */
+  const post = useMemo(() => posts.find((p) => p.slug.current === slug), [posts]);
+
   useEffect(() => {
     if (!app.posts) {
       dispatch(setPosts(posts));
     }
   }, [app.posts]);
 
-  const title: string = `${post.attributes.Title} - Blog - ossi.dev`;
+  const title: string = `${post.title} - Blog - ossi.dev`;
   
   return (
     <Layout>
@@ -63,10 +63,7 @@ const Post = ({ post, posts }: PostProps) => {
           description: get(post, "SEO.Description", ""),
           images: [
             {
-              url: get(post, "Cover.data.attributes.url", null)
-                ? process.env.NEXT_PUBLIC_API_URL +
-                  post.attributes.Cover.data.attributes.url
-                : "",
+              url:post.mainImage.asset.url
             },
           ],
         }}
@@ -76,33 +73,20 @@ const Post = ({ post, posts }: PostProps) => {
           <Link href="/#posts" className="back-to-frontpage">
             <IconArrowLeft /> Back to frontpage
           </Link>
-          <h1>{post.attributes.Title}</h1>
+          <h1>{post.title}</h1>
         </header>
         <section>
           <div className="cover-photo mb-4 full-bleed">
-            {get(post, "attributes.Cover.data.attributes.url", null) ? (
-              <Image
-                src={
-                  process.env.NEXT_PUBLIC_API_URL +
-                  post.attributes.Cover.data.attributes.url
-                }
-                alt={post.attributes.Cover.data.attributes.alternativeText}
-                width="1100"
-                height="600"
-              />
-            ) : (
-              <></>
-            )}
+            <Image
+              src={post.mainImage.asset.url}
+              alt={post.mainImage.asset.assetId}
+              width="1100"
+              height="600"
+            />
           </div>
-          <ReactMarkdown className="post-content" components={{
-            img: ImageComponent,
-            p: ParagraphComponent,
-            h2: HeadingComponent,
-            h3: HeadingComponent,
-          }}
-          >
-            {post.attributes.Content}
-          </ReactMarkdown>
+          <div class="post-content">
+            <PortableText value={post.body} components={myPortableTextComponents} />
+          </div>
         </section>
         <hr />
         <footer>
@@ -114,45 +98,23 @@ const Post = ({ post, posts }: PostProps) => {
           </Link>
         </footer>
       </article>
-      <Posts hideDescription={true} openPostId={post.id} />
+      <Posts hideDescription={true} openPostId={post._id} />
       <Contact />
     </Layout>
   );
 };
 
 export async function getStaticPaths() {
-  const res = await fetch(
-    process.env.NEXT_PUBLIC_API_URL + "/api/blog-posts?populate=*"
-  );
-  const posts = await res.json();
-  let paths = [];
-
-  if (posts) {
-    paths = posts.data.map((post: PostType) => `/post/${post.attributes.Slug}`);
-  }
-
-  return { paths, fallback: false };
+  const posts = await client.fetch(postsQuery());
+  return { paths: posts ? posts.map((p: PostType) => `/post/${p.slug.current}`) : [], fallback: false };
 }
 
-export async function getStaticProps({ params }) {
-  const postsResponse = await fetch(
-    process.env.NEXT_PUBLIC_API_URL +
-      "/api/blog-posts?pagination[pageSize]=15&sort=PublishedAt:DESC&populate=*"
-  );
-
-  const posts: { data: Array<PostType> } = await postsResponse.json();
-
-  const postResponse = await fetch(
-    process.env.NEXT_PUBLIC_API_URL +
-      `/api/blog-posts?populate=*&filters[Slug][$eq]=${params.slug}`
-  );
-
-  const singlePost: { data: PostType } = await postResponse.json();
+export async function getStaticProps() {
+ const posts = await client.fetch(postsQuery());
 
   return {
     props: {
-      post: get(singlePost.data, [0], null),
-      posts: posts.data,
+      posts: posts,
     },
   };
 }

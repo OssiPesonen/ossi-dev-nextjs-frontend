@@ -5,15 +5,14 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 
 // Types
-import { Article, Post } from "@/assets/types";
+import { Post } from "@/assets/types";
 import IconCaretUp from "../../assets/icons/i-caret-up";
 import IconArrowRight from "../../assets/icons/i-arrow-right";
-import IconMedium from "@/assets/icons/i-medium";
 import { RootState } from "@/store/rootReducer";
 
 type PostsProps = {
   hideDescription?: boolean;
-  openPostId?: number;
+  openPostId?: string;
 };
 
 const Posts = (props: PostsProps) => {
@@ -40,20 +39,8 @@ const Posts = (props: PostsProps) => {
               <h3>Blog Posts, Articles and Tweets</h3>
               <p className="text-gray">
                 You can find everything I&apos;ve posted on my blog and links to
-                some of my Medium articles right here. Below I&apos;ve embedded
-                my Twitter feed, which is where I&apos;ll sometimes post random
-                stuff that I&apos;m too lazy to write a blog post about.
+                some of my Medium articles right here.
               </p>
-              <h3 style={{ marginTop: "2rem" }}>Twitter</h3>
-              <a
-                className="twitter-timeline"
-                data-width="500"
-                data-height="540"
-                data-theme="dark"
-                href="https://twitter.com/OssiDev?ref_src=twsrc%5Etfw"
-              >
-                Tweets by OssiDev
-              </a>
             </div>
           )}
           <div
@@ -86,22 +73,22 @@ const Posts = (props: PostsProps) => {
             </h4>
             <div id="posts-list" className="pl-md-4 mb-md-4">
               {app.posts.map((post: Post) => {
-                const published = new Date(post.attributes.publishedAt);
+                const published = new Date(post.publishedAt);
                 const readableDate = published.toDateString();
 
                 return (
                   <Link
                     href="/post/[slug]"
-                    as={`/post/${post.attributes.Slug}`}
-                    key={post.id}
+                    as={`/post/${post.slug.current}`}
+                    key={post._id}
                     className={
-                      openPostId && openPostId === post.id ? "active" : ""
+                      openPostId && openPostId === post._id ? "active" : ""
                     }
-                    aria-label={post.attributes.Title}
+                    aria-label={post.title}
                   >
-                    <article className="post" key={post.id}>
+                    <article className="post" key={post._id}>
                       <header className="content">
-                        <h3>{post.attributes.Title}</h3>
+                        <h3>{post.title}</h3>
                       </header>
                       <section className="read-more-icon">
                         <IconArrowRight />
@@ -113,11 +100,6 @@ const Posts = (props: PostsProps) => {
                   </Link>
                 );
               })}
-            </div>
-            <div className="text-right explore-more-link">
-              <Link href="/posts">
-                Explore more <IconArrowRight />
-              </Link>
             </div>
           </div>
         </div>

@@ -15,6 +15,7 @@
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
@@ -35,3 +36,4 @@ yarn-error.log*
 /src/assets/fontawesome/webfonts/
 
 .vercel
+.sanity

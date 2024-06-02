@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Employment, Tag } from "@/assets/types";
 import { RootState } from "@/store/rootReducer";
 import IconCaretUp from "../../assets/icons/i-caret-up";
-import ReactMarkdown from "react-markdown";
+import { PortableText } from "@portabletext/react";
 
 const months = [
   "January",
@@ -41,15 +41,15 @@ const Resume = () => {
                   <></>
                 ) : (
                   app.employments.map((employment: Employment) => {
-                    const startDate = new Date(employment.attributes.StartDate);
+                    const startDate = new Date(employment.startDate);
                     const startDateString =
                       months[startDate.getMonth()] +
                       " " +
                       startDate.getFullYear();
                     let endDateString;
 
-                    if (employment.attributes.EndDate !== null) {
-                      const endDate = new Date(employment.attributes.EndDate);
+                    if (employment.endDate !== null) {
+                      const endDate = new Date(employment.endDate);
                       endDateString =
                         months[endDate.getMonth()] +
                         " " +
@@ -59,14 +59,14 @@ const Resume = () => {
                     }
 
                     return (
-                      <article className="employer" key={employment.id}>
+                      <article className="employer" key={employment._id}>
                         <h4>
                           <span className="job-title">
-                            {employment.attributes.JobTitle}
+                            {employment.jobTitle}
                           </span>{" "}
                           -{" "}
                           <span className="employer">
-                            {employment.attributes.Employer}
+                            {employment.employer}
                           </span>
                         </h4>
                         <p className="job-timespan">
@@ -74,9 +74,9 @@ const Resume = () => {
                             {startDateString} - {endDateString}
                           </time>
                         </p>
-                        <ReactMarkdown className="job-description">
-                          {employment.attributes.JobDescription}
-                        </ReactMarkdown>
+                        <div className="job-description">
+                          <PortableText value={employment.jobDescription} />
+                        </div>
                       </article>
                     );
                   })
@@ -98,8 +98,8 @@ const Resume = () => {
             ) : (
               <ul className="tags">
                 {app.tags.map((tag: Tag) => (
-                  <li className="tag" key={tag.id}>
-                    {tag.attributes.Tag}
+                  <li className="tag" key={tag._id}>
+                    {tag.title}
                   </li>
                 ))}
               </ul>

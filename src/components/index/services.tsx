@@ -11,7 +11,7 @@ import IconLaptopCode from "../../assets/icons/i-laptop-code";
 import { Block } from "@/assets/types";
 import { RootState } from "@/store/rootReducer";
 import IconMobile from "@/assets/icons/i-moblie";
-import IconConsulting from "@/assets/icons/i-consulting";
+import { PortableText } from "@portabletext/react";
 
 const Services = () => {
   const [blockDescription, setBlockDescription] = useState<Block>(null);
@@ -22,7 +22,7 @@ const Services = () => {
   useEffect(() => {
     if (app.blocks) {
       setBlockDescription(
-        app.blocks.find((block: Block) => block.attributes.Area === "services")
+        app.blocks.find((block: Block) => block.area === "services")
       );
     }
   }, [app.blocks]);
@@ -42,9 +42,9 @@ const Services = () => {
           <IconCaretUp /> Services
         </h2>
         <h3>What I Do</h3>
-        <ReactMarkdown className="text-gray">
-          {blockDescription.attributes.Content}
-        </ReactMarkdown>
+        <div className="text-gray">
+          <PortableText value={blockDescription.content} />
+        </div>
         <div id="service-boxes">
           <div className="row">
             {Object.keys(serviceList).map((serviceTitle: string) => (

@@ -19,6 +19,7 @@ import {
 import { Block, Employment, Tag, Post, Showcase } from "@/assets/types";
 
 // Components
+import { client, employmentsQuery, postsQuery, showcasesQuery, tagsQuery, widgetsQuery } from "@/sanity/index";
 import Introduction from "@/components/index/introduction";
 import Services from "@/components/index/services";
 import Showcases from "@/components/index/showcases";
@@ -29,11 +30,11 @@ import Loading from "@/components/loading";
 import Resume from "@/components/index/resume";
 
 type HomeProps = {
-  posts: Array<Post>;
-  showcases: Array<Showcase>;
-  blocks: Array<Block>;
-  employments: Array<Employment>;
-  tags: Array<Tag>;
+  posts: Post[],
+  showcases: Showcase[],
+  blocks: Block[],
+  employments: Employment[],
+  tags: Tag[];
 };
 
 function Home({ posts, showcases, blocks, employments, tags }: HomeProps) {
@@ -90,31 +91,29 @@ function Home({ posts, showcases, blocks, employments, tags }: HomeProps) {
 
 export async function getStaticProps() {
   // Fetch frontpage data
-  const urls = [
-    "/blog-posts?pagination[pageSize]=15&populate=*&sort=PublishedAt:DESC",
-    "/showcases?populate=*",
-    "/blocks",
-    "/employments?sort=Order:DESC",
-    "/tags?pagination[pageSize]=100",
+  const queries = [
+    postsQuery(),
+    showcasesQuery(),
+    employmentsQuery(),
+    widgetsQuery(),
+    tagsQuery(),
   ];
 
-  const contentCalls: Response[] = await Promise.all(
-    urls.map((url) => fetch(process.env.NEXT_PUBLIC_API_URL + '/api' + url))
-  );
-
-  const contentResponses = await Promise.all(
-    contentCalls.map((jsonResponse) => jsonResponse.json())
+  const content: Response[] = await Promise.all(
+    queries.map((query) => client.fetch(query))
   );
   
-  const [posts, showcases, blocks, employments, tags] = contentResponses;
+  // Todo: wrap this with Promise.all() once all have been migrated to Sanity.io
+
+  const [ posts, showcases, employments, blocks, tags ] = content;
 
   return {
     props: {
-      posts: posts.data,
-      showcases: showcases.data,
-      blocks: blocks.data,
-      employments: employments.data,
-      tags: tags.data,
+      posts: posts,
+      showcases: showcases,
+      blocks: blocks,
+      employments: employments,
+      tags: tags,
     },
   };
 }

@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { get } from "lodash";
 
 // Types
-import { Showcase, Tag } from "@/assets/types";
+import { Showcase } from "@/assets/types";
 
 // Redux
 import IconCaretUp from "../../assets/icons/i-caret-up";
@@ -15,7 +15,7 @@ import { RootState } from "@/store/rootReducer";
 
 type ShowcasesProps = {
   hideDescription?: boolean;
-  openPostId?: number;
+  openPostId?: string;
 };
 
 const Showcases = (props: ShowcasesProps) => {
@@ -47,40 +47,33 @@ const Showcases = (props: ShowcasesProps) => {
           {hideDescription ? <h2>Other showcases</h2> : <></>}
           <div className="row">
             {app.showcases.map((showcase: Showcase) => {
-              if (openPostId && showcase.id === openPostId) return false;
+              if (openPostId && showcase._id === openPostId) return false;
 
               return (
                 <Link
                   href="/showcase/[slug]"
-                  as={`/showcase/${showcase.attributes.Slug}`}
-                  key={showcase.id}
+                  as={`/showcase/${showcase.slug.current}`}
+                  key={showcase._id}
                   className="col-12 col-sm-6 col-md-4 showcase-container"
-                  aria-label={`Showcase ${showcase.attributes.Title}`}
+                  aria-label={`Showcase ${showcase.title}`}
                 >
-                  <article className="showcase" key={showcase.id}>
+                  <article className="showcase" key={showcase._id}>
                     <header>
-                      {get(showcase, "attributes.Thumbnail.data.attributes.url", false) ? (
                         <Image
                           className="showcase-thumbnail"
-                          src={
-                            process.env.NEXT_PUBLIC_API_URL +
-                            showcase.attributes.Thumbnail.data.attributes.url
-                          }
-                          alt={showcase.attributes.Thumbnail.data.attributes.alternativeText ? showcase.attributes.Thumbnail.data.attributes.alternativeText : showcase.attributes.Thumbnail.data.attributes.name}
+                          src={showcase.thumbnail.asset.url}
+                          alt=""
                           loading="lazy"
                           width="350"
                           height="350"
                         />
-                      ) : (
-                        <></>
-                      )}
                     </header>
                     <section className="content">
-                      <h4>{showcase.attributes.Title}</h4>
-                      {showcase.attributes.Tags ? (
-                        showcase.attributes.Tags.data.map((tag) => (
-                          <div className="tag" key={tag.id}>
-                            {tag.attributes.Tag}
+                      <h4>{showcase.title}</h4>
+                      {showcase.tags ? (
+                        showcase.tags.map((tag) => (
+                          <div className="tag" key={tag.title}>
+                            {tag.title}
                           </div>
                         ))
                       ) : (

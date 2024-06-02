@@ -1,11 +1,16 @@
 import React from 'react';
+import urlBuilder from '@sanity/image-url';
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialOceanic } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { client } from '../sanity';
 
-export const ImageComponent = ({... props }) => {
+const builder = urlBuilder(client)
+
+export const ImageComponent = ({value, isInline}) => {
+  const url = builder.image(value);
   return (
     <figure className="image">
-      <img src={ props.src } alt={ props.alt } width="1100" height="600" />
+      <img src={url.url()} alt={value.alt || ' '} />
     </figure>
   )
 }
@@ -13,7 +18,7 @@ export const ImageComponent = ({... props }) => {
 export const LinkComponent = (props: { href: string, children?: any }) =>
   <a href={ props.href } target="_blank" rel="noopener">{ props.children }</a>
 
-export const ParagraphComponent = (props: { children: Array<any> }): React.ReactElement => {
+export const ParagraphComponent = (props: { children: any }): React.ReactElement => {
   const { children } = props
 
   if (children && children[ 0 ]
@@ -33,7 +38,7 @@ function flatten(text, child) {
     : React.Children.toArray(child.props.children).reduce(flatten, text)
 }
 
-export const HeadingComponent = (props: { children: Array<any>, level: number }): React.ReactElement => {
+export const HeadingComponent = (props: { children: any, level: number }): React.ReactElement => {
   const { children } = props
   var text = children.reduce(flatten, '')
   var slug = text.toLowerCase().replace(/\W/g, '-')

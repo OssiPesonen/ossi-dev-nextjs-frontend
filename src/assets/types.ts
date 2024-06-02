@@ -1,24 +1,7 @@
-interface Attributes {
-  createdAt: string;
-  updatedAt: string;
-  publishedAt?: string;
+export interface Tag {
+  _id: number;
+  title: string;
 }
-
-interface ContentType<T> {
-  id: number;
-  attributes: Attributes & T;
-}
-
-interface TagAttributes {
-  Tag: string;
-  created: string;
-  updated_at: string;
-  showcase: number;
-  BackgroundColor: string;
-  TextColor: string;
-}
-
-export type Tag = ContentType<TagAttributes>;
 
 type ImageBase = {
   id: number;
@@ -49,66 +32,59 @@ interface Image extends ImageBase {
   provider_metadata: null | string;
 }
 
-interface LinkAttributes {
-  Title: string;
-  Link: string;
-  Icon: string;
-}
-
-export type Link = ContentType<LinkAttributes>;
-
-interface ShowcaseAttributes {
-  Title: string;
-  Slug: string;
-  Content: string;
-  Labels: String;
-  Cover: {
-    data: ContentType<Image>;
-  };
-  Thumbnail: {
-    data: ContentType<Image>;
-  };
-  Tags: { 
-    data: Tag[]
-  };
-}
-
-export type Showcase = ContentType<ShowcaseAttributes>;
-
-interface PostAttributes {
-  Title: string;
-  Slug: string;
-  Content: string;
-  Excerpt: string;
-  Cover: {
-    data: ContentType<Image>;
-  };
-}
-
-export type Post = ContentType<PostAttributes>;
-
-export interface ArticleAttributes {
+interface SanityTag {
   title: string;
+}
+
+export interface Showcase {
+  _id: string;
+  title: string;
+  slug: {
+    current: string;
+  };
+  content: [];
+  cover: SanityImageAsset;
+  thumbnail: SanityImageAsset;
+  tags: SanityTag[];
+}
+
+interface SanityImageAsset {
+  _type: "image";
+  asset: {
+    _createdAt: string;
+    _updatedAt: string;
+    url: string;
+    extension: string;
+    mimeType: string;
+    assetId: string;
+    originalFilename: string;
+    path: string;
+    _id: string;
+  };
+}
+
+export interface Post {
+  _id: string;
+  title: string;
+  slug: {
+    current: string;
+  };
+  body: [];
+  mainImage: SanityImageAsset;
+  publishedAt: string;
+}
+
+export interface Employment {
+  _id: string;
+  employer: string;
+  jobTitle: string;
+  jobDescription: [];
+  startDate: string;
+  endDate: string;
+}
+
+export interface Block {
+  area: string;
   description: string;
-  link: string;
+  content: [];
 }
-
-export type Article = ContentType<ArticleAttributes>;
-
-interface EmploymentAttributes {
-  Employer: string;
-  JobTitle: string;
-  JobDescription: string;
-  StartDate: string;
-  EndDate: string;
-}
-
-export type Employment = ContentType<EmploymentAttributes>;
-
-interface BlockAttributes {
-  Area: string;
-  Description: string;
-  Content: string;
-}
-
-export type Block = ContentType<BlockAttributes>;

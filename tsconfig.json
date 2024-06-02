@@ -31,6 +31,9 @@
       "@/utils/*": [
         "src/utils/*"
       ],
+      "@/sanity/*": [
+        "src/sanity/*"
+      ],
       "@/layouts/*": [
         "src/layouts/*"
       ],

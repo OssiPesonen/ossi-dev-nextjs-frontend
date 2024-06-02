@@ -2,13 +2,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Article, Block, Employment, Link, Post, Showcase, Tag } from '@/assets/types'
 
 type InitialStateProps = {
-  showcases: Array<Showcase>
-  links: Array<Link>,
-  blocks: Array<Block>,
-  posts: Array<Post>,
-  employments: Array<Employment>,
-  articles: Array<Article>,
-  tags: Array<Tag>,
+  showcases: Showcase[],
+  links: Link[],
+  blocks: Block[],
+  posts: Post[],
+  employments:Employment[],
+  articles: Article[]
+  tags: Tag[],
   loaded: boolean;
   error: string
 }
