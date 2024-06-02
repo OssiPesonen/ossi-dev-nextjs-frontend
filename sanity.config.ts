@@ -6,7 +6,6 @@ import { schemaTypes } from "./schemaTypes";
 export default defineConfig({
   name: "default",
   title: "ossi.dev",
-
   projectId: "imfphgq6",
   dataset: "production",
 
