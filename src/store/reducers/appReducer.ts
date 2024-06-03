@@ -1,13 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Article, Block, Employment, Link, Post, Showcase, Tag } from '@/assets/types'
+import { Block, Employment, Post, Showcase, Tag } from '@/assets/types'
 
 type InitialStateProps = {
   showcases: Showcase[],
-  links: Link[],
   blocks: Block[],
   posts: Post[],
   employments:Employment[],
-  articles: Article[]
   tags: Tag[],
   loaded: boolean;
   error: string
@@ -15,11 +13,9 @@ type InitialStateProps = {
 
 const initialState: InitialStateProps = {
   showcases: null,
-  links: null,
   blocks: null,
   posts: null,
   employments: null,
-  articles: null,
   tags: null,
   loaded: false,
   error: ''
@@ -32,9 +28,6 @@ const appSlice = createSlice({
     setShowcases (state, action: PayloadAction<Array<Showcase>>) {
       state.showcases = action.payload
     },
-    setLinks (state, action: PayloadAction<Array<Link>>) {
-      state.links = action.payload
-    },
     setBlocks (state, action: PayloadAction<Array<Block>>) {
       state.blocks = action.payload
     },
@@ -43,9 +36,6 @@ const appSlice = createSlice({
     },
     setEmployments (state, action: PayloadAction<Array<Employment>>) {
       state.employments = action.payload
-    },
-    setArticles (state, action: PayloadAction<Array<Article>>) {
-      state.articles = action.payload
     },
     setTags (state, action: PayloadAction<Array<Tag>>) {
       state.tags = action.payload
@@ -60,14 +50,12 @@ const appSlice = createSlice({
 })
 
 export const {
-  setLinks,
   setShowcases,
   setBlocks,
   setPosts,
   setEmployments,
   setTags,
   setLoaded,
-  setArticles,
   setError
 } = appSlice.actions
 

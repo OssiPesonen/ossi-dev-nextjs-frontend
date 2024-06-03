@@ -84,7 +84,7 @@ const Post = ({ posts }: PostProps) => {
               height="600"
             />
           </div>
-          <div class="post-content">
+          <div className="post-content">
             <PortableText value={post.body} components={myPortableTextComponents} />
           </div>
         </section>

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 // App
-import ReactMarkdown from "react-markdown";
 import { useSelector } from "react-redux";
 
 // Types

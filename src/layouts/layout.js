@@ -15,7 +15,6 @@ const Layout = (props) => (
         <link href="//fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:wght@500;600&display=swap" rel="stylesheet"/>
         <meta name="msapplication-TileColor" content="#da532c"/>
         <meta name="theme-color" content="#ffffff"/>
-        <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
       </Head>
       <Top />
       { props.children }

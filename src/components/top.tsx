@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 // Components
-import IconBehance from "../assets/icons/i-behance";
 import IconEnvelope from "../assets/icons/i-envelope";
 import IconTwitter from "../assets/icons/i-twitter";
 import IconGithub from "../assets/icons/i-github";

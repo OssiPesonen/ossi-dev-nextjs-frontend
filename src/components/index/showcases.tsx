@@ -63,7 +63,6 @@ const Showcases = (props: ShowcasesProps) => {
                           className="showcase-thumbnail"
                           src={showcase.thumbnail.asset.url}
                           alt=""
-                          loading="lazy"
                           width="350"
                           height="350"
                         />
