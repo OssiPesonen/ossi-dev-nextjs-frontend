@@ -21,9 +21,9 @@
     "@sanity/eslint-config-studio": "^4.0.0",
     "@sanity/vision": "^3.44.0",
     "@svgr/webpack": "^8.1.0",
-    "eslint-config-next": "^14.2.3",
+    "eslint-config-next": "^15.0.3",
     "lodash": "^4.17.21",
-    "next": "^14.2.3",
+    "next": "^15.0.3",
     "next-seo": "^6.5.0",
     "prismjs": "^1.21.0",
     "react": "^18.2.0",
@@ -34,10 +34,10 @@
     "styled-components": "^6.1"
   },
   "devDependencies": {
-    "@sanity/types": "3.44.0",
-    "@types/node": "^20.14.0",
-    "@types/react": "18.3.3",
-    "@types/react-dom": "18.3.0",
+    "@sanity/types": "3.65.0",
+    "@types/node": "^22.10.0",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
     "@types/webpack-env": "^1.18.0",
     "eslint": "8.57.0",
     "typescript": "^5.4.5"

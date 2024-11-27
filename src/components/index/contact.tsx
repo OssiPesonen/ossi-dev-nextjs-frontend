@@ -1,5 +1,5 @@
 import React from 'react'
-import IconTwitter from '../../assets/icons/i-twitter';
+import IconTwitter from '../../assets/icons/i-bluesky';
 import IconEnvelope from '../../assets/icons/i-envelope';
 
 const Contact = () => (

@@ -6,10 +6,11 @@ import { useRouter } from "next/router";
 
 // Components
 import IconEnvelope from "../assets/icons/i-envelope";
-import IconTwitter from "../assets/icons/i-twitter";
+import IconBluesky from "../assets/icons/i-bluesky";
 import IconGithub from "../assets/icons/i-github";
 import IconMedium from "../assets/icons/i-medium";
 import IconDev from "@/assets/icons/i-dev";
+import IconLinkedIn from "@/assets/icons/i-linkedin";
 
 const Top = () => {
   const router = useRouter();
@@ -26,7 +27,7 @@ const Top = () => {
       // Grab the clicked link
 
       if (typeof target.hash !== "undefined") {
-        const hash = target.hash.substr(1);
+        const hash = target.hash.substring(1);
         const section = document.getElementById(hash);
 
         // Scroll to section
@@ -158,12 +159,12 @@ const Top = () => {
                 </li>
                 <li>
                   <a
-                    href="https://twitter.com/OssiDev"
-                    aria-label="Twitter"
+                    href="https://bsky.app/profile/ossidev.bsky.social"
+                    aria-label="Bluesky"
                     rel="noreferrer"
                     target="_blank"
                   >
-                    <IconTwitter />
+                    <IconBluesky />
                   </a>
                 </li>
                 <li>
@@ -174,6 +175,16 @@ const Top = () => {
                     target="_blank"
                   >
                     <IconGithub />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.linkedin.com/in/ossi-pesonen/"
+                    aria-label="LinkedIn"
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    <IconLinkedIn />
                   </a>
                 </li>
                 <li>
