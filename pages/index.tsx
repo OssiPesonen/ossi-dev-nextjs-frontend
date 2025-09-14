@@ -80,7 +80,6 @@ function Home({ posts, showcases, blocks, employments, tags }: HomeProps) {
   ) : (
     <Layout>
       <Introduction />
-      <Services />
       <Showcases />
       <Posts />
       <Contact />
