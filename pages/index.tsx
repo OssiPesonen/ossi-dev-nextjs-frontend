@@ -21,11 +21,9 @@ import { Block, Employment, Tag, Post, Showcase } from "@/assets/types";
 // Components
 import { client, employmentsQuery, postsQuery, showcasesQuery, tagsQuery, widgetsQuery } from "@/sanity/index";
 import Introduction from "@/components/index/introduction";
-import Services from "@/components/index/services";
 import Showcases from "@/components/index/showcases";
 import Posts from "@/components/index/posts";
 import Layout from "@/layouts/layout";
-import Contact from "@/components/index/contact";
 import Loading from "@/components/loading";
 import Resume from "@/components/index/resume";
 
@@ -82,7 +80,6 @@ function Home({ posts, showcases, blocks, employments, tags }: HomeProps) {
       <Introduction />
       <Showcases />
       <Posts />
-      <Contact />
       <Resume />
     </Layout>
   );

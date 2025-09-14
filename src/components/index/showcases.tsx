@@ -35,11 +35,11 @@ const Showcases = (props: ShowcasesProps) => {
         ) : (
           <>
             <h2 className="section-title">
-              <IconCaretUp /> Showcases
+              <IconCaretUp /> My Freelance Portfolio
             </h2>
             <h3>Selected Projects</h3>
             <p className="text-gray">
-              You can click on each project to read about the story behind them.
+              I have worked on over 500 different projects in the span of almost 20 years, but I only picked these six to showcase. One of them is something I never even managed to finish, but I picked it because it contained so many different interesting things. You can click on each project to read about the story behind them.
             </p>
           </>
         )}

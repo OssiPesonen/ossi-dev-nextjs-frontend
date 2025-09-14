@@ -37,24 +37,8 @@ const Posts = (props: PostsProps) => {
                 <IconCaretUp /> Posts
               </h2>
               <h3>Blog Posts, Articles and Tweets</h3>
-              <p className="text-gray">
-                You can find everything I&apos;ve posted on my blog and links to
-                some of my Medium articles right here.
-              </p>
-            </div>
-          )}
-          <div
-            className={`${
-              hideDescription ? "col-md-12" : "col-md-7"
-            } mt-4 mt-md-0`}
-          >
-            
-            <h4 className="section-title mt-4">
-              <IconCaretUp /> Medium.com & Dev.to
-            </h4>
-            <div className="medium pl-md-4 mb-md-4">
               <p>
-                I write more non-personal and in-depth articles at{" "}
+                I have written more non-personal and in-depth articles at{" "}
                 <a
                   href="https://medium.com/@rcls"
                   target="_blank"
@@ -68,6 +52,12 @@ const Posts = (props: PostsProps) => {
                 </a>
               </p>
             </div>
+          )}
+          <div
+            className={`${
+              hideDescription ? "col-md-12" : "col-md-7"
+            } mt-4 mt-md-0`}
+          >
             <h4 className="section-title mt-4">
               <IconCaretUp /> Blog posts
             </h4>

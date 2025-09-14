@@ -21,7 +21,6 @@ import { RootState } from "@/store/rootReducer";
 // components
 import Layout from "@/layouts/layout";
 import Posts from "@/components/index/posts";
-import Contact from "@/components/index/contact";
 import { client, postsQuery } from "@/sanity/index";
 import { myPortableTextComponents } from "@/sanity/portableComponents";
 import { PortableText } from "@portabletext/react";
@@ -99,7 +98,6 @@ const Post = ({ posts }: PostProps) => {
         </footer>
       </article>
       <Posts hideDescription={true} openPostId={post._id} />
-      <Contact />
     </Layout>
   );
 };

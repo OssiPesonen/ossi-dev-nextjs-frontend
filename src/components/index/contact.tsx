@@ -1,18 +1,8 @@
 import React from 'react'
-import IconTwitter from '../../assets/icons/i-bluesky';
-import IconEnvelope from '../../assets/icons/i-envelope';
 
 const Contact = () => (
   <div id="contact">
-    <h2>Contact me for any type of query or discussion!</h2>
-    <p>
-      <IconEnvelope />
-      <a href="mailto:ossi@ossipesonen.fi">ossi@ossipesonen.fi</a>
-    </p>
-    <p>
-      <IconTwitter />
-      <a href="https://twitter.com/OssiDev" target="_blank" rel="noopener">@OssiDev</a>
-    </p>
+    <h3>You can contact me on various platforms, like Bluesky or just plain email, using the links on the right side of the navigation bar.</h3>
   </div>
 )
 

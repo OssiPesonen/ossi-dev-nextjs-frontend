@@ -121,23 +121,13 @@ const Top = () => {
             <nav className="col-xs-12 col-lg-8">
               <ul>
                 <li>
-                  <Link href="/#services" onClick={scrollTo}>
-                    Services
-                  </Link>
-                </li>
-                <li>
                   <Link href="/#showcases" onClick={scrollTo}>
-                    Showcases
+                    My Freelance Portfolio
                   </Link>
                 </li>
                 <li>
                   <Link href="/#posts" onClick={scrollTo}>
                     Posts
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/#contact" onClick={scrollTo}>
-                    Contact
                   </Link>
                 </li>
                 <li>

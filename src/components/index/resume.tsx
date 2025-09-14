@@ -34,7 +34,7 @@ const Resume = () => {
               </h2>
               <h3>Where I&apos;ve Worked</h3>
               <p className="text-muted mb-4">
-                A list of my most recent employers and job descriptions.{" "}
+                A list of my current and former jobs in the tech industry with descriptions.
               </p>
               <div id="employers" className="mt-4 mt-md-0">
                 {!app.employments ? (

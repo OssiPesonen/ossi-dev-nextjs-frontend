@@ -18,7 +18,6 @@ import { setShowcases } from "@/store/reducers/appReducer";
 import Layout from "@/layouts/layout";
 import Loading from "@/components/loading";
 import Showcases from "@/components/index/showcases";
-import Contact from "@/components/index/contact";
 import IconArrowLeft from "@/assets/icons/i-arrow-left";
 import { RootState } from "@/store/rootReducer";
 import { client, showcasesQuery } from "@/sanity/index";
@@ -128,7 +127,6 @@ const Showcase = ({ showcases }: ShowcaseProps) => {
           <Showcases hideDescription={true} openPostId={showcase._id} />
         </>
       )}
-      <Contact />
     </Layout>
   );
 };
