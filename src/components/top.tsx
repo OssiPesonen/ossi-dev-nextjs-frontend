@@ -149,16 +149,6 @@ const Top = () => {
                 </li>
                 <li>
                   <a
-                    href="https://bsky.app/profile/ossidev.bsky.social"
-                    aria-label="Bluesky"
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    <IconBluesky />
-                  </a>
-                </li>
-                <li>
-                  <a
                     href="https://github.com/OssiPesonen/"
                     aria-label="Github"
                     rel="noreferrer"
