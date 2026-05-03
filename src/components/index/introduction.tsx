@@ -36,7 +36,7 @@ const Introduction = () => {
           <div className="col-12 personal text-center mb-4">
             <div className="row text-center">
               <div className="col-6">
-                <h3 className="text-secondary">15+</h3>
+                <h3 className="text-secondary">20+</h3>
                 <p>Years of experience</p>
               </div>
               <div className="col-6">
